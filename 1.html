@@ -198,6 +198,22 @@ body{
 #ap-bar{color:#c9a227;font-size:11.5px;letter-spacing:1px;text-align:center;margin-bottom:9px}
 #ap-bar b{color:#e8d98a}
 #action-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}
+
+/* 行动弹出层 */
+#action-overlay{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:rgba(6,7,10,.96);display:none;z-index:150;
+  padding:20px 14px 40px;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:#4a5c30 #10150c;
+}
+#action-overlay.show{display:block}
+#action-overlay::-webkit-scrollbar{width:8px}
+#action-overlay::-webkit-scrollbar-track{background:#10150c;border-radius:4px}
+#action-overlay::-webkit-scrollbar-thumb{background:#3a4a26;border-radius:4px;border:2px solid #10150c}
+#action-content{
+  width:100%;max-width:440px;margin:0 auto;background:#0d1009;
+  border:1px solid #2a3520;border-radius:6px;padding:20px 18px;
+}
 .act-btn{
   background:#161d0f;border:1px solid #3a4a26;color:#b6cc8a;
   padding:8px 6px;font-family:inherit;font-size:12px;border-radius:4px;
@@ -1047,10 +1063,10 @@ body{
     <div id="choices"></div>
     <div id="actions">
       <div id="ap-bar"></div>
-      <div id="action-grid"></div>
       <div style="display:flex;gap:6px">
-        <button class="btn-primary" id="btn-career" style="flex:1;font-size:13px;letter-spacing:2px;padding:11px">履 历</button>
-        <button class="btn-primary" id="btn-rel" style="flex:1;font-size:13px;letter-spacing:2px;padding:11px">人 际</button>
+        <button class="btn-primary" id="btn-career" style="flex:1;font-size:12px;letter-spacing:1px;padding:11px">履历</button>
+        <button class="btn-primary" id="btn-rel" style="flex:1;font-size:12px;letter-spacing:1px;padding:11px">人际</button>
+        <button class="btn-primary" id="btn-action-open" style="flex:1;font-size:12px;letter-spacing:1px;padding:11px;border-color:#c9a227;color:#e8d98a">行动</button>
         <button class="btn-primary" id="btn-next" style="flex:2">结 束 本 月</button>
       </div>
     </div>
@@ -1077,6 +1093,10 @@ body{
 
   <div id="gallery-overlay">
     <div id="gallery-content"></div>
+  </div>
+
+  <div id="action-overlay">
+    <div id="action-content"></div>
   </div>
 
 </div>
@@ -7579,11 +7599,40 @@ const ACTIONS = [
 ];
 
 function renderActions(){
+  // 主界面只更新 AP 显示
   const bar = document.getElementById('ap-bar');
-  bar.innerHTML = `第 ${state.yos} 年 ${state.month} 月 · 行动点 <b>${state.ap}</b> / ${state.apMax}`;
+  if(bar){
+    bar.innerHTML = `第 ${state.yos} 年 ${state.month} 月 · 行动点 <b>${state.ap}</b> / ${state.apMax}`;
+  }
+  // 如果覆盖层打开，同步刷新
+  const overlay = document.getElementById('action-overlay');
+  if(overlay && overlay.classList.contains('show')){
+    renderActionOverlay();
+  }
+}
 
-  const grid = document.getElementById('action-grid');
-  grid.innerHTML = '';
+function openActionOverlay(){
+  const overlay = document.getElementById('action-overlay');
+  const content = document.getElementById('action-content');
+  if(!overlay || !content) return;
+  overlay.classList.add('show');
+  overlay.scrollTop = 0;
+  renderActionOverlay();
+}
+
+function renderActionOverlay(){
+  const content = document.getElementById('action-content');
+  if(!content) return;
+
+  let html = `
+    <div class="promo-title">行 动</div>
+    <div class="promo-sub">第 ${state.yos} 年 ${state.month} 月 · 行动点 ${state.ap} / ${state.apMax}</div>
+    <div class="promo-section">选择行动</div>
+    <div id="action-grid-overlay" style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px"></div>
+  `;
+  content.innerHTML = html;
+
+  const grid = document.getElementById('action-grid-overlay');
   ACTIONS.forEach(a=>{
     // 婚姻维护行动：只有恋爱/订婚/已婚时显示
     if(a.id === 'marriage_care'){
@@ -7594,22 +7643,29 @@ function renderActions(){
     const isRest = a.id === 'rest';
     const b = document.createElement('button');
     b.className = 'act-btn';
+    b.style.minHeight = '56px';
     b.innerHTML = `${a.name}<span class="cost">消耗 <b>${a.cost}</b> AP${(used && !isRest) ?' · 本月已用':''}</span>`;
     b.disabled = state.ap < a.cost || state.over || (used && !isRest);
-    b.onclick = ()=>doAction(a);
+    b.onclick = ()=>{
+      doAction(a);
+      // 行动后刷新覆盖层
+      renderActionOverlay();
+    };
     grid.appendChild(b);
   });
 
+  // 破格按钮
   if(canAttemptBreakthrough() && !state.breakthroughAttemptedThisYear && state.ap >= 2){
     const bt = document.createElement('button');
     bt.className = 'act-btn';
     bt.style.gridColumn = '1 / -1';
+    bt.style.minHeight = '56px';
     bt.style.borderColor = '#7a6a1a';
     bt.style.color = '#e8d98a';
     bt.innerHTML = `⚡ 争取破格 <span class="cost">消耗全部 AP · 突破 MOS 上限</span>`;
     bt.onclick = ()=>{
       state.ap = 0;
-      renderActions();
+      renderActionOverlay();
       runBreakthrough('active').then(()=>{
         refreshHud();
         refreshStats();
@@ -7617,6 +7673,15 @@ function renderActions(){
     };
     grid.appendChild(bt);
   }
+
+  // 底部关闭按钮
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'promo-btn';
+  closeBtn.textContent = '关 闭';
+  closeBtn.onclick = ()=>{
+    document.getElementById('action-overlay').classList.remove('show');
+  };
+  content.appendChild(closeBtn);
 }
 
 function doAction(a){
@@ -11501,6 +11566,7 @@ function continueFromSlot(slot){
     overlay.scrollTop = 0;
     renderRelOverlay();
   };
+  document.getElementById('btn-action-open').onclick = openActionOverlay;
 
   addLog(`第 ${state.yos} 年 ${state.month} 月 · ${state.age} 岁`, 'year');
   addLog(`载入存档：槽位 ${slot}`, 'good');
@@ -11685,6 +11751,7 @@ function beginGame(){
     overlay.scrollTop = 0;
     renderRelOverlay();
   };
+  document.getElementById('btn-action-open').onclick = openActionOverlay;
 
   state.month = 1;
   state._lastPCS = 0;
