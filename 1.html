@@ -804,6 +804,340 @@ body{
   letter-spacing:4px;
 }
 
+
+/* ===== 部署时钟动画 ===== */
+#month-clock-overlay{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(6,7,10,.94);
+  z-index:600;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  opacity:0;
+  transition:opacity .2s ease;
+}
+#month-clock-overlay.show{
+  display:flex;
+  opacity:1;
+}
+#month-clock{
+  width:130px;
+  height:130px;
+  margin-bottom:18px;
+  filter:drop-shadow(0 0 12px rgba(201,162,39,.35));
+}
+#month-clock-hand{
+  transform-origin: 50px 50px;
+}
+#month-clock-label{
+  color:#c9a227;
+  font-size:13px;
+  letter-spacing:4px;
+  font-weight:700;
+}
+
+/* ===== 装备 Tab ===== */
+.item-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:14px;
+}
+.item-card{
+  background:#141a0e;
+  border:1px solid #2a3520;
+  border-radius:4px;
+  padding:10px 11px;
+  transition:.15s;
+}
+.item-card:hover{border-color:#6d9440;background:#1a2312}
+.item-name{
+  color:#e8d98a;
+  font-weight:700;
+  font-size:12.5px;
+  margin-bottom:4px;
+  line-height:1.4;
+}
+.item-desc{
+  color:#94a878;
+  font-size:11px;
+  line-height:1.55;
+  margin-bottom:5px;
+}
+.item-meta{
+  color:#4a5540;
+  font-size:10px;
+  letter-spacing:1px;
+}
+.item-effect{
+  display:inline-block;
+  padding:1px 6px;
+  border-radius:2px;
+  background:#1a2a0e;
+  color:#9dd96a;
+  font-size:10px;
+  letter-spacing:1px;
+  margin-top:5px;
+}
+.item-empty{
+  color:#4a5540;
+  font-size:12px;
+  text-align:center;
+  padding:20px 0;
+  font-style:italic;
+}
+.equip-sub-tabs{
+  display:flex;
+  margin-bottom:10px;
+  border-bottom:1px solid #1c2216;
+}
+.equip-sub-tab{
+  flex:1;
+  padding:8px 4px;
+  text-align:center;
+  color:#68774f;
+  font-size:11.5px;
+  letter-spacing:1px;
+  cursor:pointer;
+  background:transparent;
+  border:none;
+  font-family:inherit;
+  border-bottom:2px solid transparent;
+}
+.equip-sub-tab.active{
+  color:#e8d98a;
+  border-bottom-color:#c9a227;
+}
+
+/* ===== 军械库窗口 ===== */
+#armory-overlay{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(6,7,10,.94);
+  display:none;
+  z-index:400;
+  padding:20px 14px;
+  overflow-y:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#4a5c30 #10150c;
+}
+#armory-overlay.show{display:block}
+#armory-overlay::-webkit-scrollbar{width:8px}
+#armory-overlay::-webkit-scrollbar-track{background:#10150c;border-radius:4px}
+#armory-overlay::-webkit-scrollbar-thumb{background:#3a4a26;border-radius:4px}
+#armory-content{
+  width:100%;max-width:440px;margin:0 auto;
+  background:#0d1009;
+  border:1px solid #2a3520;
+  border-radius:6px;
+  padding:20px 18px;
+}
+.armory-item{
+  background:#141a0e;
+  border:1px solid #2a3520;
+  border-radius:4px;
+  padding:11px 13px;
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:.15s;
+}
+.armory-item:hover:not(.locked){
+  border-color:#c9a227;
+  background:#1e1c0e;
+}
+.armory-item.equipped{
+  border-left:3px solid #c9a227;
+  background:#1e2c10;
+}
+.armory-item.locked{
+  opacity:.4;
+  cursor:not-allowed;
+}
+.armory-item-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:5px;
+}
+.armory-item-name{
+  color:#e8d98a;
+  font-weight:700;
+  font-size:13px;
+}
+.armory-item-bonus{
+  color:#9dd96a;
+  font-size:11px;
+  letter-spacing:1px;
+}
+.armory-item-desc{
+  color:#94a878;
+  font-size:11px;
+  line-height:1.55;
+  margin-bottom:4px;
+}
+.armory-item-meta{
+  color:#68774f;
+  font-size:10.5px;
+}
+.armory-item-status{
+  display:inline-block;
+  padding:1px 6px;
+  border-radius:2px;
+  font-size:10px;
+  letter-spacing:1px;
+  margin-left:6px;
+}
+.armory-item-status.clean{background:#1a2a0e;color:#9dd96a;border:1px solid #4a7a2a}
+.armory-item-status.worn{background:#1a1a0e;color:#c9a227;border:1px solid #7a6a1a}
+.armory-item-status.damaged{background:#2a1e0e;color:#d98a4a;border:1px solid #7a4a1a}
+.armory-item-status.broken{background:#2a0e0e;color:#d95a4a;border:1px solid #7a2a1a}
+
+/* ===== 部署准备窗口 ===== */
+.deploy-prep-section{
+  background:#10150c;
+  border:1px solid #2a3520;
+  border-radius:4px;
+  padding:12px 14px;
+  margin-bottom:10px;
+}
+.deploy-prep-line{
+  display:flex;
+  justify-content:space-between;
+  padding:4px 0;
+  font-size:12px;
+  color:#94a878;
+}
+.deploy-prep-line .label{color:#68774f}
+.deploy-prep-line .val{color:#e8d98a;font-weight:700}
+.deploy-prep-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-bottom:12px;
+}
+.deploy-prep-actions button{
+  background:#161d0f;
+  border:1px solid #3a4a26;
+  color:#b6cc8a;
+  font-family:inherit;
+  font-size:12px;
+  padding:10px 6px;
+  border-radius:4px;
+  cursor:pointer;
+  transition:.15s;
+  min-height:56px;
+}
+.deploy-prep-actions button:hover:not(:disabled){background:#1f2b14;border-color:#6d9440}
+.deploy-prep-actions button:disabled{opacity:.3;cursor:not-allowed}
+
+/* ===== 归还窗口 ===== */
+.return-section{
+  background:#10150c;
+  border:1px solid #2a3520;
+  border-radius:4px;
+  padding:14px;
+  margin-bottom:12px;
+}
+.return-item{
+  padding:10px 0;
+  border-bottom:1px dashed #1c2216;
+}
+.return-item:last-child{border-bottom:none}
+.return-item-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:6px;
+}
+.return-item-name{
+  color:#e8d98a;
+  font-weight:700;
+  font-size:13px;
+}
+.return-status-flow{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:11.5px;
+  margin-bottom:6px;
+}
+.return-status-flow .arrow{color:#68774f}
+.return-narrative{
+  color:#94a878;
+  font-size:11.5px;
+  line-height:1.6;
+  margin-bottom:8px;
+  font-style:italic;
+}
+.return-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:8px;
+}
+.return-actions button{
+  background:#161d0f;
+  border:1px solid #3a4a26;
+  color:#b6cc8a;
+  font-family:inherit;
+  font-size:11.5px;
+  padding:9px 6px;
+  border-radius:4px;
+  cursor:pointer;
+  transition:.15s;
+  min-height:50px;
+  line-height:1.35;
+}
+.return-actions button:hover:not(:disabled){background:#1f2b14;border-color:#6d9440}
+.return-actions button:disabled{opacity:.3;cursor:not-allowed}
+.return-actions button.giveup{
+  color:#94a878;
+  border-color:#2a3520;
+}
+.return-actions button .cost{
+  display:block;
+  color:#68774f;
+  font-size:10px;
+  margin-top:2px;
+}
+.return-actions button .cost b{color:#c9a227}
+
+/* ===== 车辆 ===== */
+.vehicle-display{
+  background:#10150c;
+  border:1px solid #2a3520;
+  border-radius:4px;
+  padding:14px;
+  margin-bottom:12px;
+}
+.vehicle-name{
+  color:#e8d98a;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+.vehicle-desc{
+  color:#94a878;
+  font-size:11.5px;
+  line-height:1.6;
+  margin-bottom:6px;
+}
+.vehicle-specs{
+  color:#68774f;
+  font-size:10.5px;
+  letter-spacing:1px;
+}
+.vehicle-locked{
+  color:#4a5540;
+  font-size:11px;
+  font-style:italic;
+  padding:10px 0;
+}
+
+
 /* ===== 设置面板 ===== */
 #settings-panel{
   position:fixed;
@@ -1181,7 +1515,7 @@ body{
   border-bottom:1px solid #2a3520;
 }
 .rel-tab{
-  flex:1 0 33.333%;
+  flex:1 0 25%;
   padding:10px 4px;
   text-align:center;
   color:#68774f;font-size:12px;letter-spacing:1px;
@@ -1255,6 +1589,29 @@ body{
 </style>
 </head>
 <body>
+
+  <div id="armory-overlay">
+    <div id="armory-content"></div>
+  </div>
+
+  <div id="month-clock-overlay">
+    <svg id="month-clock" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#2a3520" stroke-width="2"/>
+      <circle cx="50" cy="50" r="42" fill="#0d1009" stroke="#c9a227" stroke-width="1"/>
+      <g stroke="#68774f" stroke-width="0.8">
+        <line x1="50" y1="8" x2="50" y2="14"/>
+        <line x1="50" y1="86" x2="50" y2="92"/>
+        <line x1="8" y1="50" x2="14" y2="50"/>
+        <line x1="86" y1="50" x2="92" y2="50"/>
+      </g>
+      <circle cx="50" cy="50" r="2" fill="#c9a227"/>
+      <g id="month-clock-hand">
+        <line x1="50" y1="50" x2="50" y2="20" stroke="#c9a227" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div id="month-clock-label">第 1 / 3 个月</div>
+  </div>
+
 
   <div id="promotion-banner">
     <div class="banner-label">晋 升</div>
@@ -7533,6 +7890,966 @@ function pickChildMOS(child){
 ];
 
 /* =========================================================
+   车辆数据
+   ========================================================= */
+/* 随军衔自动配发的"座驾" */
+const ASSIGNED_VEHICLES = {
+  E1_3: { name:'无配发', desc:'列兵没有专属座驾。步行或搭车。', specs:'—' },
+  E4_6: { name:'悍马 HMMWV', desc:'单位共用的战术车辆。你有一把钥匙，但经常被别人借走。', specs:'通用机动 · 无装甲' },
+  E7_9: { name:'悍马 HMMWV（专属）', desc:'专属座驾，配一名司机。你的名字被喷在车尾。', specs:'通用机动 · 无装甲 · 专属' },
+  W1_3: { name:'技术支援车', desc:'配有便携式诊断设备的特种车辆。用于野外装备维护。', specs:'技术支援 · 定制改装' },
+  W4_5: { name:'技术指挥车', desc:'准尉的高级技术指挥平台。有独立的通信系统。', specs:'技术指挥 · 全频通信' },
+  O1_3: { name:'悍马或 M1151 装甲车', desc:'军官标准配车。比士兵的悍马多一层薄装甲。', specs:'轻装甲 · 指挥官标识' },
+  O4_5: { name:'指挥车 + 司机', desc:'专属指挥车，配专职司机。车尾挂着你的指挥旗。', specs:'指挥型 · 专职司机 · 通信中继' },
+  O6:   { name:'专车 + 司机 + 护卫', desc:'上校级别待遇。一辆越野车 + 一辆护卫车。', specs:'高级指挥 · 专职司机 · 护卫' },
+  O7_10:{ name:'将官专车', desc:'将官专车，全副武装的护卫队。你出行时前方有清道车。', specs:'将官级 · 护卫队 · 优先通行' }
+};
+
+/* 部署任务时可申领的车辆 */
+const DEPLOY_VEHICLES = {
+  none: {
+    id:'none', name:'无车辆（徒步）',
+    desc:'全程徒步。机动性差，但不易被发现。',
+    bonusType:'stealth', bonusValue:1,
+    repairCost:0,
+    requiredGrade:1
+  },
+  humvee: {
+    id:'humvee', name:'悍马 HMMWV',
+    desc:'标准战术车辆。速度快，通用性好。',
+    bonusType:'mobility', bonusValue:1,
+    repairCost:200,
+    requiredGrade:4
+  },
+  armoredHumvee: {
+    id:'armoredHumvee', name:'M1151 装甲悍马',
+    desc:'加装装甲的悍马。能抵御小口径火力和路边炸弹。',
+    bonusType:'armor', bonusValue:2,
+    repairCost:350,
+    requiredGrade:5
+  },
+  mrap: {
+    id:'mrap', name:'MRAP 防雷车',
+    desc:'专门针对路边炸弹设计的防雷车辆。防护力极强。',
+    bonusType:'armor', bonusValue:3,
+    repairCost:500,
+    requiredGrade:6
+  },
+  truck: {
+    id:'truck', name:'运输卡车',
+    desc:'重型运输卡车。可以装载大量物资，但机动性一般。',
+    bonusType:'cargo', bonusValue:3,
+    repairCost:300,
+    requiredGrade:4
+  },
+  lsv: {
+    id:'lsv', name:'轻型突击车',
+    desc:'特种部队专用的轻型突击车。速度快、隐蔽性强。',
+    bonusType:'mobility', bonusValue:2,
+    repairCost:250,
+    requiredSOF:true,
+    requiredGrade:4
+  }
+};
+
+function getAssignedVehicle(){
+  const t = state.track;
+  const g = state.grade;
+  if(t === 'E'){
+    if(g <= 3) return ASSIGNED_VEHICLES.E1_3;
+    if(g <= 6) return ASSIGNED_VEHICLES.E4_6;
+    return ASSIGNED_VEHICLES.E7_9;
+  }
+  if(t === 'W'){
+    if(g <= 3) return ASSIGNED_VEHICLES.W1_3;
+    return ASSIGNED_VEHICLES.W4_5;
+  }
+  if(t === 'O'){
+    if(g <= 3) return ASSIGNED_VEHICLES.O1_3;
+    if(g <= 5) return ASSIGNED_VEHICLES.O4_5;
+    if(g === 6) return ASSIGNED_VEHICLES.O6;
+    return ASSIGNED_VEHICLES.O7_10;
+  }
+  return ASSIGNED_VEHICLES.E1_3;
+}
+
+function getDeployVehicleEligibility(v){
+  if(v.requiredSOF && !state.flags.sof) return false;
+  if(v.id === 'none') return true;
+  if(state.track === 'E'){
+    if(state.grade < (v.requiredGrade || 1)) return false;
+  } else if(state.track === 'W'){
+    if(state.grade < 1) return false;
+  } else if(state.track === 'O'){
+    if(state.grade < 1) return false;
+  }
+  return true;
+}
+
+function getVehicleStatusLabel(status){
+  return { clean:'完好', worn:'轻微磨损', damaged:'严重受损', broken:'报废' }[status] || '未知';
+}
+
+function getVehicleStatusMultiplier(status){
+  return { clean:1.0, worn:0.7, damaged:0.4, broken:0.0 }[status] || 0;
+}
+
+function ensureVehicleStatus(){
+  if(!state.equipment) return;
+  if(!state.equipment.vehicles) return;
+  const v = state.equipment.vehicles;
+  if(!v.deployType) v.deployType = 'none';
+  if(!v.deployStatus) v.deployStatus = 'clean';
+}
+
+
+/* =========================================================
+   武器数据
+   ========================================================= */
+const WEAPONS = {
+  m4: {
+    id:'m4', name:'M4 卡宾枪',
+    desc:'标准配发步枪。可靠、通用，适合大多数任务。',
+    bonusType:'combat', bonusValue:1,
+    requiredTrack:null, requiredGrade:1,
+    repairCost:50
+  },
+  m9: {
+    id:'m9', name:'M9 手枪',
+    desc:'军官和宪兵标配。用于近距自卫。',
+    bonusType:'stealth', bonusValue:1,
+    requiredTrack:null, requiredGrade:4,
+    repairCost:30
+  },
+  m249: {
+    id:'m249', name:'M249 班用机枪',
+    desc:'班用自动武器。提供压制火力。',
+    bonusType:'suppress', bonusValue:2,
+    requiredTrack:null, requiredGrade:4,
+    repairCost:150
+  },
+  m240: {
+    id:'m240', name:'M240 通用机枪',
+    desc:'连营级支援武器。压制力极强。',
+    bonusType:'suppress', bonusValue:3,
+    requiredTrack:null, requiredGrade:7,
+    repairCost:200
+  },
+  m17: {
+    id:'m17', name:'M17 手枪',
+    desc:'新一代军官配枪。轻便、精准。',
+    bonusType:'stealth', bonusValue:1,
+    requiredTrack:null, requiredGrade:7,
+    repairCost:40
+  },
+  m110: {
+    id:'m110', name:'M110 精确射手步枪',
+    desc:'半自动精确射手步枪。适合中远距离打击。',
+    bonusType:'precise', bonusValue:2,
+    requiredTrack:null, requiredGrade:8,
+    repairCost:200
+  },
+  m24: {
+    id:'m24', name:'M24 狙击步枪',
+    desc:'高精度栓动狙击枪。一击致命。',
+    bonusType:'precise', bonusValue:3,
+    requiredTrack:'recon', requiredGrade:4,
+    repairCost:250
+  },
+  m107: {
+    id:'m107', name:'M107 反器材步枪',
+    desc:'大口径反器材步枪。可以打穿轻型装甲。',
+    bonusType:'precise', bonusValue:4,
+    requiredTrack:'sniper', requiredGrade:6,
+    repairCost:400
+  },
+  m4a1: {
+    id:'m4a1', name:'M4A1 特种卡宾枪',
+    desc:'SOF 专用改型。可靠性和火力均强于标准 M4。',
+    bonusType:'combat', bonusValue:2,
+    requiredSOF:true, requiredGrade:4,
+    repairCost:80
+  },
+  mk48: {
+    id:'mk48', name:'Mk 48 轻量机枪',
+    desc:'SOF 专用轻量机枪。机动性强。',
+    bonusType:'suppress', bonusValue:3,
+    requiredSOF:true, requiredGrade:5,
+    repairCost:250
+  }
+};
+
+function getWeaponEligibility(w){
+  if(w.requiredSOF && !state.flags.sof) return false;
+  if(w.requiredTrack){
+    if(w.requiredTrack === 'recon' && !['11B','12B','35F'].includes(state.mosCode)) return false;
+    if(w.requiredTrack === 'sniper' && state.mosCode !== '11B') return false;
+  }
+  if(state.track === 'E'){
+    if(state.grade < (w.requiredGrade || 1)) return false;
+  } else if(state.track === 'W'){
+    if(state.grade < 3) return false;
+  } else if(state.track === 'O'){
+    if(state.grade < 1) return false;
+    // 军官对某些重型武器有额外限制
+    if(['m249','m240','mk48'].includes(w.id) && state.grade < 4) return false;
+  }
+  return true;
+}
+
+function getWeaponStatusLabel(status){
+  return { clean:'清洁', worn:'磨损', damaged:'受损', broken:'报废' }[status] || '未知';
+}
+
+function getWeaponStatusMultiplier(status){
+  return { clean:1.0, worn:0.7, damaged:0.4, broken:0.0 }[status] || 0;
+}
+
+function ensureWeaponStatus(){
+  if(!state.equipment) return;
+  if(!state.equipment.weapons) return;
+  const w = state.equipment.weapons;
+  if(!w.primary) w.primary = 'm4';
+  if(!w.primaryStatus) w.primaryStatus = 'clean';
+}
+
+/* =========================================================
+   武器损耗 · 归还 · 维修
+   ========================================================= */
+function computeWeaponWear(mission, tier){
+  if(!state.equipment || !state.equipment.weapons) return null;
+  const w = state.equipment.weapons;
+  if(!w.primary) return null;
+
+  // 基础磨损概率
+  let baseChance = 0.3;
+  if(['patrol','mos_11b_assault','sof_recon'].includes(mission.id)) baseChance = 0.7;
+  else if(['convoy','mos_92y_hub'].includes(mission.id)) baseChance = 0.4;
+  else if(['train_local','humanitarian','mos_25b_joint','mos_68w_masscal'].includes(mission.id)) baseChance = 0.2;
+
+  // 任务结果影响
+  if(tier === 'fail') baseChance += 0.20;
+  else if(tier === 'marginal') baseChance += 0.10;
+  else if(tier === 'excellent') baseChance -= 0.15;
+
+  // 是否磨损
+  if(Math.random() > baseChance) return null;
+
+  // 磨损等级
+  const roll = Math.random();
+  let levels = 1;
+  if(tier === 'fail'){
+    if(roll < 0.35) levels = 2;
+  } else if(tier === 'marginal'){
+    if(roll < 0.15) levels = 2;
+  } else {
+    if(roll < 0.10) levels = 2;
+  }
+
+  // 生成损耗叙事
+  const narratives = {
+    patrol: '长途巡逻中，枪身淋过雨、进了沙，回营时枪机已经拉动不畅。',
+    mos_11b_assault: '突击过程中你的步枪磕在掩体边缘，护木上留下了一道明显的凹痕。',
+    sof_recon: '一周的野外渗透，枪身上满是泥和汗。枪管里进了沙土。',
+    convoy: '车队的颠簸让你的步枪在枪架上撞来撞去，光学瞄准镜有些松动。',
+    humanitarian: '任务本身不激烈，但连续几周的潮湿天气让你的枪开始生锈。',
+    train_local: '训练任务中你打了不少弹药。枪膛积了不少碳，需要清理。',
+    default: '连续数周的部署，装备磨损在所难免。'
+  };
+  const narrative = narratives[mission.id] || narratives.default;
+
+  return { levels, narrative };
+}
+
+/* =========================================================
+   车辆损耗 · 归还 · 维修
+   ========================================================= */
+function computeVehicleWear(mission, tier){
+  if(!state.equipment || !state.equipment.vehicles) return null;
+  const v = state.equipment.vehicles;
+  const veh = DEPLOY_VEHICLES[v.deployType];
+  if(!veh || veh.id === 'none') return null;
+
+  // 基础磨损概率
+  let baseChance = 0.3;
+  if(['patrol','mos_11b_assault','sof_recon'].includes(mission.id)) baseChance = 0.75;
+  else if(['convoy','mos_92y_hub'].includes(mission.id)) baseChance = 0.5;
+  else if(['train_local','humanitarian','mos_25b_joint','mos_68w_masscal'].includes(mission.id)) baseChance = 0.25;
+
+  // 任务结果影响
+  if(tier === 'fail') baseChance += 0.20;
+  else if(tier === 'marginal') baseChance += 0.10;
+  else if(tier === 'excellent') baseChance -= 0.15;
+
+  if(Math.random() > baseChance) return null;
+
+  // 磨损等级（车辆比武器更容易两级损伤）
+  const roll = Math.random();
+  let levels = 1;
+  if(tier === 'fail'){
+    if(roll < 0.5) levels = 2;
+  } else if(tier === 'marginal'){
+    if(roll < 0.25) levels = 2;
+  } else {
+    if(roll < 0.15) levels = 2;
+  }
+
+  // 生成损耗叙事（按车辆类型）
+  const narratives = {
+    humvee: {
+      patrol: '长途巡逻让悍马的悬挂系统发出异响。回营时右前轮已经有些歪。',
+      convoy: '一路上的碎石路面把悍马的轮胎磨损得厉害。车底护板被石头磕了几下。',
+      default: '任务结束后，悍马的车身多了几道划痕，机油也需要更换。'
+    },
+    armoredHumvee: {
+      patrol: '一次路边炸弹的冲击让装甲悍马的右后门变形，虽然没被击穿但密封条已经失效。',
+      mos_11b_assault: '突击中装甲悍马挨了两发小口径子弹。装甲挡住了，但车灯碎了。',
+      default: '装甲悍马的装甲板有磕碰，车载电台天线也歪了。'
+    },
+    mrap: {
+      patrol: 'MRAP的底部装甲承受了一次巨大的冲击。车没事，但底盘的减震器报废了两个。',
+      mos_11b_assault: 'MRAP在狭窄街道上转弯时刮到了墙。车体装甲有一处凹陷。',
+      default: 'MRAP的车重导致轮胎磨损严重。轮胎纹路已经快磨平了。'
+    },
+    truck: {
+      convoy: '卡车满载行驶了几千英里。后轮轴的润滑油已经发黑。',
+      mos_92y_hub: '连续几周的物资运输让卡车的变速箱过热过一次。',
+      default: '卡车的货箱有一些磕碰，驾驶室的仪表盘上有一个警示灯亮了。'
+    },
+    lsv: {
+      sof_recon: '轻型突击车在荒野中飞驰了数百公里。空气滤清器进了不少沙土。',
+      default: '轻型突击车回来后需要彻底清洁。轮毂里塞满了泥。'
+    },
+    default: '连续数周的部署，车辆磨损在所难免。'
+  };
+  const byVehicle = narratives[veh.id] || narratives.default;
+  const narrative = (typeof byVehicle === 'object' ? byVehicle[mission.id] : null) || (typeof byVehicle === 'object' ? byVehicle.default : byVehicle);
+
+  return { levels, narrative };
+}
+
+function applyVehicleWear(wearResult){
+  if(!wearResult || !state.equipment) return;
+  const v = state.equipment.vehicles;
+  const current = v.deployStatus || 'clean';
+  const statusOrder = ['clean', 'worn', 'damaged', 'broken'];
+  const currentIdx = statusOrder.indexOf(current);
+  const newIdx = Math.min(currentIdx + wearResult.levels, 3);
+  v.deployStatus = statusOrder[newIdx];
+  v.wearNarrative = wearResult.narrative;
+
+  return {
+    from: current,
+    to: v.deployStatus,
+    narrative: wearResult.narrative
+  };
+}
+
+function getVehicleRepairCost(vehicleId, status){
+  const veh = DEPLOY_VEHICLES[vehicleId];
+  if(!veh) return 0;
+  const base = veh.repairCost || 200;
+  if(status === 'worn') return Math.round(base * 0.5);
+  if(status === 'damaged') return base;
+  return 0;
+}
+
+async function runVehicleReturn(){
+  if(!state.equipment || !state.equipment.vehicles) return;
+  const v = state.equipment.vehicles;
+  const veh = DEPLOY_VEHICLES[v.deployType];
+  if(!veh || veh.id === 'none') return;
+
+  const statusLabels = { clean:'完好', worn:'轻微磨损', damaged:'严重受损', broken:'报废' };
+
+  if(v.deployStatus === 'clean'){
+    addLog(`🔧 ${veh.name} 状况良好，加满油、清洁后交回车场。`, 'fx');
+    return;
+  }
+
+  if(v.deployStatus === 'broken'){
+    addLog(`💥 ${veh.name} 已报废，无法继续使用。车场士官在记录上写下了你的名字。`, 'bad');
+    addCareer('milestone', `${veh.name} 报废`, '车辆无法修复');
+    // 需要重新申领
+    state.equipment.vehicles.deployType = 'none';
+    state.equipment.vehicles.deployStatus = 'clean';
+    state.equipment.vehicles.wearNarrative = null;
+    // 财务赔偿
+    const compCost = 3000 + (veh.repairCost || 200) * 10;
+    state.finance.balance -= compCost;
+    state.finance.totalExpense += compCost;
+    state.finance.log.push({
+      year: state.yos, month: state.month,
+      type: 'penalty', amount: -compCost, note: `${veh.name} 报废赔偿`
+    });
+    addLog(`📋 按 DD Form 362 你需赔偿 $${compCost.toLocaleString()}。`, 'bad');
+    // 上级关系下降
+    if(state.npcs && state.npcs.superior){
+      state.npcs.superior.value = clamp(state.npcs.superior.value - 5, 0, 100);
+    }
+    return;
+  }
+
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    const repairCost = getVehicleRepairCost(v.deployType, v.deployStatus);
+    const canAfford = state.finance && state.finance.balance >= repairCost;
+    const canAP = state.ap >= 1;
+    const narrative = v.wearNarrative || '任务结束后，车场士官检查了你的车辆。';
+
+    content.innerHTML = `
+      <div class="promo-title">归 还 车 辆</div>
+      <div class="promo-sub">回到基地 · 车场</div>
+      <div class="deploy-narr">
+        你回到基地。车场士官拿着检查表在等你——按程序，车辆必须加满油、清洁后才能交回。
+      </div>
+
+      <div class="return-section">
+        <div class="return-item">
+          <div class="return-item-header">
+            <span class="return-item-name">${veh.name}</span>
+          </div>
+          <div class="return-status-flow">
+            <span style="color:#9dd96a">${statusLabels.clean}</span>
+            <span class="arrow">→</span>
+            <span style="color:${v.deployStatus === 'worn' ? '#c9a227' : v.deployStatus === 'damaged' ? '#d98a4a' : '#d95a4a'}">${statusLabels[v.deployStatus]}</span>
+          </div>
+          <div class="return-narrative">${narrative}</div>
+          <div style="color:#68774f;font-size:11px">维修费用：$${repairCost.toLocaleString()}</div>
+        </div>
+      </div>
+
+      <div class="promo-section">你打算怎么处理？</div>
+      <div class="return-actions">
+        <button data-vreturn="repair" ${(!canAfford || !canAP) ? 'disabled' : ''}>
+          维修保养
+          <span class="cost">消耗 <b>1</b> AP · <b>$${repairCost.toLocaleString()}</b>${!canAfford ? ' · 余额不足' : ''}${!canAP ? ' · AP 不足' : ''}</span>
+        </button>
+        <button data-vreturn="defer" class="giveup">
+          交回车场
+          <span class="cost">不处理 · 状态保留</span>
+        </button>
+      </div>
+    `;
+
+    document.querySelectorAll('[data-vreturn]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const choice = btn.dataset.vreturn;
+        overlay.classList.remove('show');
+
+        if(choice === 'repair'){
+          state.ap -= 1;
+          state.finance.balance -= repairCost;
+          state.finance.totalExpense += repairCost;
+          state.finance.log.push({
+            year: state.yos, month: state.month,
+            type: 'repair', amount: -repairCost, note: `${veh.name} 维修`
+          });
+
+          const statusOrder = ['clean', 'worn', 'damaged', 'broken'];
+          const idx = statusOrder.indexOf(v.deployStatus);
+          v.deployStatus = statusOrder[Math.max(0, idx - 1)];
+          v.wearNarrative = null;
+
+          addLog(`🔧 你花 $${repairCost.toLocaleString()} 维修了 ${veh.name}。状态恢复到「${statusLabels[v.deployStatus]}」。`, 'good');
+          addCareer('milestone', `维修 ${veh.name}`, `$${repairCost.toLocaleString()} · 状态 ${statusLabels[v.deployStatus]}`);
+        } else {
+          addLog(`你把 ${veh.name} 交回了车场。下次申领时它会带着这些磨损。`, 'warn');
+        }
+
+        refreshHud();
+        renderFinanceLine();
+        refreshStats();
+        resolve();
+      };
+    });
+  });
+}
+
+function applyWeaponWear(wearResult){
+  if(!wearResult || !state.equipment) return;
+  const w = state.equipment.weapons;
+  const current = w.primaryStatus || 'clean';
+  const levels = wearResult.levels;
+
+  const statusOrder = ['clean', 'worn', 'damaged', 'broken'];
+  const currentIdx = statusOrder.indexOf(current);
+  const newIdx = Math.min(currentIdx + levels, 3);
+  w.primaryStatus = statusOrder[newIdx];
+  w.wearNarrative = wearResult.narrative;
+
+  return {
+    from: current,
+    to: w.primaryStatus,
+    narrative: wearResult.narrative
+  };
+}
+
+function getRepairCost(weaponId, status){
+  const wp = WEAPONS[weaponId];
+  if(!wp) return 0;
+  const base = wp.repairCost || 50;
+  if(status === 'worn') return Math.round(base * 0.5);
+  if(status === 'damaged') return base;
+  return 0;
+}
+
+async function runEquipmentReturn(){
+  if(!state.equipment || !state.equipment.weapons) return;
+  const w = state.equipment.weapons;
+  const wp = WEAPONS[w.primary];
+  if(!wp) return;
+
+  const statusOrder = ['clean', 'worn', 'damaged', 'broken'];
+  const statusLabels = { clean:'清洁', worn:'磨损', damaged:'受损', broken:'报废' };
+
+  // 只有在非 clean 时才弹窗口
+  if(w.primaryStatus === 'clean'){
+    addLog(`🔧 ${wp.name} 状态良好，无需维修。`, 'fx');
+    return;
+  }
+
+  if(w.primaryStatus === 'broken'){
+    addLog(`💥 ${wp.name} 已报废，无法继续使用。你需要重新申领武器。`, 'bad');
+    addCareer('milestone', `${wp.name} 报废`, '');
+    state.equipment.weapons.secondary = null;
+    // 主武器变回 M4（默认配发）
+    state.equipment.weapons.primary = 'm4';
+    state.equipment.weapons.primaryStatus = 'clean';
+    state.equipment.weapons.wearNarrative = null;
+    return;
+  }
+
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    const repairCost = getRepairCost(w.primary, w.primaryStatus);
+    const canAfford = state.finance && state.finance.balance >= repairCost;
+    const canAP = state.ap >= 1;
+    const narrative = w.wearNarrative || '任务结束后，军械员检查了你的武器。';
+
+    content.innerHTML = `
+      <div class="promo-title">归 还 装 备</div>
+      <div class="promo-sub">回到基地 · 军械库</div>
+      <div class="deploy-narr">
+        你回到基地。军械员在等你——按程序，所有装备必须当面清点。
+      </div>
+
+      <div class="return-section">
+        <div class="return-item">
+          <div class="return-item-header">
+            <span class="return-item-name">${wp.name}</span>
+          </div>
+          <div class="return-status-flow">
+            <span style="color:#9dd96a">${statusLabels.clean}</span>
+            <span class="arrow">→</span>
+            <span style="color:${w.primaryStatus === 'worn' ? '#c9a227' : w.primaryStatus === 'damaged' ? '#d98a4a' : '#d95a4a'}">${statusLabels[w.primaryStatus]}</span>
+          </div>
+          <div class="return-narrative">${narrative}</div>
+          <div style="color:#68774f;font-size:11px">维修费用：$${repairCost}</div>
+        </div>
+      </div>
+
+      <div class="promo-section">你打算怎么处理？</div>
+      <div class="return-actions">
+        <button data-return="repair" ${(!canAfford || !canAP) ? 'disabled' : ''}>
+          清洁保养
+          <span class="cost">消耗 <b>1</b> AP · <b>$${repairCost}</b>${!canAfford ? ' · 余额不足' : ''}${!canAP ? ' · AP 不足' : ''}</span>
+        </button>
+        <button data-return="defer" class="giveup">
+          交回军械库
+          <span class="cost">不处理 · 状态保留</span>
+        </button>
+      </div>
+    `;
+
+    document.querySelectorAll('[data-return]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const choice = btn.dataset.return;
+        overlay.classList.remove('show');
+
+        if(choice === 'repair'){
+          // 应用维修
+          state.ap -= 1;
+          state.finance.balance -= repairCost;
+          state.finance.totalExpense += repairCost;
+          state.finance.log.push({
+            year: state.yos, month: state.month,
+            type: 'repair', amount: -repairCost, note: `${wp.name} 维修`
+          });
+
+          // 恢复一个等级
+          const idx = statusOrder.indexOf(w.primaryStatus);
+          w.primaryStatus = statusOrder[Math.max(0, idx - 1)];
+          w.wearNarrative = null;
+
+          addLog(`🔧 你花 $${repairCost} 维修了 ${wp.name}。状态恢复到「${statusLabels[w.primaryStatus]}」。`, 'good');
+          addCareer('milestone', `维修 ${wp.name}`, `$${repairCost} · 状态 ${statusLabels[w.primaryStatus]}`);
+        } else {
+          addLog(`你签了字，把 ${wp.name} 交回了军械库。下次申领时它会带着这些磨损。`, 'warn');
+        }
+
+        refreshHud();
+        renderFinanceLine();
+        refreshStats();
+        resolve();
+      };
+    });
+  });
+}
+
+/* =========================================================
+   装备系统 · 个人物品
+   ========================================================= */
+function addPersonalItem(id, name, desc, effect){
+  if(!state.equipment) state.equipment = { personalItems: [], weapons:{ primary:'M4', secondary:null }, vehicles:{ current:null, deployType:null } };
+  if(!state.equipment.personalItems) state.equipment.personalItems = [];
+  // 已存在则不重复
+  if(state.equipment.personalItems.some(it=>it.id === id)) return;
+  state.equipment.personalItems.push({
+    id,
+    name,
+    desc,
+    effect: effect || null,
+    fromYear: state.yos,
+    fromMonth: state.month
+  });
+  addLog(`🎁 获得物品：${name}`, 'fx');
+  addCareer('milestone', `获得物品：${name}`, desc);
+}
+
+function renderEquipmentTab(){
+  let html = '';
+
+  // 三个子板块
+  html += `<div class="squad-section-label">个人物品</div>`;
+  html += renderPersonalItems();
+
+  html += `<div class="squad-section-label">武器装备</div>`;
+  html += renderWeaponsBlock();
+
+  html += `<div class="squad-section-label">车辆装备</div>`;
+  html += renderVehiclesBlock();
+
+  return html;
+}
+
+function bindEquipmentTabEvents(){
+  const vehicleBtn = document.getElementById('open-vehicle-btn');
+  if(vehicleBtn){
+    vehicleBtn.onclick = ()=> openVehicleDepot('view');
+  }
+}
+
+/* =========================================================
+   军械库窗口
+   ========================================================= */
+let armoryPurpose = null; // 'deploy' 或 'view'
+
+function openArmory(purpose){
+  armoryPurpose = purpose || 'view';
+  const overlay = document.getElementById('armory-overlay');
+  const content = document.getElementById('armory-content');
+  if(!overlay || !content) return;
+  overlay.classList.add('show');
+  overlay.scrollTop = 0;
+  renderArmory();
+}
+
+function renderArmory(){
+  ensureWeaponStatus();
+  const content = document.getElementById('armory-content');
+  if(!content) return;
+
+  const w = state.equipment.weapons;
+  const currentPrimary = w.primary || 'm4';
+
+  let html = `
+    <div class="promo-title">军 械 库</div>
+    <div class="promo-sub">${rankName()} · ${state.mosCode}</div>
+    <div style="color:#68774f;font-size:11px;line-height:1.7;padding:8px 0 14px">
+      每人每次申领需签署 DA Form 3749 并当面清点。申领消耗 <b style="color:#c9a227">1 AP</b>。
+    </div>
+    <div class="promo-section">可申领武器</div>
+  `;
+
+  Object.values(WEAPONS).forEach(wp=>{
+    const eligible = getWeaponEligibility(wp);
+    const equipped = currentPrimary === wp.id;
+    const isLocked = !eligible;
+    const cls = equipped ? 'equipped' : (isLocked ? 'locked' : '');
+    const statusLabel = equipped ? getWeaponStatusLabel(w.primaryStatus) : '';
+    const statusCls = equipped ? w.primaryStatus : '';
+
+    html += `
+      <div class="armory-item ${cls}" data-weapon="${wp.id}">
+        <div class="armory-item-header">
+          <span class="armory-item-name">${wp.name}${equipped ? ' ✓' : ''}</span>
+          <span class="armory-item-bonus">${wp.bonusType === 'combat' ? '战斗' : wp.bonusType === 'suppress' ? '压制' : wp.bonusType === 'precise' ? '精准' : '潜行'} +${wp.bonusValue}</span>
+        </div>
+        <div class="armory-item-desc">${wp.desc}</div>
+        <div class="armory-item-meta">
+          ${isLocked ? `🔒 需 ${wp.requiredSOF ? 'SOF 资格 · ' : ''}${wp.requiredTrack ? '专用 MOS · ' : ''}军衔 ≥ ${wp.requiredGrade || 1}` : `维修 $${wp.repairCost}`}
+          ${equipped ? `<span class="armory-item-status ${statusCls}">${statusLabel}</span>` : ''}
+        </div>
+      </div>
+    `;
+  });
+
+  html += `<button class="promo-btn" id="armory-close">${armoryPurpose === 'deploy' ? '返 回 部 署 准 备' : '关 闭'}</button>`;
+  content.innerHTML = html;
+
+  document.querySelectorAll('[data-weapon]').forEach(card=>{
+    card.onclick = ()=>{
+      const wpId = card.dataset.weapon;
+      const wp = WEAPONS[wpId];
+      if(!wp) return;
+      if(!getWeaponEligibility(wp)){
+        addLog(`你没有资格申领 ${wp.name}。`, 'warn');
+        return;
+      }
+      if(state.equipment.weapons.primary === wpId){
+        return; // 已经装备
+      }
+      requisitionWeapon(wpId);
+    };
+  });
+
+  document.getElementById('armory-close').onclick = ()=>{
+    const overlay = document.getElementById('armory-overlay');
+    overlay.classList.remove('show');
+    if(armoryPurpose === 'deploy'){
+      // 返回部署准备窗口
+      renderDeployOverlay();
+    }
+  };
+}
+
+/* =========================================================
+   车辆申领窗口
+   ========================================================= */
+let vehiclePurpose = null;
+
+function openVehicleDepot(purpose){
+  vehiclePurpose = purpose || 'view';
+  ensureVehicleStatus();
+  const overlay = document.getElementById('armory-overlay');
+  const content = document.getElementById('armory-content');
+  overlay.classList.add('show');
+  overlay.scrollTop = 0;
+  renderVehicleDepot();
+}
+
+function renderVehicleDepot(){
+  ensureVehicleStatus();
+  const content = document.getElementById('armory-content');
+  if(!content) return;
+
+  const v = state.equipment.vehicles;
+  const currentDeploy = v.deployType || 'none';
+  const assigned = getAssignedVehicle();
+
+  let html = `
+    <div class="promo-title">车 辆 调 度</div>
+    <div class="promo-sub">${rankName()} · ${state.mosCode}</div>
+    <div style="color:#68774f;font-size:11px;line-height:1.7;padding:8px 0 14px">
+      车辆属于单位 motor pool。申领需填写 DA Form 5988-E 并确认车辆状况。
+      每次申领消耗 <b style="color:#c9a227">1 AP</b>。归还时需加满油、清洁。
+    </div>
+
+    <div class="promo-section">你的座驾（自动配发）</div>
+    <div class="vehicle-display">
+      <div class="vehicle-name">🚙 ${assigned.name}</div>
+      <div class="vehicle-desc">${assigned.desc}</div>
+      <div class="vehicle-specs">${assigned.specs}</div>
+    </div>
+
+    <div class="promo-section">部署车辆（可申领）</div>
+  `;
+
+  Object.values(DEPLOY_VEHICLES).forEach(veh=>{
+    const eligible = getDeployVehicleEligibility(veh);
+    const equipped = currentDeploy === veh.id;
+    const isLocked = !eligible;
+    const cls = equipped ? 'equipped' : (isLocked ? 'locked' : '');
+    const statusLabel = equipped ? getVehicleStatusLabel(v.deployStatus) : '';
+    const statusCls = equipped ? v.deployStatus : '';
+
+    const typeLabel = veh.bonusType === 'mobility' ? '机动' :
+                      veh.bonusType === 'armor' ? '防护' :
+                      veh.bonusType === 'cargo' ? '载重' : '潜行';
+
+    html += `
+      <div class="armory-item ${cls}" data-vehicle="${veh.id}">
+        <div class="armory-item-header">
+          <span class="armory-item-name">${veh.name}${equipped ? ' ✓' : ''}</span>
+          <span class="armory-item-bonus">${typeLabel} +${veh.bonusValue}</span>
+        </div>
+        <div class="armory-item-desc">${veh.desc}</div>
+        <div class="armory-item-meta">
+          ${isLocked ? `🔒 需 ${veh.requiredSOF ? 'SOF 资格 · ' : ''}军衔 ≥ ${veh.requiredGrade || 1}` : `维修 $${veh.repairCost}`}
+          ${equipped ? `<span class="armory-item-status ${statusCls}">${statusLabel}</span>` : ''}
+        </div>
+      </div>
+    `;
+  });
+
+  html += `<button class="promo-btn" id="vehicle-close">${vehiclePurpose === 'deploy' ? '返 回 部 署 准 备' : '关 闭'}</button>`;
+  content.innerHTML = html;
+
+  document.querySelectorAll('[data-vehicle]').forEach(card=>{
+    card.onclick = ()=>{
+      const vId = card.dataset.vehicle;
+      const veh = DEPLOY_VEHICLES[vId];
+      if(!veh) return;
+      if(!getDeployVehicleEligibility(veh)){
+        addLog(`你没有资格申领 ${veh.name}。`, 'warn');
+        return;
+      }
+      if(state.equipment.vehicles.deployType === vId) return;
+      requisitionVehicle(vId);
+    };
+  });
+
+  document.getElementById('vehicle-close').onclick = ()=>{
+    document.getElementById('armory-overlay').classList.remove('show');
+    if(vehiclePurpose === 'deploy'){
+      renderDeployOverlay();
+    }
+  };
+}
+
+function requisitionVehicle(vId){
+  const veh = DEPLOY_VEHICLES[vId];
+  if(!veh) return;
+
+  if(state.ap < 1){
+    addLog('AP 不足，无法申领车辆。', 'warn');
+    return;
+  }
+  state.ap -= 1;
+
+  // 低军衔驳回
+  if(state.track === 'E' && state.grade < 5 && vId !== 'none'){
+    if(Math.random() < 0.20){
+      addLog(`📋 ${veh.name} 申领被驳回：车场士官说"优先给更需要的人"。AP 已消耗。`, 'warn');
+      addCareer('milestone', `${veh.name} 申领被驳回`, '车场优先分配给其他人');
+      refreshHud();
+      return;
+    }
+  }
+
+  // 申领成功
+  state.equipment.vehicles.deployType = vId;
+  state.equipment.vehicles.deployStatus = 'clean';
+  addLog(`📋 ${veh.name} 申领成功。你在 DA Form 5988-E 上签了字。`, 'good');
+  addCareer('milestone', `申领车辆 ${veh.name}`, '');
+
+  refreshHud();
+  refreshStats();
+  renderVehicleDepot();
+}
+
+function requisitionWeapon(wpId){
+  const wp = WEAPONS[wpId];
+  if(!wp) return;
+
+  // 消耗 AP
+  if(state.ap < 1){
+    addLog('AP 不足，无法申领武器。', 'warn');
+    return;
+  }
+  state.ap -= 1;
+
+  // 低军衔驳回
+  if(state.track === 'E' && state.grade < 5){
+    if(Math.random() < 0.20){
+      addLog(`📋 ${wp.name} 申领被驳回：你的班军士没有在 DA Form 3749 上签字。AP 已消耗。`, 'warn');
+      addCareer('milestone', `${wp.name} 申领被驳回`, '班军士未签字');
+      refreshHud();
+      return;
+    }
+  }
+
+  // 申领成功
+  state.equipment.weapons.primary = wpId;
+  state.equipment.weapons.primaryStatus = 'clean';
+  addLog(`📋 ${wp.name} 申领成功。你在 DA Form 3749 上签了字。`, 'good');
+  addCareer('milestone', `申领 ${wp.name}`, '');
+
+  refreshHud();
+  refreshStats();
+  renderArmory();
+}
+
+function renderPersonalItems(){
+  const items = (state.equipment && state.equipment.personalItems) || [];
+  if(!items.length){
+    return `<div class="item-empty">尚无个人物品。<br>它们会在事件中自然获得。</div>`;
+  }
+  let html = `<div class="item-grid">`;
+  items.forEach(it=>{
+    html += `
+      <div class="item-card">
+        <div class="item-name">${it.name}</div>
+        <div class="item-desc">${it.desc}</div>
+        <div class="item-meta">第 ${it.fromYear} 年 ${it.fromMonth || ''} 月获得</div>
+        ${it.effect ? `<div class="item-effect">${it.effect}</div>` : ''}
+      </div>
+    `;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function renderWeaponsBlock(){
+  const w = (state.equipment && state.equipment.weapons) || { primary:'M4', secondary:null };
+  return `
+    <div style="color:#94a878;font-size:12px;line-height:1.8;padding:4px 0 8px">
+      <div class="promo-item"><span>主武器</span><span>${w.primary || '未申领'}</span></div>
+      <div class="promo-item"><span>副武器</span><span>${w.secondary || '未申领'}</span></div>
+    </div>
+    <div style="color:#4a5540;font-size:10.5px;font-style:italic;padding-bottom:10px">
+      · 外出执勤武器申领系统将在下一批上线
+    </div>
+  `;
+}
+
+function renderVehiclesBlock(){
+  ensureVehicleStatus();
+  const v = (state.equipment && state.equipment.vehicles) || { deployType:'none', deployStatus:'clean' };
+  const assigned = getAssignedVehicle();
+  const deploy = DEPLOY_VEHICLES[v.deployType] || DEPLOY_VEHICLES.none;
+
+  let html = '';
+
+  // 座驾
+  html += `<div class="vehicle-display">
+    <div class="vehicle-name">🚙 ${assigned.name}</div>
+    <div class="vehicle-desc">${assigned.desc}</div>
+    <div class="vehicle-specs">${assigned.specs}</div>
+  </div>`;
+
+  // 部署车辆
+  html += `<div class="vehicle-display">
+    <div class="vehicle-name">🚚 部署车辆：${deploy.name}<span class="armory-item-status ${v.deployStatus}" style="margin-left:8px">${getVehicleStatusLabel(v.deployStatus)}</span></div>
+    <div class="vehicle-desc">${deploy.desc}</div>
+    <div class="vehicle-specs">加成：${deploy.bonusType === 'mobility' ? '机动' : deploy.bonusType === 'armor' ? '防护' : deploy.bonusType === 'cargo' ? '载重' : '潜行'} +${deploy.bonusValue}</div>
+  </div>`;
+
+  html += `<button class="promo-btn" id="open-vehicle-btn" style="margin-top:8px">车 辆 申 领</button>`;
+
+  return html;
+}
+
+/* =========================================================
    军事教育系统
    ========================================================= */
 const MILITARY_SCHOOLS = {
@@ -8646,6 +9963,223 @@ function openDiaryEntry(idx){
 }
 
 /* =========================================================
+   部署时间推进
+   ========================================================= */
+async function advanceDeploymentTime(months){
+  // 记录快照
+  const before = {
+    pt: state.pt, mos: state.mos, lead: state.lead,
+    pol: state.pol, morale: state.morale,
+    balance: state.finance.balance,
+    spouseLove: state.spouse ? state.spouse.love : 0,
+    spousePressure: state.spouse ? state.spouse.pressure : 0,
+    commandTraining: state.command ? state.command.training : 0,
+    commandMorale: state.command ? state.command.morale : 0,
+    commandEquip: state.command ? state.command.equipment : 0
+  };
+
+  for(let i = 1; i <= months; i++){
+    // 时钟动画
+    await playMonthClock(i, months);
+
+    // 时间推进
+    state.month++;
+    let crossedYear = false;
+    if(state.month > 12){
+      state.month = 1;
+      state.yos++;
+      state.age++;
+      state.tig++;
+      crossedYear = true;
+
+      // NPC 关系历史记录
+      if(state.npcs){
+        ['superior','peer','subordinate','technician'].forEach(k=>{
+          if(!state.npcs[k]) return;
+          if(!state.npcs[k].relationHistory) state.npcs[k].relationHistory = [];
+          state.npcs[k].relationHistory.push(state.npcs[k].value);
+          if(state.npcs[k].relationHistory.length > 5){
+            state.npcs[k].relationHistory = state.npcs[k].relationHistory.slice(-5);
+          }
+        });
+      }
+    }
+
+    // 属性变化
+    state.pt = clamp(state.pt + 1, 0, 100);
+    state.mos = clamp(state.mos + 1, 0, 100);
+    state.lead = clamp(state.lead + 1, 0, 100);
+    state.pol = clamp(state.pol - 1, 0, 100);
+    state.morale = clamp(state.morale - 2, 0, 100);
+
+    // 财务
+    const pay = Math.round(getCurrentPay() * 1.5);
+    addFinance('pay', pay, '军饷（含部署津贴）');
+    let expense = 450;
+    if(state.finance.hasHouse) expense += 1200;
+    if(state.finance.hasCar) expense += 300;
+    if(state.finance.loans > 0) expense += state.finance.loans;
+    if(state.finance.mortgage > 0) expense += state.finance.mortgage;
+    if(state.spouse && state.spouse.status === 'married') expense += 600;
+    if(state.spouse && state.spouse.children){
+      state.spouse.children.forEach(c=>{
+        if(c.age >= 6 && c.age <= 18) expense += 400;
+        else if(c.age > 18 && c.age <= 22) expense += 800;
+      });
+    }
+    addFinance('living', -expense, '日常支出');
+
+    // 婚姻
+    if(state.spouse && state.spouse.status === 'married'){
+      state.spouse.pressure = clamp(state.spouse.pressure + 5, 0, 100);
+      const pers = getSpousePersonality(state.spouse.personality);
+      if(pers && pers.pressureResist){
+        state.spouse.pressure = clamp(state.spouse.pressure - pers.pressureResist, 0, 100);
+      }
+      if(state.spouse.pressure >= 70){
+        state.spouse.love = clamp(state.spouse.love - 1, 0, 100);
+      }
+      state.spouse.independence = clamp(state.spouse.independence + 1, 0, 100);
+      state.spouse.patience = clamp(state.spouse.patience - 1, 0, 100);
+    }
+
+    // 孩子年龄
+    if(state.month === 1 && state.spouse && state.spouse.children){
+      state.spouse.children.forEach(c=>{
+        c.age += 1;
+        c.intelligence = clamp(c.intelligence + randomInt(1, 2), 0, 100);
+        c.physique = clamp(c.physique + randomInt(1, 2), 0, 100);
+        c.discipline = clamp(c.discipline + randomInt(1, 2), 0, 100);
+      });
+    }
+
+    // 单位
+    if(state.command && state.command.active){
+      state.command.training = clamp(state.command.training + 2, 0, 100);
+      state.command.morale = clamp(state.command.morale - 2, 0, 100);
+      state.command.equipment = clamp(state.command.equipment - 1, 0, 100);
+    }
+
+    // 战友成长
+    if(state._deploySquadMembers && state._deploySquadMembers.length){
+      state._deploySquadMembers.forEach(sm=>{
+        const cur = getSquadMember(sm.id);
+        if(cur){
+          cur.pt = clamp(cur.pt + 1, 0, 100);
+          cur.mos = clamp(cur.mos + 1, 0, 100);
+          cur.loyalty = clamp(cur.loyalty + 1, 0, 100);
+        }
+      });
+    }
+  }
+
+  // 保存快照供回顾用
+  state._deployBefore = before;
+  state._deployMonths = months;
+}
+
+function playMonthClock(monthIndex, totalMonths){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('month-clock-overlay');
+    const hand = document.getElementById('month-clock-hand');
+    const label = document.getElementById('month-clock-label');
+
+    if(!overlay){
+      setTimeout(resolve, 400);
+      return;
+    }
+
+    if(label) label.textContent = `第 ${monthIndex} / ${totalMonths} 个月`;
+
+    if(hand){
+      hand.style.transition = 'none';
+      hand.style.transform = 'rotate(0deg)';
+      void hand.offsetWidth;
+      hand.style.transition = 'transform 0.55s cubic-bezier(.3,.7,.4,1)';
+      hand.style.transform = `rotate(${monthIndex * 30}deg)`;
+    }
+
+    overlay.classList.add('show');
+
+    setTimeout(()=>{
+      overlay.classList.remove('show');
+      setTimeout(resolve, 200);
+    }, 600);
+  });
+}
+
+async function showDeploymentReview(){
+  const months = state._deployMonths || 1;
+  const before = state._deployBefore || {};
+
+  const overlay = document.getElementById('promo-overlay');
+  const content = document.getElementById('promo-content');
+  overlay.classList.add('show');
+  overlay.scrollTop = 0;
+
+  const dp = (cur, prev) => {
+    const d = Math.round((cur - (prev || 0)) * 10) / 10;
+    if(d === 0) return '0';
+    return (d > 0 ? '+' : '') + d;
+  };
+  const color = (d) => d > 0 ? '#9dd96a' : d < 0 ? '#d95a4a' : '#94a878';
+
+  let html = `
+    <div class="promo-title">部 署 回 顾</div>
+    <div class="promo-sub">${state.deployedLocation ? state.deployedLocation.name : '远方'} · ${months} 个月</div>
+    <div class="deploy-narr">
+      你回到了基地。${months} 个月的时间，在你身上留下了痕迹。
+    </div>
+
+    <div class="promo-section">个人变化</div>
+    <div class="promo-item"><span>体能</span><span style="color:${color(state.pt - before.pt)}">${dp(state.pt, before.pt)}</span></div>
+    <div class="promo-item"><span>专业</span><span style="color:${color(state.mos - before.mos)}">${dp(state.mos, before.mos)}</span></div>
+    <div class="promo-item"><span>领导</span><span style="color:${color(state.lead - before.lead)}">${dp(state.lead, before.lead)}</span></div>
+    <div class="promo-item"><span>政治</span><span style="color:${color(state.pol - before.pol)}">${dp(state.pol, before.pol)}</span></div>
+    <div class="promo-item"><span>士气</span><span style="color:${color(state.morale - before.morale)}">${dp(state.morale, before.morale)}</span></div>
+
+    <div class="promo-section">收支</div>
+    <div class="promo-item"><span>余额变化</span><span style="color:${color(state.finance.balance - before.balance)}">$${Math.round(state.finance.balance - before.balance).toLocaleString()}</span></div>
+  `;
+
+  if(state.spouse && state.spouse.status === 'married'){
+    html += `
+      <div class="promo-section">婚姻</div>
+      <div class="promo-item"><span>配偶压力</span><span style="color:${color(state.spouse.pressure - before.spousePressure)}">${dp(state.spouse.pressure, before.spousePressure)}</span></div>
+      <div class="promo-item"><span>爱意</span><span style="color:${color(state.spouse.love - before.spouseLove)}">${dp(state.spouse.love, before.spouseLove)}</span></div>
+    `;
+  }
+
+  if(state.command && state.command.active){
+    html += `
+      <div class="promo-section">单位</div>
+      <div class="promo-item"><span>训练</span><span style="color:${color(state.command.training - before.commandTraining)}">${dp(state.command.training, before.commandTraining)}</span></div>
+      <div class="promo-item"><span>士气</span><span style="color:${color(state.command.morale - before.commandMorale)}">${dp(state.command.morale, before.commandMorale)}</span></div>
+      <div class="promo-item"><span>装备</span><span style="color:${color(state.command.equipment - before.commandEquip)}">${dp(state.command.equipment, before.commandEquip)}</span></div>
+    `;
+  }
+
+  if(state._deploySquadMembers && state._deploySquadMembers.length){
+    html += `<div class="promo-section">参战战友</div>`;
+    state._deploySquadMembers.forEach(sm=>{
+      const cur = getSquadMember(sm.id);
+      if(!cur) return;
+      html += `<div class="promo-item"><span>${cur.name}</span><span style="color:#9dd96a">体能 +${months} · 专业 +${months} · 忠诚 +${months}</span></div>`;
+    });
+  }
+
+  html += `<button class="promo-btn" id="deploy-review-close">返 回 基 地</button>`;
+  content.innerHTML = html;
+
+  return new Promise(resolve=>{
+    document.getElementById('deploy-review-close').onclick = ()=>{
+      overlay.classList.remove('show');
+      resolve();
+    };
+  });
+}
+
+/* =========================================================
    伤亡通知系统
    ========================================================= */
 function checkCasualtyNotificationTrigger(){
@@ -9293,17 +10827,21 @@ const AMBIENCE_EVENTS = [
   { id:'amb_30', text:'你今天教一个左撇子怎么用右手射击。他花了两个小时才打中靶心。', fx:{lead:+1} },
 
   /* ---------- 家庭 / 私人（15） ---------- */
-  { id:'amb_31', text:'你收到母亲寄来的一盒饼干。她不识字，是托邻居写的地址。', fx:{morale:+2} },
+  { id:'amb_31', text:'你收到母亲寄来的一盒饼干。她不识字，是托邻居写的地址。', fx:{morale:+2},
+  item:{ name:'母亲的饼干盒', desc:'一个用旧报纸包着的铁盒。里面是母亲亲手做的饼干，已经吃完了，但盒子留了下来。', effect:'士气 +1' } },
   { id:'amb_32', text:'你给家里打电话。没人接。你听了一会儿忙音，然后挂了。', fx:{morale:-1} },
-  { id:'amb_33', text:'你的旧手表坏了。是父亲留给你那块。你花了一个下午修好了它。', fx:{morale:+1} },
+  { id:'amb_33', text:'你的旧手表坏了。是父亲留给你那块。你花了一个下午修好了它。', fx:{morale:+1},
+  item:{ name:'父亲的手表', desc:'一只老式机械表，表盘已经泛黄。你花了一个下午修好它，它现在还在走。', effect:'士气 +1' } },
   { id:'amb_34', text:'你在休息日看了一部老电影。是关于战争的。看完之后你没说话。', fx:{morale:-1,pol:+1} },
   { id:'amb_35', text:'一个战友问你"你想过退役之后干什么吗？" 你说"还没想好"。他说"我也是"。', fx:{pol:+1} },
   { id:'amb_36', text:'你今天梦到了小时候的家。醒来时宿舍里一片漆黑，只有上铺的呼噜声。', fx:{morale:+1} },
-  { id:'amb_37', text:'你给自己买了一双新靴子。旧的没扔，收进了柜子最底层。', fx:{pt:+1} },
+  { id:'amb_37', text:'你给自己买了一双新靴子。旧的没扔，收进了柜子最底层。', fx:{pt:+1},
+  item:{ name:'磨破的旧靴子', desc:'鞋底已经磨平，鞋帮上有一道划痕——那是第一次部署时留下的。', effect:null } },
   { id:'amb_38', text:'你收到了一封战友的信。他退役后去了别的州。信里只写了几句。', fx:{morale:+1} },
   { id:'amb_39', text:'今天生日。没有人记得，除了一个不认识的新兵在食堂跟你说"生日快乐，长官"。', fx:{morale:+2} },
   { id:'amb_40', text:'你在军人服务社买了一本旧书。晚上读了半本。', fx:{pol:+1} },
-  { id:'amb_41', text:'你在换季整理衣服时发现了一张照片。是入伍第一天拍的。照片上的你看起来非常年轻。', fx:{morale:+1} },
+  { id:'amb_41', text:'你在换季整理衣服时发现了一张照片。是入伍第一天拍的。照片上的你看起来非常年轻。', fx:{morale:+1},
+  item:{ name:'入伍第一天的照片', desc:'照片上的年轻人穿着崭新的军装，笑得有些傻。你在照片背面写了日期。', effect:null } },
   { id:'amb_42', text:'你听着收音机里的球赛。你支持的队输了。', fx:{morale:-1} },
   { id:'amb_43', text:'一个退役的老兵回到基地，看了看营房。他说"这里一点没变"。', fx:{pol:+1} },
   { id:'amb_44', text:'你在休息日睡了 14 个小时。醒来之后觉得更累了。', fx:{morale:+1,pt:-1} },
@@ -9314,10 +10852,12 @@ const AMBIENCE_EVENTS = [
   { id:'amb_47', text:'你在部署地收到了一封家书。信在路上走了三个星期。', fx:{morale:+2}, cond:s=>s.flags.deployed },
   { id:'amb_48', text:'一个当地小孩向你跑来，递给你一个水果。他的母亲在远处看着。你没接。', fx:{morale:-1,pol:+1}, cond:s=>s.flags.deployed },
   { id:'amb_49', text:'沙尘暴。所有人躲在帐篷里，听风声。有人开始讲他家里的故事。', fx:{morale:+1}, cond:s=>s.flags.deployed },
-  { id:'amb_50', text:'你在一处废墟里发现了一本烧了一半的书。你把它收好，带回了基地。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_50', text:'你在一处废墟里发现了一本烧了一半的书。你把它收好，带回了基地。', fx:{morale:+1}, cond:s=>s.flags.deployed,
+  item:{ name:'烧了一半的书', desc:'一本讲战争与和平的旧书，最后 30 页被火燎焦了。你后来把它读完了。', effect:null } },
   { id:'amb_51', text:'一个战友的手机里存着他女儿的视频。他给你看，眼睛里全是光。', fx:{morale:+2}, cond:s=>s.flags.deployed },
   { id:'amb_52', text:'你在头盔里发现了一张战友塞进来的纸条。上面写着"小心点"。', fx:{morale:+2}, cond:s=>s.flags.deployed },
-  { id:'amb_53', text:'一次夜袭结束后，你坐在装甲车边。有人递给你一瓶水。你喝了半瓶，发现自己手在抖。', fx:{morale:-1,pt:-1}, cond:s=>s.flags.deployed },
+  { id:'amb_53', text:'一次夜袭结束后，你坐在装甲车边。有人递给你一瓶水。你喝了半瓶，发现自己手在抖。', fx:{morale:-1,pt:-1}, cond:s=>s.flags.deployed,
+  item:{ name:'战友的半瓶水', desc:'一个空了一半的塑料水瓶。瓶身上的标签已经被手汗磨掉了。', effect:null } },
   { id:'amb_54', text:'当地的一名老人跟你说了几句话。翻译说"他说的是 愿平安与你同在"。', fx:{morale:+1,pol:+1}, cond:s=>s.flags.deployed },
   { id:'amb_55', text:'你在一处哨塔上看日出。沙子被风吹起来，天空变成了橙色。', fx:{morale:+1}, cond:s=>s.flags.deployed },
   { id:'amb_56', text:'一个战友的靴子磨破了。你把自己备用的给了他。他说"回去还你"。', fx:{lead:+1}, cond:s=>s.flags.deployed },
@@ -9551,6 +11091,11 @@ function newState(bg, talent, mos){
     campaign: 'peace',
     militaryEducation: {},
     militaryEducationAttendance: null,
+    equipment: {
+      personalItems: [],
+      weapons: { primary: 'm4', primaryStatus: 'clean', secondary: null },
+      vehicles: { deployType: 'none', deployStatus: 'clean' }
+    },
     unit: null,
     location: null,
     deployedLocation: null,
@@ -9884,6 +11429,10 @@ async function endMonth(){
         }
       }
       if(fxParts.length) addLog(fxParts.join('　'), 'fx');
+    }
+    // 物品产出
+    if(ambEv.item){
+      addPersonalItem(ambEv.id, ambEv.item.name, ambEv.item.desc, ambEv.item.effect);
     }
   }
 
@@ -11588,6 +13137,12 @@ function bindSOFResultEvents(){
       else if(_totalScore >= 18) addRankMedal('second');
       else addRankMedal('third');
 
+      // 功勋奖励
+      if(_totalScore >= 21) addMerit(4);
+      else if(_totalScore >= 18) addMerit(3);
+      else addMerit(2);
+    
+
       state.pt = clamp(state.pt+8, 0, 100);
       state.mos = clamp(state.mos+8, 0, 100);
       state.lead = clamp(state.lead+8, 0, 100);
@@ -11633,6 +13188,7 @@ const DEPLOY_MISSIONS = [
     name:'训练友军',
     risk:'低',
     riskCls:'low',
+    duration: 2,
     eligible: s=>s.track==='E'&&s.grade>=2&&s.grade<=5,
     intro:'你被派往一处前沿基地，为当地安全部队提供为期六周的战术训练。这一带最近有极端组织活动，但训练区本身相对安全。',
     phases:[
@@ -11667,6 +13223,7 @@ const DEPLOY_MISSIONS = [
     name:'后勤护送',
     risk:'中',
     riskCls:'mid',
+    duration: 1,
     eligible: s=>s.track==='E'&&s.grade>=2&&s.grade<=6,
     intro:'一支补给车队需要穿越一段"绿区"与"红区"交界地带。情报显示这一带最近有极端组织的简易爆炸装置活动记录。',
     phases:[
@@ -11701,6 +13258,7 @@ const DEPLOY_MISSIONS = [
     name:'战斗巡逻',
     risk:'高',
     riskCls:'high',
+    duration: 3,
     eligible: s=>s.track==='E'&&s.grade>=5&&s.grade<=8,
     intro:'情报显示一伙极端分子在某村庄外围活动。你带队执行夜间侦察巡逻，任务是确认目标位置并呼叫打击。',
     phases:[
@@ -11742,6 +13300,7 @@ const DEPLOY_MISSIONS = [
     name:'人道主义援助',
     risk:'低',
     riskCls:'low',
+    duration: 2,
     eligible: s=>s.track==='E'&&s.grade>=4&&s.grade<=7,
     intro:'一处村庄因极端组织破坏水源设施而断水。你被派往现场，与当地政府和国际组织协作，恢复供水并分发物资。',
     phases:[
@@ -11776,6 +13335,7 @@ const DEPLOY_MISSIONS = [
     name:'特种侦察',
     risk:'极高',
     riskCls:'veryhigh',
+    duration: 1,
     eligible: s=>s.flags.sof===true&&s.track==='E'&&s.grade>=5,
     intro:'特种作战司令部下达任务：深入极端组织控制区，侦察一处疑似指挥节点，为后续打击提供目标坐标。',
     phases:[
@@ -11806,7 +13366,7 @@ const DEPLOY_MISSIONS = [
   },
 
 { id:'mos_11b_assault',
-  name:'突击行动', risk:'高', riskCls:'high',
+  name:'突击行动', risk:'高', riskCls:'high',duration: 1,
   eligible: s=>s.mosCode==='11B'&&s.track==='E'&&s.grade>=5&&s.grade<=8,
   intro:'情报显示一处极端组织的武器藏匿点。你带队执行夜间突击清剿，任务窗口只有二十分钟。',
   phases:[
@@ -11836,7 +13396,7 @@ const DEPLOY_MISSIONS = [
   medal:'铜星勋章' },
 
 { id:'mos_68w_masscal',
-  name:'大规模伤亡处置', risk:'中', riskCls:'mid',
+  name:'大规模伤亡处置', risk:'中', riskCls:'mid',duration: 1,
   eligible: s=>s.mosCode==='68W'&&s.track==='E'&&s.grade>=4,
   intro:'一次训练事故导致多名士兵受伤。你是现场唯一的高级医疗兵，十几个伤员在等你。',
   phases:[
@@ -11859,7 +13419,7 @@ const DEPLOY_MISSIONS = [
   medal:'陆军嘉奖勋章' },
 
 { id:'mos_25b_joint',
-  name:'联合通信保障', risk:'低', riskCls:'low',
+  name:'联合通信保障', risk:'低', riskCls:'low',duration: 1,
   eligible: s=>s.mosCode==='25B'&&s.track==='E'&&s.grade>=4,
   intro:'一次多军种联合演习。你负责协调陆军、海军陆战队和空军的通信协议对接。',
   phases:[
@@ -11882,7 +13442,7 @@ const DEPLOY_MISSIONS = [
   medal:'陆军成就勋章' },
 
 { id:'mos_92y_hub',
-  name:'后勤枢纽管理', risk:'低', riskCls:'low',
+  name:'后勤枢纽管理', risk:'低', riskCls:'low',duration: 2,
   eligible: s=>s.mosCode==='92Y'&&s.track==='E'&&s.grade>=4,
   intro:'你被派往一处前线后勤枢纽，管理每天数百吨物资的流转、储存和分发。',
   phases:[
@@ -12039,9 +13599,13 @@ function renderDeployOverlay(){
     case 'brief':
       content.innerHTML = renderDeployBriefHTML();
       document.getElementById('deploy-start-btn').onclick = ()=>{
-        deployFlow.step = 'phase';
+        deployFlow.step = 'prepare';
         renderDeployOverlay();
       };
+      break;
+    case 'prepare':
+      content.innerHTML = renderDeployPrepareHTML();
+      bindDeployPrepareEvents();
       break;
     case 'phase':
       content.innerHTML = renderDeployPhaseHTML();
@@ -12087,6 +13651,116 @@ function renderDeployBriefHTML(){
     </div>
     <button class="promo-btn" id="deploy-start-btn">出 发</button>
   `;
+}
+
+function renderDeployPrepareHTML(){
+  ensureWeaponStatus();
+  ensureVehicleStatus();
+  const m = deployFlow.mission;
+  const w = state.equipment.weapons;
+  const v = state.equipment.vehicles;
+  const primary = WEAPONS[w.primary] || WEAPONS.m4;
+  const vehicle = DEPLOY_VEHICLES[v.deployType] || DEPLOY_VEHICLES.none;
+
+  const statusLabel = getWeaponStatusLabel(w.primaryStatus);
+  const statusCls = w.primaryStatus;
+  const statusMult = getWeaponStatusMultiplier(w.primaryStatus);
+  const currentBonus = Math.round(primary.bonusValue * statusMult * 10) / 10;
+
+  const vehStatusLabel = getVehicleStatusLabel(v.deployStatus);
+  const vehStatusCls = v.deployStatus;
+  const vehStatusMult = getVehicleStatusMultiplier(v.deployStatus);
+  const vehBonus = Math.round(vehicle.bonusValue * vehStatusMult * 10) / 10;
+
+  const vehTypeLabel = vehicle.bonusType === 'mobility' ? '机动' :
+                       vehicle.bonusType === 'armor' ? '防护' :
+                       vehicle.bonusType === 'cargo' ? '载重' : '潜行';
+
+  return `
+    <div class="deploy-header">
+      <div class="promo-title">部 署 准 备</div>
+      <div class="deploy-meta">${m.name}</div>
+      <div class="deploy-status ${m.riskCls}">风险 · ${m.risk}</div>
+    </div>
+
+    <div class="promo-section">任务信息</div>
+    <div class="deploy-prep-section">
+      <div class="deploy-prep-line"><span class="label">任务</span><span class="val">${m.name}</span></div>
+      <div class="deploy-prep-line"><span class="label">地点</span><span class="val">${deployFlow.deployLocation ? deployFlow.deployLocation.name : '未知'}</span></div>
+      <div class="deploy-prep-line"><span class="label">时长</span><span class="val">${m.duration || 1} 个月</span></div>
+    </div>
+
+    <div class="promo-section">当前装备</div>
+    <div class="deploy-prep-section">
+      <div class="deploy-prep-line">
+        <span class="label">主武器</span>
+        <span class="val">${primary.name}<span class="armory-item-status ${statusCls}" style="margin-left:8px">${statusLabel}</span></span>
+      </div>
+      <div class="deploy-prep-line"><span class="label">武器加成</span><span class="val">${currentBonus > 0 ? '+' + currentBonus : '0'}</span></div>
+      <div class="deploy-prep-line">
+        <span class="label">车辆</span>
+        <span class="val">${vehicle.name}<span class="armory-item-status ${vehStatusCls}" style="margin-left:8px">${vehStatusLabel}</span></span>
+      </div>
+      <div class="deploy-prep-line"><span class="label">车辆加成</span><span class="val">${vehBonus > 0 ? vehTypeLabel + ' +' + vehBonus : '0'}</span></div>
+    </div>
+
+    <div class="promo-section">行动</div>
+    <div class="deploy-prep-actions">
+      <button id="prep-armory-btn" ${state.ap < 1 ? 'disabled' : ''}>
+        更换武器<br><span style="color:#68774f;font-size:10.5px">消耗 1 AP</span>
+      </button>
+      <button id="prep-vehicle-btn" ${state.ap < 1 ? 'disabled' : ''}>
+        更换车辆<br><span style="color:#68774f;font-size:10.5px">消耗 1 AP</span>
+      </button>
+    </div>
+
+    <button class="promo-btn" id="prep-start-btn">开 始 部 署</button>
+  `;
+}
+
+function bindDeployPrepareEvents(){
+  const armoryBtn = document.getElementById('prep-armory-btn');
+  if(armoryBtn){
+    armoryBtn.onclick = ()=> openArmory('deploy');
+  }
+  const vehicleBtn = document.getElementById('prep-vehicle-btn');
+  if(vehicleBtn){
+    vehicleBtn.onclick = ()=> openVehicleDepot('deploy');
+  }
+  const startBtn = document.getElementById('prep-start-btn');
+  if(startBtn){
+    startBtn.onclick = ()=>{
+      deployFlow.step = 'phase';
+      renderDeployOverlay();
+    };
+  }
+}
+
+function bindDeployPrepareEvents(){
+  const armoryBtn = document.getElementById('prep-armory-btn');
+  if(armoryBtn){
+    armoryBtn.onclick = ()=>{
+      openArmory('deploy');
+    };
+  }
+    const startBtn = document.getElementById('prep-start-btn');
+  if(startBtn){
+    startBtn.onclick = ()=>{
+      // 检查车辆状态
+      const v = state.equipment.vehicles;
+      if(v.deployStatus === 'broken' && v.deployType !== 'none'){
+        alert('该车辆已报废，无法使用。请先更换车辆。');
+        return;
+      }
+      if(v.deployStatus === 'damaged'){
+        if(!confirm('车辆严重受损，带它出发可能影响任务成功率。确定继续？')){
+          return;
+        }
+      }
+      deployFlow.step = 'phase';
+      renderDeployOverlay();
+    };
+  }
 }
 
 function renderDeployPhaseHTML(){
@@ -12189,11 +13863,52 @@ function renderDeployResultHTML(){
     commandBonus = Math.min(Math.round((c.morale + c.training + c.equipment) / 30), 10);
   }
 
+    // 武器加成
+  let weaponBonus = 0;
+  if(state.equipment && state.equipment.weapons){
+    const w = state.equipment.weapons;
+    const wp = WEAPONS[w.primary];
+    if(wp){
+      const mult = getWeaponStatusMultiplier(w.primaryStatus || 'clean');
+      // 任务类型匹配加成
+      const missionId = deployFlow.mission.id;
+      let matchBonus = 1.0;
+      if(wp.bonusType === 'combat' && ['patrol','mos_11b_assault'].includes(missionId)) matchBonus = 1.3;
+      if(wp.bonusType === 'suppress' && ['patrol','mos_11b_assault'].includes(missionId)) matchBonus = 1.2;
+      if(wp.bonusType === 'precise' && missionId === 'sof_recon') matchBonus = 1.5;
+      if(wp.bonusType === 'stealth' && ['sof_recon','humanitarian'].includes(missionId)) matchBonus = 1.3;
+      weaponBonus = Math.round(wp.bonusValue * mult * matchBonus * 10) / 10;
+    }
+  }
+
+  // 车辆加成
+  let vehicleBonus = 0;
+  let vehicleBonusLabel = '';
+  if(state.equipment && state.equipment.vehicles){
+    const v = state.equipment.vehicles;
+    const veh = DEPLOY_VEHICLES[v.deployType];
+    if(veh){
+      const mult = getVehicleStatusMultiplier(v.deployStatus || 'clean');
+      const missionId = deployFlow.mission.id;
+      let matchBonus = 1.0;
+      // 任务类型匹配
+      if(veh.bonusType === 'mobility' && ['patrol','mos_11b_assault','convoy'].includes(missionId)) matchBonus = 1.2;
+      if(veh.bonusType === 'armor' && ['patrol','mos_11b_assault'].includes(missionId)) matchBonus = 1.4;
+      if(veh.bonusType === 'cargo' && ['mos_92y_hub','convoy'].includes(missionId)) matchBonus = 1.5;
+      if(veh.bonusType === 'stealth' && ['sof_recon','humanitarian'].includes(missionId)) matchBonus = 1.3;
+      vehicleBonus = Math.round(veh.bonusValue * mult * matchBonus * 10) / 10;
+      const typeLabel = veh.bonusType === 'mobility' ? '机动' :
+                        veh.bonusType === 'armor' ? '防护' :
+                        veh.bonusType === 'cargo' ? '载重' : '潜行';
+      vehicleBonusLabel = `${veh.name} · ${typeLabel}`;
+    }
+  }
+
   const specEff = getSpecialtyEffects();
   const missionId = deployFlow.mission.id;
   let specBonus = specEff.deployBonus[missionId] || 0;
   if(specEff.deployBonus['any']) specBonus += specEff.deployBonus['any'];
-  const totalScore = deployFlow.totalScore + (deployFlow.subBonus || 0) + specBonus + squadBonus + commandBonus;
+  const totalScore = deployFlow.totalScore + (deployFlow.subBonus || 0) + specBonus + squadBonus + commandBonus + weaponBonus + vehicleBonus;
   const safeBuffer = specEff.deploySafeBuffer || 0;
 
   const effectiveScore = totalScore + safeBuffer;
@@ -12231,6 +13946,8 @@ function renderDeployResultHTML(){
     </div>
     ${squadBonus > 0 ? `<div class="promo-item"><span>战友加成</span><span style="color:#8fbf55">+${squadBonus}</span></div>` : ''}
     ${commandBonus > 0 ? `<div class="promo-item"><span>单位加成</span><span style="color:#8fbf55">+${commandBonus}</span></div>` : ''}
+    ${weaponBonus > 0 ? `<div class="promo-item"><span>武器加成</span><span style="color:#8fbf55">+${weaponBonus}（${WEAPONS[state.equipment.weapons.primary].name}）</span></div>` : ''}
+    ${vehicleBonus > 0 ? `<div class="promo-item"><span>车辆加成</span><span style="color:#8fbf55">+${vehicleBonus}（${vehicleBonusLabel}）</span></div>` : ''}
     <div class="promo-item">
       <span>完成度</span>
       <span>${Math.round(ratio*100)}%</span>
@@ -12248,17 +13965,21 @@ function renderDeployResultHTML(){
 }
 
 function bindDeployResultEvents(){
-  document.getElementById('deploy-close-btn').onclick = ()=>{
+  document.getElementById('deploy-close-btn').onclick = async ()=>{
     document.getElementById('promo-overlay').classList.remove('show');
     const m = deployFlow.mission;
     const tier = deployFlow._tier;
     const ratio = deployFlow._ratio;
-    const resolve = deployFlow.resolve;
+    const resolve = deployFlow.resolve;   
     const squadMembers = deployFlow.squadMembers || [];
+    const months = m.duration || 1;
     deployFlow = null;
     playSound('deployEnd');
     state.flags.in_deploy = false;
     state.deployedLocation = null;
+
+    // 保存参战战友，供回顾窗口使用
+    state._deploySquadMembers = squadMembers;
 
     // 应用成功收益
     const s = m.success;
@@ -12300,6 +14021,11 @@ function bindDeployResultEvents(){
     if(tier === 'excellent') addRankMedal('first');
     else if(tier === 'good') addRankMedal('second');
     else if(tier === 'pass') addRankMedal('third');
+    
+    // 功勋奖励
+    if(tier === 'excellent') addMerit(3);
+    else if(tier === 'good') addMerit(2);
+    else if(tier === 'pass') addMerit(1);
 
     // 晋升加分
     const bonusMap = {excellent:0.12, good:0.06, pass:0.02, marginal:0, fail:-0.05};
@@ -12356,11 +14082,51 @@ function bindDeployResultEvents(){
       }
     });
 
-    refreshHud();
+        refreshHud();
     refreshStats();
+
+    // 武器损耗判定（战斗中发生）
+    const wearResult = computeWeaponWear(m, tier);
+    if(wearResult){
+      const applied = applyWeaponWear(wearResult);
+      if(applied){
+        addLog(`🔧 任务结束后，军械员检查了你的 ${WEAPONS[state.equipment.weapons.primary].name}。状态：${applied.from} → ${applied.to}`, 'warn');
+      }
+    }
+
+    // 车辆损耗判定
+    const vWearResult = computeVehicleWear(m, tier);
+    if(vWearResult){
+      const vApplied = applyVehicleWear(vWearResult);
+      if(vApplied){
+        const veh = DEPLOY_VEHICLES[state.equipment.vehicles.deployType];
+        if(veh){
+          addLog(`🔧 车场士官检查了你的 ${veh.name}。状态：${vApplied.from} → ${vApplied.to}`, 'warn');
+        }
+      }
+    }
+
+    // 部署期间时间推进
+    await advanceDeploymentTime(months);
+
+    // 归还武器
+    await runEquipmentReturn();
+
+    // 归还车辆
+    await runVehicleReturn();
+
+    // 部署回顾窗口
+    await showDeploymentReview();
+
+    refreshHud();
+    renderFinanceLine();
+    renderMarriageLine();
+    refreshStats();
+    saveGame(activeSaveSlot);
     resolve();
   };
 }
+
 
 function tierNameOf(t){
   return {excellent:'出色完成', good:'成功', pass:'勉强完成', marginal:'部分失败', fail:'失败'}[t]||'结束';
@@ -12421,6 +14187,7 @@ function renderRelOverlay(){
       <button class="rel-tab ${window._relTab==='career'?'active':''}" data-rel-tab="career">路线</button>
       <button class="rel-tab ${window._relTab==='family'?'active':''}" data-rel-tab="family">家庭</button>
       <button class="rel-tab ${window._relTab==='command'?'active':''}" data-rel-tab="command">单位</button>
+      <button class="rel-tab ${window._relTab==='equipment'?'active':''}" data-rel-tab="equipment">装备</button>
     </div>
     <div id="rel-tab-body"></div>
     <button class="promo-btn" id="rel-close-btn">关 闭</button>
@@ -12448,12 +14215,15 @@ function renderRelOverlay(){
     body.innerHTML = renderFactionTab();
   } else if(window._relTab === 'career'){
     body.innerHTML = renderCareerTab();
-  } else if(window._relTab === 'family'){
+    } else if(window._relTab === 'family'){
     body.innerHTML = renderFamilyTab();
     bindFamilyTabEvents();
-  } else {
+  } else if(window._relTab === 'command'){
     body.innerHTML = renderCommandTab();
     bindCommandTabEvents();
+  } else {
+    body.innerHTML = renderEquipmentTab();
+    bindEquipmentTabEvents();
   }
 }
 
@@ -14187,6 +15957,38 @@ function renderCareerOverlay(){
     });
   }
 
+    // 装备记录
+  if(state.equipment){
+    const eq = state.equipment;
+    const hasWeapon = eq.weapons && eq.weapons.primary;
+    const hasVehicle = eq.vehicles && eq.vehicles.deployType && eq.vehicles.deployType !== 'none';
+    if(hasWeapon || hasVehicle || (eq.personalItems && eq.personalItems.length)){
+      html += `<div class="promo-section">装备档案</div>`;
+      if(eq.personalItems && eq.personalItems.length){
+        html += `<div class="promo-item"><span>个人物品</span><span>${eq.personalItems.length} 件</span></div>`;
+      }
+      if(hasWeapon){
+        const wp = WEAPONS[eq.weapons.primary];
+        if(wp){
+          const stLabel = getWeaponStatusLabel(eq.weapons.primaryStatus || 'clean');
+          html += `<div class="promo-item"><span>主武器</span><span>${wp.name}（${stLabel}）</span></div>`;
+        }
+      }
+      if(hasVehicle){
+        const veh = DEPLOY_VEHICLES[eq.vehicles.deployType];
+        if(veh){
+          const stLabel = getVehicleStatusLabel(eq.vehicles.deployStatus || 'clean');
+          html += `<div class="promo-item"><span>部署车辆</span><span>${veh.name}（${stLabel}）</span></div>`;
+        }
+      }
+      const assigned = getAssignedVehicle();
+      if(assigned && assigned.name !== '无配发'){
+        html += `<div class="promo-item"><span>座驾</span><span>${assigned.name}</span></div>`;
+      }
+    }
+  }
+
+
   // 财务档案
   if(state.finance){
     const st = getFinanceStatus();
@@ -15083,6 +16885,11 @@ function beginGame(){
   state.enemyCommander = null;
   state.militaryEducation = {};
   state.militaryEducationAttendance = null;
+  state.equipment = {
+    personalItems: [],
+    weapons: { primary: 'm4', primaryStatus: 'clean', secondary: null },
+    vehicles: { deployType: 'none', deployStatus: 'clean' }
+  };
   // campaign 已在前面设置，无需重置
 
   renderFinanceLine();
