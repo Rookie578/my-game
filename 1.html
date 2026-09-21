@@ -747,6 +747,63 @@ body{
 #settings-btn:hover{border-color:#6d9440;color:#e8d98a}
 #settings-btn:active{transform:scale(.95)}
 
+/* ===== 晋升横幅 ===== */
+#promotion-banner{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(0.85);
+  background:linear-gradient(135deg,#1e1a0e 0%,#2a2010 50%,#1e1a0e 100%);
+  border:2px solid #c9a227;
+  border-radius:8px;
+  padding:28px 48px;
+  text-align:center;
+  z-index:500;
+  opacity:0;
+  pointer-events:none;
+  box-shadow:0 0 40px rgba(201,162,39,.5), inset 0 0 30px rgba(201,162,39,.1);
+  transition:opacity .35s ease, transform .35s cubic-bezier(.2,1.2,.3,1);
+  min-width:220px;
+  max-width:80vw;
+}
+#promotion-banner::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(circle at 50% 50%, rgba(232,217,138,.15), transparent 70%);
+  border-radius:6px;
+  pointer-events:none;
+}
+#promotion-banner.show{
+  opacity:1;
+  transform:translate(-50%, -50%) scale(1);
+}
+#promotion-banner .banner-label{
+  color:#a89050;
+  font-size:11px;
+  letter-spacing:6px;
+  margin-bottom:8px;
+}
+#promotion-banner .banner-rank{
+  color:#e8d98a;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:4px;
+  text-shadow:0 0 16px rgba(201,162,39,.7);
+  margin-bottom:6px;
+}
+#promotion-banner .banner-abbr{
+  color:#a89050;
+  font-size:12px;
+  letter-spacing:3px;
+}
+#promotion-banner .banner-stars{
+  margin-top:10px;
+  color:#c9a227;
+  font-size:14px;
+  letter-spacing:4px;
+}
+
 /* ===== 设置面板 ===== */
 #settings-panel{
   position:fixed;
@@ -1198,6 +1255,13 @@ body{
 </style>
 </head>
 <body>
+
+  <div id="promotion-banner">
+    <div class="banner-label">晋 升</div>
+    <div class="banner-rank" id="banner-rank">—</div>
+    <div class="banner-abbr" id="banner-abbr">—</div>
+    <div class="banner-stars" id="banner-stars"></div>
+  </div>
 
   <button id="settings-btn" title="设置">⚙</button>
   <div id="settings-panel">
@@ -9673,6 +9737,9 @@ function doPromote(key){
   // 转军官 / 准尉时额外奖励
   if(t==='O' && state.grade===1){ state.pol+=3; state.lead+=3; }
   if(t==='W' && state.grade===1){ state.mos+=4; }
+
+  // ★ 在这里加
+  showPromotionBanner(RANK_NAMES[key], RANK_ABBR[key]);
 }
 
 /* =========================================================
@@ -15807,6 +15874,36 @@ setTimeout(()=>{
     b.classList.toggle('active', parseInt(b.dataset.sound) === SoundSystem.volume);
   });
 }, 150);
+
+/* =========================================================
+   晋升横幅
+   ========================================================= */
+function showPromotionBanner(rankName, rankAbbr){
+  const banner = document.getElementById('promotion-banner');
+  if(!banner) return;
+
+  document.getElementById('banner-rank').textContent = rankName;
+  document.getElementById('banner-abbr').textContent = rankAbbr;
+
+  const stars = document.getElementById('banner-stars');
+  const grade = state.grade;
+  if(state.track === 'O' && grade >= 7){
+    const n = Math.min(grade - 6, 4);
+    stars.textContent = '★'.repeat(n);
+  } else if(state.track === 'O'){
+    stars.textContent = '✦';
+  } else if(state.track === 'W'){
+    stars.textContent = '⬥';
+  } else {
+    stars.textContent = '';
+  }
+
+  banner.classList.add('show');
+
+  setTimeout(()=>{
+    banner.classList.remove('show');
+  }, 2400);
+}
 
 renderStart();  // 现在 renderStart 内部调用 showSlotSelector
 </script>
