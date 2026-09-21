@@ -225,7 +225,18 @@ body{
 .act-btn .cost b{color:#c9a227}
 
 /* ===== 结束界面 ===== */
-#screen-end{padding:28px 20px;overflow-y:auto;justify-content:center;text-align:center}
+#screen-end{
+  padding:28px 20px;overflow-y:auto;
+  justify-content:flex-start;text-align:center;
+  scrollbar-width:thin;scrollbar-color:#4a5c30 #10150c;
+}
+#screen-end::before,
+#screen-end::after{
+  content:'';display:block;flex:1 0 0;min-height:0;
+}
+#screen-end::-webkit-scrollbar{width:8px}
+#screen-end::-webkit-scrollbar-track{background:#10150c;border-radius:4px}
+#screen-end::-webkit-scrollbar-thumb{background:#3a4a26;border-radius:4px;border:2px solid #10150c}
 .end-title{font-size:20px;color:#c9a227;letter-spacing:4px;margin-bottom:20px}
 .end-card{background:#141a0e;border:1px solid #2a3520;border-radius:5px;padding:18px;margin-bottom:16px;text-align:left}
 .end-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1c2216;font-size:12.5px}
@@ -645,6 +656,155 @@ body{
   padding:12px;font-style:italic;
 }
 
+/* ===== 战场日记 ===== */
+.diary-list{
+  background:#10150c;border:1px solid #2a3520;border-radius:4px;
+  padding:8px 12px;margin-bottom:10px;
+}
+.diary-row{
+  padding:8px 0;border-bottom:1px dashed #1c2216;
+  cursor:pointer;transition:.15s;
+}
+.diary-row:hover{background:#141a0e;margin:0 -12px;padding-left:12px;padding-right:12px}
+.diary-row:last-child{border-bottom:none}
+.diary-date{color:#68774f;font-size:10.5px;letter-spacing:1px}
+.diary-title{color:#b6cc8a;font-size:12.5px;margin-top:2px}
+.diary-row:hover .diary-title{color:#e8d98a}
+.diary-full{
+  background:#0e130a;border:1px solid #2a3520;border-radius:4px;
+  padding:16px;color:#c8d0b8;font-size:12.5px;line-height:2;
+  font-family:'Georgia','Times New Roman',serif;letter-spacing:0.5px;
+  white-space:pre-wrap;
+}
+.diary-full-title{
+  color:#e8d98a;font-size:14px;font-weight:700;letter-spacing:2px;
+  text-align:center;margin-bottom:12px;
+  padding-bottom:10px;border-bottom:1px dashed #3a4a26;
+}
+.diary-full-date{
+  color:#68774f;font-size:11px;text-align:right;margin-top:12px;
+  font-style:italic;
+}
+
+/* ===== 敌对指挥官 ===== */
+.enemy-card{
+  background:#1a0e0e;border:1px solid #5a2020;border-radius:4px;
+  padding:12px 14px;margin-bottom:10px;
+}
+.enemy-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.enemy-icon{
+  width:32px;height:32px;flex-shrink:0;
+  border:1px solid #7a2a1a;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#d95a4a;font-size:15px;
+}
+.enemy-name{color:#d95a4a;font-weight:700;font-size:13.5px;letter-spacing:2px}
+.enemy-sub{color:#a05858;font-size:10.5px;margin-top:2px}
+.enemy-intel{
+  display:flex;gap:3px;margin-top:6px;
+}
+.enemy-intel-cell{
+  flex:1;height:5px;background:#2a1010;border-radius:2px;
+}
+.enemy-intel-cell.filled{background:#d95a4a}
+.enemy-quote{
+  color:#c8d0b8;font-size:12px;line-height:1.75;
+  padding:9px 12px;background:#100a0a;border-left:3px solid #7a2a1a;
+  border-radius:3px;margin-top:8px;font-style:italic;
+}
+.enemy-history-row{
+  padding:6px 0;font-size:11.5px;color:#94a878;
+  border-bottom:1px dashed #2a1010;
+}
+.enemy-history-row:last-child{border-bottom:none}
+
+/* ===== 设置按钮 ===== */
+#settings-btn{
+  position:fixed;
+  top:14px;
+  right:14px;
+  width:38px;height:38px;
+  background:#141a0e;
+  border:1px solid #3a4a26;
+  border-radius:50%;
+  color:#94a878;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:50;
+  transition:.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+#settings-btn:hover{border-color:#6d9440;color:#e8d98a}
+#settings-btn:active{transform:scale(.95)}
+
+/* ===== 设置面板 ===== */
+#settings-panel{
+  position:fixed;
+  top:60px;right:14px;
+  background:#0d1009;
+  border:1px solid #2a3520;
+  border-radius:6px;
+  padding:14px 16px;
+  z-index:60;
+  display:none;
+  box-shadow:0 4px 24px rgba(0,0,0,.6);
+  min-width:200px;
+}
+#settings-panel.show{display:block}
+.settings-title{
+  color:#e8d98a;font-size:12px;letter-spacing:2px;
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid #1c2216;
+}
+.settings-row{
+  display:flex;align-items:center;gap:6px;
+  margin-bottom:8px;
+}
+.settings-label{
+  color:#68774f;font-size:11px;width:60px;flex-shrink:0;
+}
+.settings-options{
+  display:flex;gap:4px;flex:1;
+}
+.settings-opt{
+  flex:1;padding:5px 6px;
+  background:#141a0e;
+  border:1px solid #2a3520;
+  border-radius:3px;
+  color:#94a878;
+  font-family:inherit;
+  font-size:11px;
+  cursor:pointer;
+  text-align:center;
+  transition:.15s;
+}
+.settings-opt:hover{border-color:#6d9440}
+.settings-opt.active{
+  background:#1e2c10;border-color:#c9a227;color:#e8d98a;font-weight:700;
+}
+
+/* ===== 战役模式 ===== */
+.campaign-options{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.campaign-card{
+  background:#141a0e;border:1px solid #2a3520;border-radius:4px;
+  padding:12px 14px;cursor:pointer;transition:.15s;
+}
+.campaign-card:hover,.campaign-card.sel{border-color:#c9a227;background:#1e1c0e}
+.campaign-card.sel{box-shadow:0 0 12px rgba(201,162,39,.25)}
+.campaign-icon{font-size:18px;margin-right:8px}
+.campaign-name{color:#e8d98a;font-weight:700;font-size:14px;letter-spacing:1px}
+.campaign-year{color:#68774f;font-size:10.5px;letter-spacing:1px;margin-left:6px}
+.campaign-desc{color:#94a878;font-size:11.5px;line-height:1.6;margin-top:6px}
+.campaign-tags{margin-top:6px}
+.campaign-tag{
+  display:inline-block;padding:2px 7px;border-radius:2px;
+  font-size:10px;letter-spacing:1px;margin-right:4px;
+  background:#1a1e0e;color:#94a878;border:1px solid #3a4a26;
+}
+.campaign-tag.warn{background:#2a0e0e;color:#d95a4a;border-color:#5a2020}
+.campaign-tag.good{background:#1a2a0e;color:#9dd96a;border-color:#4a7a2a}
+
 
 .rel-bar-lg{
   height:8px;background:#1a2013;border-radius:4px;overflow:hidden;
@@ -1028,6 +1188,25 @@ body{
 </style>
 </head>
 <body>
+
+  <button id="settings-btn" title="设置">⚙</button>
+  <div id="settings-panel">
+    <div class="settings-title">设 置</div>
+    <div class="settings-row">
+      <div class="settings-label">音效</div>
+      <div class="settings-options" id="sound-opts">
+        <button class="settings-opt" data-sound="0">关</button>
+        <button class="settings-opt" data-sound="1">低</button>
+        <button class="settings-opt active" data-sound="2">中</button>
+        <button class="settings-opt" data-sound="3">高</button>
+      </div>
+    </div>
+    <div style="color:#4a5540;font-size:10px;margin-top:6px;text-align:right">
+      点击空白处关闭
+    </div>
+  </div>
+
+
 <div id="app">
 
   <!-- 开局 -->
@@ -1320,6 +1499,7 @@ function tickWorldState(){
       w.current = pick.to;
       w.yearsIn = 0;
       const newState = WORLD_STATES[pick.to];
+      if(pick.to === 'wartime') playSound('war');
       addLog(`🌍 世界状态：${newState.icon} ${newState.name}`, 'good');
       addLog(newState.desc, 'fx');
       return;
@@ -1333,6 +1513,7 @@ function tickWorldState(){
       w.current = t.to;
       w.yearsIn = 0;
       const newState = WORLD_STATES[t.to];
+      if(t.to === 'wartime') playSound('war');
       if(t.to === 'normal'){
         addLog(`🌍 世界状态：进入常态。${newState.desc}`, 'fx');
       } else {
@@ -1342,6 +1523,9 @@ function tickWorldState(){
       return;
     }
   }
+
+  // 战役偏向
+  applyCampaignWorldBias();
 
   // 特殊状态下的额外影响
   if(w.current === 'budget_cut'){
@@ -1701,16 +1885,31 @@ function monthlyMarriage(){
   if(sp.status === 'married'){
     if(state.flags.in_deploy){
       sp.pressure = clamp(sp.pressure + 5, 0, 100);
+      // 部署期间：配偶被迫独立，但耐心被消耗
+      sp.independence = clamp(sp.independence + 1, 0, 100);
+      sp.patience = clamp(sp.patience - 1, 0, 100);
     } else {
       sp.pressure = clamp(sp.pressure - (pers.pressureResist || 0) * 2, 0, 100);
+      // 同居期间：耐心缓慢恢复（每 3 个月 +1）
+      if(state.month % 3 === 0){
+        sp.patience = clamp(sp.patience + 1, 0, 100);
+      }
     }
     sp.pressure = clamp(sp.pressure - 1, 0, 100);
 
-    // 爱意随压力缓慢降低
     if(sp.pressure >= 70){
       sp.love = clamp(sp.love - 1, 0, 100);
     } else if(sp.pressure <= 30){
       sp.love = clamp(sp.love + 1, 0, 100);
+    }
+
+    // 属性阈值联动
+    if(sp.independence >= 70 && state.flags.in_deploy){
+      // 独立性高的配偶，部署期间压力上升减半（+5 → +2.5，用额外 -2 抵消）
+      sp.pressure = clamp(sp.pressure - 2, 0, 100);
+    }
+    if(sp.understanding >= 70){
+      s.morale = clamp(s.morale + 1, 0, 100);
     }
   }
 
@@ -1757,7 +1956,7 @@ function renderMarriageLine(){
     <span style="color:#68774f;margin-left:6px">${statusText}</span>
     <span style="color:#5d6b48;margin-left:6px">·</span>
     <span style="color:${lv.color};margin-left:6px">${lv.label} ${Math.round(sp.love)}</span>
-    ${sp.pressure > 0 ? `<span style="color:${sp.pressure>=70?'#d95a4a':sp.pressure>=40?'#d98a4a':'#94a878'};margin-left:8px">压力 ${Math.round(sp.pressure)}</span>` : ''}
+    ${sp.status === 'married' ? `<span style="color:${sp.pressure>=70?'#d95a4a':sp.pressure>=40?'#d98a4a':'#94a878'};margin-left:8px">压力 ${Math.round(sp.pressure)}</span>` : ''}
     ${childCount > 0 ? `<span style="color:#8fbf55;margin-left:8px">👶 ${childCount}</span>` : ''}
   `;
 }
@@ -1884,6 +2083,143 @@ function renderFinanceLine(){
 }
 
 /* =========================================================
+   战友个人档案 · 数据池
+   ========================================================= */
+const SQUAD_HOMETOWNS = [
+  '蒙大拿州的一个小镇','得克萨斯州的农场','俄亥俄州的哥伦布市','布鲁克林','西雅图',
+  '底特律','明尼苏达州的一个小镇','路易斯安那州的沼泽边','肯塔基州的煤矿镇','波士顿',
+  '亚特兰大','新墨西哥州的沙漠边缘','缅因州的渔村','堪萨斯州的麦田','宾夕法尼亚州的钢铁镇',
+  '弗吉尼亚州的山谷','阿拉巴马州的小城','俄勒冈州的林区','内布拉斯加的牧场','密西西比河畔'
+];
+
+const SQUAD_NICKNAMES = [
+  '老狗','小个子','大块头','沉默','笑面','快手','铁头','大嘴','幸运','老烟枪',
+  '铁锤','影子','铅笔','面包','火柴','石头','瘦子','老虎','独眼','左撇子'
+];
+
+const SQUAD_CATCHPHRASES = [
+  '别问我怎么知道，我就是知道。',
+  '能行就行，不行再来一次。',
+  '没事儿，睡一觉就好了。',
+  '我家乡的牛排比这好吃多了。',
+  '跟着我走，不会错。',
+  '我没什么想法，长官说什么就是什么。',
+  '别废话，干活。',
+  '只要还没死，就还能干。',
+  '回去我请你们喝酒。',
+  '这不算什么，我见过更糟的。'
+];
+
+const SQUAD_DREAMS = [
+  '退役后想回家开一家小酒馆。',
+  '想把妹妹的大学学费攒够。',
+  '想买一块地养马。',
+  '想去阿拉斯加钓一次鱼。',
+  '想当警察。',
+  '想回去把大学读完。',
+  '想开一家修车铺。',
+  '想在老家盖一栋房子。',
+  '想带父母去看一次海。',
+  '想做一名消防员。'
+];
+
+const SQUAD_KEEPSAKES = [
+  '一张 10 岁时的照片',
+  '父亲留下的旧手表',
+  '女儿的乳牙',
+  '女朋友编的手绳',
+  '一本翻旧了的书',
+  '一枚磨光的硬币',
+  '母亲绣的手帕',
+  '入伍时的第一枚徽章',
+  '哥哥的军牌',
+  '一封没寄出的信'
+];
+
+const SQUAD_BIO_POOL = {
+  '步枪手': [
+    '来自得克萨斯州的农场。父亲教他打猎，也教他做人。他说"我入伍是因为想看看世界有多大"。',
+    '高中打过橄榄球，膝盖受伤没能上大学。他说"我不后悔，橄榄球让我学会了怎么摔"。',
+    '家里有三个兄弟，他是唯一参军的那个。他说"大哥继承了农场，二哥去了银行，我得走自己的路"。'
+  ],
+  '机枪手': [
+    '在布鲁克林长大。父亲是消防员，"9·11"那天没能回来。他说"我当兵是为了记住他"。',
+    '高中毕业后在建筑工地干了两年。他说"我力气大，不太会说话，但在部队里够用了"。',
+    '身材高大，性格意外温和。他说"我妈说我是家里最不凶的"。'
+  ],
+  '狙击手': [
+    '来自蒙大拿州的小镇。父亲是越战老兵，教会了他第一支枪。他说"安静下来，才能听见风"。',
+    '从小就喜欢一个人在山里待着。他说"我不太合群，但我不觉得孤单"。',
+    '入伍前是射击俱乐部的冠军。他说"打中靶心不难，难的是知道什么时候不该开枪"。'
+  ],
+  '医疗兵': [
+    '母亲是护士，从小看着母亲救人。他说"我学医不是为了杀人，是为了把人带回来"。',
+    '大学读了一年护理专业，之后退学入伍。他说"我想离战场近一点，但还能救人"。',
+    '家里有五个姐妹。他说"我习惯了照顾人，这算不算天赋"。'
+  ],
+  '通信兵': [
+    '是个技术宅，入伍前自学了编程。他说"信号就是生命线，断了就完了"。',
+    '来自西雅图，父母都是工程师。他说"我小时候拆过家里所有电器，都被骂过"。',
+    '他说"我最喜欢的一句话是——你得先听得懂，才能被听懂"。'
+  ],
+  '工兵': [
+    '父亲是建筑工人，他从小跟着父亲拆房子。他说"爆破是一种艺术"。',
+    '来自底特律，见过那座城市的兴衰。他说"我见过最繁华的，也见过最破败的"。',
+    '他说"别人怕炸，我不怕。我怕的是算错一厘米"。'
+  ],
+  '侦察兵': [
+    '高中时是越野跑冠军。他说"我跑得不快，但我能跑很久"。',
+    '喜欢一个人跑很远的路。他说"侦察就是回家前先看清楚路"。',
+    '他说"我最擅长的不是看，是听。风会告诉我一切"。'
+  ],
+  '榴弹手': [
+    '来自俄亥俄州的矿业小镇。祖父是二战老兵，家里挂着祖父的勋章。',
+    '性格开朗，是队伍里最会讲笑话的。他说"越是难的时候，越要笑"。',
+    '他说"小时候我爸教我一件事——手抖的时候，先深呼吸"。'
+  ]
+};
+
+const SQUAD_IMPRESSIONS = [
+  '训练的时候话不多，但从不掉队。',
+  '总是一个人待着，但每次任务都很靠得住。',
+  '爱开玩笑，但是个能托付的人。',
+  '有点毛躁，但从来不逃避。',
+  '刚来的时候什么都不懂，现在越来越靠谱了。',
+  '总是第一个到，最后一个走。',
+  '嘴巴很硬，但心里软。',
+  '会修东西，会做饭，什么都会一点。',
+  '脾气不好，但对弟兄们很好。',
+  '不说大话，只用行动说话。'
+];
+
+function pickSquadArchive(isCore, role){
+  if(isCore){
+    const bios = SQUAD_BIO_POOL[role] || SQUAD_BIO_POOL['步枪手'];
+    return {
+      hometown: randomPick(SQUAD_HOMETOWNS),
+      family: '',
+      nickname: randomPick(SQUAD_NICKNAMES),
+      catchphrase: randomPick(SQUAD_CATCHPHRASES),
+      dream: randomPick(SQUAD_DREAMS),
+      keepsake: randomPick(SQUAD_KEEPSAKES),
+      story: randomPick(bios),
+      impression: ''
+    };
+  } else {
+    return {
+      hometown: randomPick(SQUAD_HOMETOWNS),
+      family: '',
+      nickname: randomPick(SQUAD_NICKNAMES),
+      catchphrase: '',
+      dream: '',
+      keepsake: '',
+      story: '',
+      impression: randomPick(SQUAD_IMPRESSIONS)
+    };
+  }
+}
+
+/* =========================================================
    战友系统 · 数据
    ========================================================= */
 const SQUAD_NAMES = [
@@ -1961,7 +2297,6 @@ function randomInt(min, max){
 }
 
 function generateSquadMember(isCore, index){
-  // 角色：核心用固定建制，流动从剩余池里选
   const role = isCore
     ? CORE_SQUAD_ROLES[index % CORE_SQUAD_ROLES.length]
     : FLOW_SQUAD_ROLES[Math.floor(Math.random()*FLOW_SQUAD_ROLES.length)];
@@ -1987,8 +2322,10 @@ function generateSquadMember(isCore, index){
     baseRank = randomInt(2, 5);
   }
 
+  const archive = pickSquadArchive(isCore, role);
+
   return {
-    id: isCore ? 'core_' + index : 'flow_' + index,
+    id: isCore ? 'core_' + index + '_' + Date.now() : 'flow_' + index + '_' + Date.now(),
     name,
     age: baseAge,
     joinYear: state.yos - randomInt(1, 4),
@@ -2002,10 +2339,17 @@ function generateSquadMember(isCore, index){
     morale: baseMorale,
     isCore: !!isCore,
     alive: true,
-    bio: randomPick(SQUAD_BIOS[role] || SQUAD_BIOS['步枪手']),
     bioUnlocked: false,
     events: [],
-    medals: []
+    medals: [],
+    // 个人档案
+    hometown: archive.hometown,
+    nickname: archive.nickname,
+    catchphrase: archive.catchphrase,
+    dream: archive.dream,
+    keepsake: archive.keepsake,
+    story: archive.story,
+    impression: archive.impression
   };
 }
 
@@ -2519,7 +2863,8 @@ function checkCommandYearlyReport(){
   if(!state.command) return;
   const cmd = state.command;
   const baseScore = (cmd.morale + cmd.training + cmd.equipment) / 3;
-  const readinessMult = (5 - cmd.readiness) / 4;
+  // 战备等级 1 级 = ×1.0，2 级 = ×0.9，3 级 = ×0.8，4 级 = ×0.7
+  const readinessMult = 1 - (cmd.readiness - 1) * 0.1;
   const score = Math.round(baseScore * readinessMult);
 
   let grade, gradeClass;
@@ -2547,6 +2892,28 @@ function checkCommandYearlyReport(){
   } else if(score >= 75){
     state.pol = clamp(state.pol+2, 0, 100);
     state.npcs.superior.value = clamp(state.npcs.superior.value+1, 0, 100);
+  }
+
+  // 连续低分惩罚
+  if(!state.flags.lowScoreStreak) state.flags.lowScoreStreak = 0;
+  if(score < 40){
+    state.flags.lowScoreStreak += 1;
+    if(state.flags.lowScoreStreak >= 2){
+      addLog('⚠️ 单位连续两年评估不及格，上级决定免去你的指挥职务。', 'bad');
+      state.command = null;
+      state.pol = clamp(state.pol-8, 0, 100);
+      state.npcs.superior.value = clamp(state.npcs.superior.value-15, 0, 100);
+      // 两年内不得重新担任指挥官
+      state.flags.commandBannedUntil = state.yos + 2;
+      addCareer('milestone', '被免去指挥职务', '连续两年评估不及格，2年内不得重新任命');
+      addLog('你被调往参谋岗位。2 年内不会被重新任命为指挥官。', 'warn');
+    } else {
+      addLog('⚠️ 单位评估不及格，你被上级约谈。', 'warn');
+      state.pol = clamp(state.pol-3, 0, 100);
+      state.npcs.superior.value = clamp(state.npcs.superior.value-5, 0, 100);
+    }
+  } else {
+    state.flags.lowScoreStreak = 0;
   }
 }
 
@@ -2616,6 +2983,8 @@ function generateCommandUnit(tierId){
 
 function ensureCommandExists(){
   if(state.track === 'W') return;
+  // 冷却期内不重新任命
+  if(state.flags.commandBannedUntil && state.yos < state.flags.commandBannedUntil) return;
   const tierId = getCommandTier();
   if(!tierId) return;
   if(!state.unit) return;
@@ -2636,6 +3005,114 @@ function ensureCommandExists(){
 function refreshCommandFullName(){
   if(!state.command) return;
   state.command.fullName = buildCommandFullName(state.command.tier);
+}
+
+/* =========================================================
+   阿灵顿国家公墓 · 资格判定 + 仪式
+   ========================================================= */
+function checkArlingtonEligibility(score, ending){
+  const reasons = [];
+  let eligible = false;
+
+  // 1. 荣誉勋章 → 自动资格
+  if(state.medals.includes('国会荣誉勋章')){
+    eligible = true;
+    reasons.push('国会荣誉勋章获得者');
+  }
+
+  // 2. 因公殉职（阵亡/任务中牺牲）
+  if(state.flags.retire_early && state.endReason && 
+     (state.endReason.includes('阵亡') || state.endReason.includes('牺牲') || state.endReason.includes('殉职'))){
+    eligible = true;
+    reasons.push('服役期间殉职');
+  }
+
+  // 3. 高级军衔 + 战斗勋章 + 长期服役
+  const isSNCO = state.track === 'E' && state.grade >= 8;
+  const isOfficer = state.track === 'O' && state.grade >= 6;
+  const isWO = state.track === 'W' && state.grade >= 4;
+  const hasCombatMedal = state.medals.includes('银星勋章') || 
+                         state.medals.includes('铜星勋章') || 
+                         state.medals.includes('紫心勋章');
+  const longService = state.yos >= 20;
+  
+  if((isSNCO || isOfficer || isWO) && hasCombatMedal && longService){
+    eligible = true;
+    reasons.push('高级军衔 · 战斗勋章 · 长期服役');
+  }
+
+  // 4. 综合评分极高 + 有战功
+  if(score.total >= 220 && hasCombatMedal && state.yos >= 20){
+    eligible = true;
+    if(!reasons.length) reasons.push('卓越军旅生涯');
+  }
+
+  // 5. 荣誉退役 + 服役 ≥ 20 年 + 勋章 ≥ 8 枚
+  const totalMedals = (state.medals.length) + 
+    (state.rankMedals ? (state.rankMedals.first + state.rankMedals.second + state.rankMedals.third) : 0);
+  if(state.yos >= 20 && totalMedals >= 8 && !state.flags.retire_early){
+    eligible = true;
+    if(!reasons.length) reasons.push('荣誉退役 · 多次受勋');
+  }
+
+  return { eligible, reasons };
+}
+
+function renderArlingtonCeremony(eligibility){
+  if(!eligibility.eligible) return '';
+
+  const reasonsStr = eligibility.reasons.join(' · ');
+  const spouseName = state.spouse && state.spouse.status === 'married' ? state.spouse.name : null;
+  const childNames = state.spouse && state.spouse.children ? 
+    state.spouse.children.filter(c=>c.age >= 18).map(c=>c.name) : [];
+
+  return `
+    <div class="moh-banner" style="margin-top:14px">
+      <svg class="moh-icon" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 4 L24 12 L32 12 L26 18 L28 26 L21 21 L14 26 L16 18 L10 12 L18 12 Z" 
+              fill="none" stroke="#8a9aa8" stroke-width="1.2"/>
+        <circle cx="21" cy="20" r="2" fill="#8a9aa8"/>
+      </svg>
+      <div class="moh-title" style="color:#a8b0b8;text-shadow:0 0 12px rgba(168,176,184,.5)">
+        阿 灵 顿 国 家 公 墓
+      </div>
+      <div class="moh-sub" style="color:#8a9098">ARLINGTON NATIONAL CEMETERY</div>
+      <div style="color:#68774f;font-size:10.5px;margin-top:6px;letter-spacing:1px">
+        资格：${reasonsStr}
+      </div>
+    </div>
+    <div class="moh-narrative" style="border-left-color:#8a9aa8">
+      ${spouseName ? `多年后，${spouseName} 在葬礼上收到了一面折叠的国旗。` : '多年后，你被安葬在阿灵顿。'}
+      ${childNames.length ? `你的孩子 ${childNames.join('、')} 站在墓前。` : ''}
+      仪式上，三名士兵鸣枪三次。号手吹响《熄灯号》。<br><br>
+      一位老战友走上前，把一枚徽章放在墓碑前。他说了一句只有他自己能听见的话。<br><br>
+      墓碑上刻着你的名字、军衔、服役年限。下面还有一行小字：<br>
+      <span style="color:#a8b0b8;letter-spacing:2px">"${state.track === 'E' ? '士兵' : state.track === 'W' ? '准尉' : '军官'} · 荣誉退役"</span>
+    </div>
+  `;
+}
+
+function renderOrdinaryRetirement(score){
+  const totalMedals = (state.medals.length) + 
+    (state.rankMedals ? (state.rankMedals.first + state.rankMedals.second + state.rankMedals.third) : 0);
+  
+  if(state.yos >= 20 && totalMedals >= 3){
+    return `
+      <div class="moh-narrative">
+        你退役了。仪式在营区的小礼堂举行。来的人不多，但都是真正认识你的人。<br><br>
+        你说了几句话。最后一句是："弟兄们，我先走一步。" 台下有人笑了，有人低下头擦了擦眼睛。
+      </div>
+    `;
+  }
+  if(state.yos >= 10){
+    return `
+      <div class="moh-narrative">
+        你退役了。没有人给你办仪式。你收拾好自己的东西，走出营区大门。<br><br>
+        门口的哨兵敬了个礼。你回了一个。然后你走了。身后的门关上了。
+      </div>
+    `;
+  }
+  return '';
 }
 
 /* =========================================================
@@ -2749,7 +3226,7 @@ function checkCareerPathTrigger(){
   const t = state.track;
   const g = state.grade;
   if(t === 'E' && g >= 7) return true;
-  if(t === 'O' && g >= 4) return true;
+  if(t === 'O' && g >= 3) return true;
   if(t === 'W' && g >= 3) return true;
   return false;
 }
@@ -3480,7 +3957,7 @@ const EVENTS = [
     { label:'保持中立，只谈专业', apply:s=>{ s.pol+=2; s.lead+=4; s.net+=2; return '你两边都不站，只谈训练本身。两个人都不太满意，但都尊重你的专业性。'; } }
   ]},
 
-{ id:'cpt_cmd', w:10, cond:s=>s.track==='O'&&s.grade===3,
+{ id:'cpt_cmd', w:10, cond:s=>s.track==='O'&&s.grade===3 && !s.flags.tookCommand,
   text:'你接任连长。全连120人的训练、装备、纪律、福利，全部压在你一个人肩上。你第一次体会到什么叫"孤独的决策"。',
   fx:{lead:8,pol:5,mos:3,morale:-4} },
 
@@ -3709,7 +4186,7 @@ const EVENTS = [
   ]},
 
 { id:'mentor_4', w:0, force:true,
-  cond:s=>s.chains.mentorEnd && s.grade>=6,
+  cond:s=>s.chains.mentorEnd && s.track==='E' && s.grade>=6,
   text:'你第一次独立带教一批新兵。其中一个 19 岁的小伙子让你想起了当年的自己。你翻开那本旧笔记本，找到了他当年写的一句话："带兵先带心，命令管一时，人心管一世。"',
   fx:{lead:+6,morale:+6,net:+3} },
 
@@ -3765,7 +4242,7 @@ const EVENTS = [
   ]},
 
 { id:'officer_4', w:0, force:true,
-  cond:s=>s.chains.officerEnd && s.yos>=14,
+  cond:s=>s.chains.officerEnd && s.yos>=14 && s.track==='O' && s.grade>=4,
   text:'你已经是中校。一次军校的授课邀请，要你给刚入伍的军官讲一节"带兵之道"。你站在讲台上，看着台下那些年轻的脸。',
   fx:{lead:+6,pol:+5,net:+3,morale:+5} },
 
@@ -3933,7 +4410,7 @@ const EVENTS = [
    家庭的天平链（通用）
    ========================================================= */
 { id:'family_1', w:0, force:true,
-  cond:s=>s.yos>=6 && !s.chains.family && (s.flags.deployed || s.yos>=8),
+  cond:s=>s.yos>=6 && !s.chains.family && (s.flags.deployed || s.yos>=8) && s.spouse && s.spouse.status === 'married',
   text:'你已经服役第六年。你的配偶在电话里说："我们需要谈谈。" 这不是一个好信号。',
   choices:[
     { label:'立刻申请紧急休假回家',
@@ -3948,7 +4425,7 @@ const EVENTS = [
   ]},
 
 { id:'family_2', w:0, force:true,
-  cond:s=>s.chains.family && !s.chains.familyStage2,
+  cond:s=>s.chains.family && !s.chains.familyStage2 && s.spouse && s.spouse.status === 'married',
   text:'一年后，你的孩子出生了。你当时正在海外部署，赶不回去。',
   choices:[
     { label:'申请紧急调回，不惜代价',
@@ -3963,7 +4440,7 @@ const EVENTS = [
   ]},
 
 { id:'family_3', w:0, force:true,
-  cond:s=>s.chains.familyStage2 && !s.chains.familyEnd,
+  cond:s=>s.chains.familyStage2 && !s.chains.familyEnd && s.spouse && s.spouse.status === 'married',
   text:'孩子三岁了。你回家时TA指着你说："叔叔。" 你的配偶站在旁边，什么都没说。',
   choices:[
     { label:'申请转岗，减少部署',
@@ -3978,7 +4455,7 @@ const EVENTS = [
   ]},
 
 { id:'family_4', w:0, force:true,
-  cond:s=>s.chains.familyEnd && s.yos>=18,
+  cond:s=>s.chains.familyEnd && s.yos>=18 && s.spouse && s.spouse.status === 'married',
   text:'你退役了。走出军营大门那天，家人开着车来接你。孩子已经上中学了。',
   fx:{morale:+12,lead:+4,pol:+3} },
 
@@ -4089,9 +4566,35 @@ const EVENTS = [
           return '你继续在你的人事岗位上服务，你的政治资本一点一点累积。'; }
         s.pol=clamp(s.pol+3,0,100);
         return '你继续保持中立，两边都不讨好，也两边都不欠。'; } },
-    { label:'主动申请去更高级别的军校深造',
-      apply:s=>{ s.chains.politicsEnd='school'; s.mos=clamp(s.mos+4,0,100); s.pol=clamp(s.pol+4,0,100); s.net=clamp(s.net+3,0,100);
-        return '你用深造的名义离开了这个是非之地。两年后你带着新的学历和人脉回来，旅里已经换了一任旅长。'; } }
+        { label:'主动申请去更高级别的军校深造',
+      apply:s=>{
+        s.chains.politicsEnd='school';
+        s.mos=clamp(s.mos+4,0,100);
+        s.pol=clamp(s.pol+4,0,100);
+        s.net=clamp(s.net+3,0,100);
+
+        // 标记深造状态（后续晋升加成）
+        s.flags.politicsSchool = true;
+        s.flags.politicsSchoolYear = s.yos;
+
+        // 实际 PCS 调到训练中心
+        const trainingUnits = UNITS.filter(u=>['benning','bliss','riley','stewart','meade','lewis'].includes(u.loc));
+        if(trainingUnits.length){
+          const newUnit = trainingUnits[Math.floor(Math.random()*trainingUnits.length)];
+          const newLoc = LOCATIONS[newUnit.loc];
+          s.unit = { id: newUnit.id, name: newUnit.name, code: newUnit.code, tier: newUnit.tier, sof: !!newUnit.sof };
+          s.location = Object.assign({}, newLoc);
+          s.location._key = newUnit.loc;
+          s._lastPCS = s.yos;
+          if(s.command){
+            s.command.fullName = buildCommandFullName(s.command.tier);
+          }
+          addLog(`📦 调往${newUnit.name}（${newLoc.name}），参加高级军校深造。`, 'good');
+          addCareer('milestone', `军校深造：${newUnit.name}`, `从 ${newLoc.name}`);
+        }
+
+        return '你用深造的名义离开了这个是非之地。两年后你带着新的学历和人脉回来，旅里已经换了一任旅长。';
+      } },
   ]},
 
 { id:'politics_4', w:0, force:true,
@@ -4137,15 +4640,45 @@ const EVENTS = [
   cond:s=>s.chains.casualtyStage2 && !s.chains.casualtyEnd,
   text:'一年后，调查结果公布。你被认定"负有一定管理责任"，但没有构成犯罪。你的军旅生涯没有被终止，但留下了一条永久记录。',
   choices:[
-    { label:'申请调到训练部门，把教训变成制度',
-      apply:s=>{ s.chains.casualtyEnd='trainer'; s.mos=clamp(s.mos+5,0,100); s.lead=clamp(s.lead+4,0,100); s.pol=clamp(s.pol+3,0,100);
-        return '你主动申请去了训练中心，把自己犯过的每一个错误写成了新的安全教材。多年后，这套教材在全军推广。'; } },
+        { label:'申请调到训练部门，把教训变成制度',
+      apply:s=>{
+        s.chains.casualtyEnd='trainer';
+        s.mos=clamp(s.mos+5,0,100);
+        s.lead=clamp(s.lead+4,0,100);
+        s.pol=clamp(s.pol+3,0,100);
+
+        // 实际调动到训练中心
+        const trainingUnits = UNITS.filter(u=>['benning','bliss','riley','stewart','meade'].includes(u.loc));
+        if(trainingUnits.length){
+          const newUnit = trainingUnits[Math.floor(Math.random()*trainingUnits.length)];
+          const newLoc = LOCATIONS[newUnit.loc];
+          s.unit = { id: newUnit.id, name: newUnit.name, code: newUnit.code, tier: newUnit.tier, sof: !!newUnit.sof };
+          s.location = Object.assign({}, newLoc);
+          s.location._key = newUnit.loc;
+          s._lastPCS = s.yos;
+          if(s.command){
+            s.command.fullName = buildCommandFullName(s.command.tier);
+          }
+          addLog(`📦 调往训练部门：${newUnit.name}（${newLoc.name}）。`, 'good');
+          addCareer('milestone', `调往训练部门：${newUnit.name}`, `从 ${newUnit.loc}`);
+        }
+
+        return '你主动申请去了训练中心，把自己犯过的每一个错误写成了新的安全教材。多年后，这套教材在全军推广。';
+      } },
     { label:'继续留在原岗位，用行动证明自己',
       apply:s=>{ s.chains.casualtyEnd='persist'; s.lead=clamp(s.lead+3,0,100); s.morale=clamp(s.morale+4,0,100); s.net=clamp(s.net+2,0,100);
         return '你没有申请调岗。你说"我犯过错，但我不会逃走"。接下来的几年你用行动证明了自己，但每年的那一天，你都会独自去墓园待一会儿。'; } },
-    { label:'申请退役，离开这个伤心地',
-      apply:s=>{ s.chains.casualtyEnd='retire'; s.morale=clamp(s.morale-8,0,100); s.pol=clamp(s.pol+3,0,100);
-        return '你递交了退役申请。走之前你最后一次去看了那面墙，然后在军营门口站了很久。'; } }
+        { label:'申请退役，离开这个伤心地',
+      apply:s=>{
+        s.chains.casualtyEnd='retire';
+        s.morale=clamp(s.morale-8,0,100);
+        s.pol=clamp(s.pol+3,0,100);
+        // 触发退役
+        s.flags.retire_early = true;
+        addLog('你递交了退役申请。', 'warn');
+        addCareer('milestone', '因事故申请退役', '');
+        return '你递交了退役申请。走之前你最后一次去看了那面墙，然后在军营门口站了很久。';
+      } }
   ]},
 
 { id:'casualty_4', w:0, force:true,
@@ -4190,16 +4723,59 @@ const EVENTS = [
 { id:'school_3', w:0, force:true,
   cond:s=>s.chains.schoolStage2 && !s.chains.schoolEnd,
   text:'毕业分配。学校给了你三个选择：回原单位、去一线作战部队、去总部机关。',
-  choices:[
+    choices:[
     { label:'回原单位，继续跟着老领导',
-      apply:s=>{ s.chains.schoolEnd='return'; s.net=clamp(s.net+3,0,100); s.lead=clamp(s.lead+2,0,100);
-        return '你回到了原来的部队。老领导说："我没看错你。" 你的晋升路径平稳，但也少了一些跳跃。'; } },
+      apply:s=>{
+        s.chains.schoolEnd='return';
+        s.net=clamp(s.net+3,0,100);
+        s.lead=clamp(s.lead+2,0,100);
+        return '你回到了原来的部队。老领导说："我没看错你。" 你的晋升路径平稳，但也少了一些跳跃。';
+      } },
     { label:'去一线作战部队，从零开始',
-      apply:s=>{ s.chains.schoolEnd='frontline'; s.lead=clamp(s.lead+5,0,100); s.pt=clamp(s.pt+3,0,100); s.morale=clamp(s.morale+4,0,100);
-        return '你去了一支刚组建的作战部队。这里没有人认识你，所有人都从零开始。你用了两年时间重新证明了自己。'; } },
+      apply:s=>{
+        s.chains.schoolEnd='frontline';
+        s.lead=clamp(s.lead+5,0,100);
+        s.pt=clamp(s.pt+3,0,100);
+        s.morale=clamp(s.morale+4,0,100);
+        // 实际 PCS 到战斗部队
+        const combatUnits = UNITS.filter(u=>['82abn','101abn','1cav','1inf','3inf','10mtn'].includes(u.id));
+        if(combatUnits.length){
+          const newUnit = combatUnits[Math.floor(Math.random()*combatUnits.length)];
+          const newLoc = LOCATIONS[newUnit.loc];
+          s.unit = { id: newUnit.id, name: newUnit.name, code: newUnit.code, tier: newUnit.tier, sof: !!newUnit.sof };
+          s.location = Object.assign({}, newLoc);
+          s.location._key = newUnit.loc;
+          s._lastPCS = s.yos;
+          if(s.command){
+            s.command.fullName = buildCommandFullName(s.command.tier);
+          }
+          addLog(`PCS 调令：调往 ${newUnit.name}（${newLoc.name}）。`, 'good');
+          addCareer('milestone', `PCS：${newUnit.name}`, `深造分配`);
+        }
+        return '你去了一支刚组建的作战部队。这里没有人认识你，所有人都从零开始。你用了两年时间重新证明了自己。';
+      } },
     { label:'去总部机关，走政治路线',
-      apply:s=>{ s.chains.schoolEnd='staff'; s.pol=clamp(s.pol+6,0,100); s.net=clamp(s.net+5,0,100);
-        return '你被分配到了总部的一个关键处室。你开始接触真正的军事政治——那些不在教科书里的东西。'; } }
+      apply:s=>{
+        s.chains.schoolEnd='staff';
+        s.pol=clamp(s.pol+6,0,100);
+        s.net=clamp(s.net+5,0,100);
+        // 实际 PCS 到机关
+        const staffUnits = UNITS.filter(u=>['inscom','meade'].includes(u.loc) || u.id==='wramc');
+        if(staffUnits.length){
+          const newUnit = staffUnits[0];
+          const newLoc = LOCATIONS[newUnit.loc];
+          s.unit = { id: newUnit.id, name: newUnit.name, code: newUnit.code, tier: newUnit.tier, sof: !!newUnit.sof };
+          s.location = Object.assign({}, newLoc);
+          s.location._key = newUnit.loc;
+          s._lastPCS = s.yos;
+          if(s.command){
+            s.command.fullName = buildCommandFullName(s.command.tier);
+          }
+          addLog(`PCS 调令：调往 ${newUnit.name}（${newLoc.name}）。`, 'good');
+          addCareer('milestone', `PCS：${newUnit.name}`, '深造分配');
+        }
+        return '你被分配到了总部的一个关键处室。你开始接触真正的军事政治——那些不在教科书里的东西。';
+      } }
   ]},
 
 { id:'school_4', w:0, force:true,
@@ -4269,12 +4845,28 @@ const EVENTS = [
   cond:s=>s.yos>=15 && !s.chains.transition && s.grade>=5,
   text:'你开始考虑退役后的生活。军队不会永远是你的家。你收到了一家国防承包商和一所大学的邀请，还有一个选项是继续留队到最高服役年限。',
   choices:[
-    { label:'接受国防承包商的offer',
-      apply:s=>{ s.chains.transition='contractor'; s.net=clamp(s.net+5,0,100); s.pol=clamp(s.pol+3,0,100); s.morale=clamp(s.morale+3,0,100);
-        return '承包商给的薪水是军队的三倍，但你也知道，从此你要为利润而不是为使命工作。'; } },
+        { label:'接受国防承包商的offer',
+      apply:s=>{
+        s.chains.transition='contractor';
+        s.net=clamp(s.net+5,0,100);
+        s.pol=clamp(s.pol+3,0,100);
+        s.morale=clamp(s.morale+3,0,100);
+        s.flags.retire_early = true;
+        addLog('你接受了国防承包商的 offer，准备退役。', 'warn');
+        addCareer('milestone', '退役：国防承包商', '');
+        return '承包商给的薪水是军队的三倍，但你也知道，从此你要为利润而不是为使命工作。';
+      } },
     { label:'接受大学教职，去教书',
-      apply:s=>{ s.chains.transition='academic'; s.mos=clamp(s.mos+4,0,100); s.pol=clamp(s.pol+4,0,100); s.morale=clamp(s.morale+6,0,100);
-        return '大学请你去做军事科学客座教授。你想了想，觉得这份工作能让你把二十年的经验传给下一代。'; } },
+      apply:s=>{
+        s.chains.transition='academic';
+        s.mos=clamp(s.mos+4,0,100);
+        s.pol=clamp(s.pol+4,0,100);
+        s.morale=clamp(s.morale+6,0,100);
+        s.flags.retire_early = true;
+        addLog('你接受了大学教职，准备退役。', 'warn');
+        addCareer('milestone', '退役：大学教职', '');
+        return '大学请你去做军事科学客座教授。你想了想，觉得这份工作能让你把二十年的经验传给下一代。';
+      } },
     { label:'留在部队，继续干到最高年限',
       apply:s=>{ s.chains.transition='stay'; s.lead=clamp(s.lead+3,0,100); s.morale=clamp(s.morale+2,0,100);
         return '你把那两份offer收进抽屉，对领导说"我还想再干几年"。领导拍了拍你的肩，说"军队需要你这样的人"。'; } }
@@ -5535,7 +6127,7 @@ const EVENTS = [
    婚姻系统 · 相遇事件
    ========================================================= */
 { id:'meet_1', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=2 && s.yos<=7 && !s.marriageFlags.meet1 && s.age>=21,
+  cond:s=>s.spouse.status==='single' && s.yos>=2 && s.yos<=10 && !s.marriageFlags.meet1 && s.age>=21,
   text:'你的老班长邀请你去他家吃饭。席间他说："我妻子有个同事，人很不错，要不要见一面？"',
   choices:[
     { label:'见一面，没什么坏处',
@@ -5550,7 +6142,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_2', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=3 && s.yos<=8 && !s.marriageFlags.meet2 && s.age>=22,
+  cond:s=>s.spouse.status==='single' && s.yos>=3 && s.yos<=10 && !s.marriageFlags.meet2 && s.age>=22,
   text:'驻地附近的小镇办周末市集。你被战友拉去逛，在一个卖手工艺品的摊位前停下。摊主是一位年轻人，正在低头修一个木雕。',
   choices:[
     { label:'主动搭话，夸一句他的手艺',
@@ -5565,7 +6157,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_3', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.flags.deployed && s.yos>=3 && !s.marriageFlags.meet3,
+  cond:s=>s.spouse.status==='single' && s.flags.deployed && s.yos>=3 && s.yos<=10 && !s.marriageFlags.meet3,
   text:'部署期间，你在一处人道主义援助点遇到了一位当地翻译。她在帮助一个家庭登记物资，工作认真，英语流利。',
   choices:[
     { label:'保持联系，交换邮箱',
@@ -5580,7 +6172,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_4', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=4 && !s.marriageFlags.meet4 && s.age>=24,
+  cond:s=>s.spouse.status==='single' && s.yos>=4 && s.yos<=10 && !s.marriageFlags.meet4 && s.age>=24,
   text:'母亲在电话里说："你表哥的同事有个女儿，人很好，也在城里工作。要不要认识一下？"',
   choices:[
     { label:'接受母亲的安排',
@@ -5595,7 +6187,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_5', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=5 && !s.marriageFlags.meet5 && s.track!=='E',
+  cond:s=>s.spouse.status==='single' && s.yos>=5 && s.yos<=11 && !s.marriageFlags.meet5 && s.track!=='E',
   text:'军校/技术学校的一位同学邀请你参加她的生日聚会。在聚会上，你遇到了一位在另一支部队服役的军官。',
   choices:[
     { label:'主动聊天，深入了解',
@@ -5610,7 +6202,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_6', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=4 && s.rank>=5 && !s.marriageFlags.meet6,
+  cond:s=>s.spouse.status==='single' && s.yos>=4 && s.yos<=10 && s.rank>=5 && !s.marriageFlags.meet6,
   text:'你手下的一名士兵找到你："长官，我姐姐在附近的医院工作。她让我问问您，周末有没有空一起吃个饭。"',
   choices:[
     { label:'接受，去看看',
@@ -5625,7 +6217,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_7', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=6 && !s.marriageFlags.meet7 && s.morale>=60,
+  cond:s=>s.spouse.status==='single' && s.yos>=6 && s.yos<=12 && !s.marriageFlags.meet7 && s.morale>=60,
   text:'一次联合演习后，你在另一个基地的军官俱乐部遇到了一位律师。她是作为军方法律顾问来参加演习评估的。',
   choices:[
     { label:'认真聊一聊',
@@ -5640,7 +6232,7 @@ const EVENTS = [
   ]},
 
 { id:'meet_8', w:0, force:true,
-  cond:s=>s.spouse.status==='single' && s.yos>=5 && !s.marriageFlags.meet8 && hasTag('battle_bond'),
+  cond:s=>s.spouse.status==='single' && s.yos>=5 && s.yos<=12 && !s.marriageFlags.meet8 && hasTag('battle_bond'),
   text:'你负伤住院期间，认识了一位负责照顾你的康复理疗师。她每天来帮你做复健，一来就是三个小时。',
   choices:[
     { label:'出院后继续保持联系',
@@ -5857,7 +6449,7 @@ function pickChildMOS(child){
    婚姻系统 · 危机
    ========================================================= */
 { id:'marriage_crisis', w:0, force:true,
-  cond:s=>s.spouse.status==='married' && s.spouse.pressure>=70 && !s.marriageFlags.inCrisis,
+  cond:s=>s.spouse.status==='married' && (s.spouse.pressure>=70 || (s.spouse.patience<=20 && s.spouse.pressure>=55)) && !s.marriageFlags.inCrisis,
   text:'你回到家，发现她在收拾行李。她抬头看了你一眼，眼睛红了。"我们需要谈谈。"她说。',
   choices:[
     { label:'认真谈，愿意妥协',
@@ -5923,6 +6515,8 @@ function pickChildMOS(child){
       } }
   ]},
 
+  
+
 /* =========================================================
    剧情链条 · 15
    军医的抉择（68W 专属）
@@ -5973,7 +6567,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'triage_4', w:0, force:true,
-  cond:s=>s.chains.triageEnd && s.grade>=6,
+  cond:s=>s.chains.triageEnd && s.grade>=6 && s.yos>=15,
   text:'你成为军医学校的教官。第一堂课，坐在下面的是一群刚从医学院毕业的年轻军医。他们还没见过战场。你站在讲台上，手里的讲义第一页写着"Triage 原则"。',
   fx:{mos:+4,lead:+5,morale:+5,pol:+3}, flag:'triage_instructor' },
 
@@ -5982,7 +6576,7 @@ function pickChildMOS(child){
    军犬（通用）
    ========================================================= */
 { id:'k9_1', w:0, force:true,
-  cond:s=>s.yos>=3 && s.grade>=3 && !s.chains.k9,
+  cond:s=>s.yos>=3 && s.yos<=8 && s.grade>=3 && !s.chains.k9,
   text:'军犬队分给你一条比利时马里努阿犬，名字叫"阿波罗"。它三岁，训练有素，但脾气倔。军犬训导员说："它挑人。看看它认不认你。"',
   choices:[
     { label:'花时间跟它培养感情，从喂食开始',
@@ -6000,7 +6594,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'k9_2', w:0, force:true,
-  cond:s=>s.chains.k9 && s.flags.deployed && !s.chains.k9Stage2,
+  cond:s=>s.chains.k9 && s.flags.deployed && !s.chains.k9Stage2 && s.yos <= 12,
   text:'首次带着阿波罗部署。一次夜间巡逻，它突然停住，抬头闻了闻，然后回头看你，发出低沉的呜咽。前面十米处是一片看似平静的路边。',
   choices:[
     { label:'相信它，全队停止前进，呼叫排爆',
@@ -6015,7 +6609,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'k9_3', w:0, force:true,
-  cond:s=>s.chains.k9Stage2 && s.yos>=s.chains.k9Year+3 && !s.chains.k9End,
+  cond:s=>s.chains.k9Stage2 && s.yos>=s.chains.k9Year+3 && !s.chains.k9End && s.yos <= 18,
   text:'一次任务中，阿波罗为了掩护你而扑向了一名武装分子，子弹打中了它的后腿。军医检查后说："动脉断了，救不回来。安乐死是唯一的选择。"',
   choices:[
     { label:'签字同意安乐死，陪着它到最后',
@@ -6030,7 +6624,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'k9_4', w:0, force:true,
-  cond:s=>s.chains.k9End && s.yos>=15,
+  cond:s=>s.chains.k9End && s.yos>=15 && s.yos <= 30,
   text:'你退役前一个月，收到军犬队的通知：阿波罗（或它的继任者）也到了退役年龄。他们问："你愿意领养它吗？"',
   fx:{morale:+12,lead:+3,pol:+2}, flag:'k9_adopted' },
 
@@ -6138,7 +6732,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'intel_4', w:0, force:true,
-  cond:s=>s.chains.intelEnd && s.grade>=6,
+  cond:s=>s.chains.intelEnd && s.grade>=6 && s.yos >= 15,
   text:'你成为情报学校的教官。第一堂课上，你对台下的新学员说："你们分析的不是数字，是人命。每一个坐标背后，都可能有一个家庭。"',
   fx:{mos:+5,lead:+5,pol:+4,morale:+5}, flag:'intel_instructor' },
 
@@ -6147,7 +6741,7 @@ function pickChildMOS(child){
    吹哨人（通用，中高级）
    ========================================================= */
 { id:'whistle_1', w:0, force:true,
-  cond:s=>(s.track==='E'?s.grade>=6:s.grade>=3) && s.yos>=8 && !s.chains.whistle,
+  cond:s=>(s.track==='E'?s.grade>=6:s.grade>=3) && s.yos>=8 && s.yos<=20 && !s.chains.whistle,
   text:'一次例行装备检查中，你发现某型号装甲车的防护板存在设计缺陷——在特定角度的爆炸冲击下，会向内破裂。这个型号已经部署到前线，最近三个月有三名士兵在类似情况下死亡。你把报告递给了直接上级。',
   choices:[
     { label:'按正常渠道逐级上报',
@@ -6162,7 +6756,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'whistle_2', w:0, force:true,
-  cond:s=>s.chains.whistle && !s.chains.whistleStage2,
+  cond:s=>s.chains.whistle && !s.chains.whistleStage2 && s.yos <= 22,
   text:'两个月后，你收到通知：上级要求你"停止调查，此事已由相关部门处理"。同一天，调令下来了——你被调往一个偏远的海外基地，岗位是仓库管理员。',
   choices:[
     { label:'服从调动，等风头过去',
@@ -6170,10 +6764,16 @@ function pickChildMOS(child){
         s.chains.whistleStage2='comply';
         s.pol=clamp(s.pol+4,0,100);
         s.morale=clamp(s.morale-8,0,100);
-        const newLoc = (s.location && s.location.overseas) ? 'wainwright' : 'guam';
+        // 实际调动
+        const newLoc = state.location && state.location.overseas ? 'wainwright' : 'guam';
         s.location = Object.assign({}, LOCATIONS[newLoc]);
         s.location._key = newLoc;
+        // 同步单位番号
+        if(s.command){
+          s.command.fullName = buildCommandFullName(s.command.tier);
+        }
         addLog(`你被调往${s.location.name}（${s.location.state}）。`, 'warn');
+        if(s.command) addLog(`单位重新编入：${s.command.fullName}`, 'fx');
         return `你去了${s.location.name}。三个月里，你每天数零件。但每天晚上，你都在想那三个死去的士兵。`;
       } },
     { label:'拒绝调动，坚持调查',
@@ -6184,18 +6784,19 @@ function pickChildMOS(child){
         s.morale=clamp(s.morale-5,0,100);
         return '你拒绝签字。人事处的人看了你一眼，说："你确定？" 你说"确定"。接下来的六个月，你被安排值最辛苦的班次。但你留在了原单位。';
       } },
-    { label:'把资料交给国会军事委员会',
+      { label:'把资料交给国会军事委员会',
       apply:s=>{
         s.chains.whistleStage2='congress';
         s.pol=clamp(s.pol-6,0,100);
         s.lead=clamp(s.lead+6,0,100);
         s.net=clamp(s.net-3,0,100);
-        return '你把所有证据通过一位老战友转给了国会军事委员会的一位议员。一周后，军方监察长办公室打电话给你："请到华盛顿来一趟。"';
+        addLog('📦 你临时飞往华盛顿，在国会军事委员会作证。', 'fx');
+        return '你把所有证据通过一位老战友转给了国会军事委员会的一位议员。一周后，军方监察长办公室打电话给你："请到华盛顿来一趟。" 你请了一周的事假，飞往华盛顿。作证结束后返回原单位。';
       } }
   ]},
 
 { id:'whistle_3', w:0, force:true,
-  cond:s=>s.chains.whistleStage2 && !s.chains.whistleEnd,
+  cond:s=>s.chains.whistleStage2 && !s.chains.whistleEnd && s.yos <= 25,
   text:'国会听证会。你坐在证人席上，对面是一排将军和议员。你的证词将在全国直播。他们问你："你是否愿意为你的报告承担全部责任？"',
   choices:[
     { label:'"我愿意。那些士兵已经承担了他们的。"',
@@ -6213,7 +6814,7 @@ function pickChildMOS(child){
   ]},
 
 { id:'whistle_4', w:0, force:true,
-  cond:s=>s.chains.whistleEnd && s.yos>=15,
+  cond:s=>s.chains.whistleEnd && s.yos>=15 && s.yos <= 32,
   text:'多年后，那款装甲车已经全部退役。你退役那天，一位陌生人在营区门口拦住你。他说："我是当年死在那个型号里的士兵的哥哥。我一直想告诉你——谢谢你。"',
   fx:{morale:+15,lead:+4,pol:+3,net:+4}, flag:'whistle_thanks' },
 
@@ -6678,6 +7279,7 @@ function pickChildMOS(child){
           s.pol = clamp(s.pol+5, 0, 100);
           addFaction('warrior', 15);
           addFaction('idealist', 10);
+          playSound('moh');
           addLog('🏅 你带回了最后一名战友。你被推荐授勋。', 'rank');
           addCareer('milestone', '荣誉时刻：国会荣誉勋章', '冒死救回两名战友');
           return '你第三次冲进火网。这一次，你成功了。直升机到达时，你身上有三处弹伤，但两名战友都还活着。';
@@ -6689,6 +7291,7 @@ function pickChildMOS(child){
           s.morale = clamp(s.morale+10, 0, 100);
           s.lead = clamp(s.lead+8, 0, 100);
           addFaction('warrior', 15);
+          playSound('moh');
           addLog('🏅 你被击中，但活了下来。你被推荐授勋。', 'rank');
           addCareer('milestone', '荣誉时刻：国会荣誉勋章', '重伤救回战友');
           return '你冲进去之后被重创，昏迷了三天。醒来时，医生说："你差点没命。" 你问的第一句话是："他们呢？" 医生说："都活着。" 你闭上了眼睛。';
@@ -6701,6 +7304,7 @@ function pickChildMOS(child){
           s.lead = clamp(s.lead+15, 0, 100);
           addFaction('warrior', 20);
           addFaction('idealist', 15);
+          playSound('moh');
           addLog('🏅 你在任务中牺牲。国会荣誉勋章由家属代领。', 'rank');
           addCareer('milestone', '荣誉时刻：牺牲', '追授国会荣誉勋章');
           return '你第三次冲进去了。这次，你把战友拖出来了——但你自己倒在了离掩体五米的地方。后来，将军把那枚蓝色缎带勋章交到你妻子手里。';
@@ -6818,9 +7422,1984 @@ function pickChildMOS(child){
         addLog('你开始接受心理治疗。', 'good');
         return '心理医生问你："你有没有想过，你那天为什么冲出去？" 你沉默了很久，然后说："因为我不冲，我会恨自己一辈子。" 医生说："那就够了。"';
       } }
+  ]},
+
+{ id:'brevet_promotion', w:0, force:true,
+  cond:s=>s.pendingAcademy > 0 && s.track === 'O' && s.grade < 10 && s.yos >= (s._lastBrevetCheck || 0) + 1,
+  text:'你手上还留着一份"待使用的军校入学资格"。现在你已经是一名军官，这份资格可以转化为一次**破格晋升**——让你的军衔直接提升一级。是否使用？',
+  choices:[
+    { label:'使用，破格晋升一级',
+      apply:s=>{
+        const next = nextRankKey();
+        if(next){
+          doPromote(next);
+          s.pendingAcademy = Math.max(0, s.pendingAcademy - 1);
+          s._lastBrevetCheck = s.yos;
+          addLog(`▲ 破格晋升 ——— ${RANK_NAMES[next]}（${RANK_ABBR[next]}）`, 'rank');
+          addCareer('promotion', '破格晋升', '使用军校资格');
+          return '你使用了一份军校资格换取破格晋升。档案里会记录这次特殊晋升。';
+        }
+        return '你已达最高军衔，无法再晋升。';
+      } },
+    { label:'保留——等更关键的时刻',
+      apply:s=>{
+        s._lastBrevetCheck = s.yos;
+        return '你把这份资格收好。有些机会，值得等待。';
+      } },
+    { label:'放弃——留给更年轻的军官',
+      apply:s=>{
+        s.pendingAcademy = Math.max(0, s.pendingAcademy - 1);
+        s.pol = clamp(s.pol+3, 0, 100);
+        addLog('你放弃了一份军校资格。政治 +3', 'fx');
+        return '你把资格让了出去。人事官看了你一眼，什么也没说。';
+      } }
   ]}
 
 
+];
+
+/* =========================================================
+   军事教育系统
+   ========================================================= */
+const MILITARY_SCHOOLS = {
+  blc: {
+    id:'blc', name:'初级领导课程', abbr:'BLC',
+    forTrack:'E', forGrade:5, minYos:4,
+    duration:3, location:'本宁堡',
+    desc:'为即将担任班长的士官开设的领导力基础课程。',
+    content:['基础战术指挥','士兵管理','纪律与条令','体能考核'],
+    graduateBonus: 3
+  },
+  alc: {
+    id:'alc', name:'高级领导课程', abbr:'ALC',
+    forTrack:'E', forGrade:6, minYos:7,
+    duration:4, location:'本宁堡',
+    desc:'为即将担任排军士的士官开设的高级课程。',
+    content:['排级战术','团队建设','教官训练','装备管理'],
+    graduateBonus: 4
+  },
+  slc: {
+    id:'slc', name:'高级军士课程', abbr:'SLC',
+    forTrack:'E', forGrade:7, minYos:11,
+    duration:5, location:'本宁堡',
+    desc:'为即将担任连军士长的士官开设的课程。',
+    content:['连级作战','军士长职责','参谋工作','后勤保障'],
+    graduateBonus: 5
+  },
+  usasma: {
+    id:'usasma', name:'军士长学院', abbr:'USASMA',
+    forTrack:'E', forGrade:8, minYos:15,
+    duration:10, location:'布利斯堡',
+    desc:'培养一级军士长的最高学府。',
+    content:['战略思维','联合行动','军队政治','领导哲学'],
+    graduateBonus: 6
+  },
+  ccc: {
+    id:'ccc', name:'上尉职业课程', abbr:'CCC',
+    forTrack:'O', forGrade:3, minYos:6,
+    duration:5, location:'各兵种学校',
+    desc:'为即将担任营级参谋的上尉开设的职业课程。',
+    content:['营级作战','参谋业务','战术规划','联合作战'],
+    graduateBonus: 4
+  },
+  cgsc: {
+    id:'cgsc', name:'指挥与参谋学院', abbr:'CGSC',
+    forTrack:'O', forGrade:4, minYos:12,
+    duration:10, location:'利文沃斯堡',
+    desc:'为即将担任营长的少校开设的指挥学院。',
+    content:['战役法','联合部队','军队组织','战略研究'],
+    graduateBonus: 6
+  },
+  awc: {
+    id:'awc', name:'陆军战争学院', abbr:'AWC',
+    forTrack:'O', forGrade:6, minYos:20,
+    duration:10, location:'卡莱尔',
+    desc:'为即将晋升将官的上校开设的最高军事学府。',
+    content:['国家战略','国防政策','国际关系','高层领导'],
+    graduateBonus: 8
+  }
+};
+
+function getSchoolForCurrentRank(){
+  if(!state.track) return null;
+  for(const key of Object.keys(MILITARY_SCHOOLS)){
+    const s = MILITARY_SCHOOLS[key];
+    if(s.forTrack !== state.track) continue;
+    if(s.forGrade !== state.grade) continue;
+    if(state.yos < s.minYos) continue;
+    if(state.militaryEducation && state.militaryEducation[key]) continue; // 已完成
+    return s;
+  }
+  return null;
+}
+
+function checkMilitarySchoolTrigger(){
+  if(!state.militaryEducation) state.militaryEducation = {};
+  const school = getSchoolForCurrentRank();
+  if(!school) return null;
+  // 每年 3 月、9 月人事部门发通知
+  if(state.month !== 3 && state.month !== 9) return null;
+  // 有冷却：上次被拒绝后 2 年内不再问
+  if(state.militaryEducation[`${school.id}_declined`] &&
+     state.yos < state.militaryEducation[`${school.id}_declined`] + 2){
+    return null;
+  }
+  return school;
+}
+
+async function runSchoolApplication(school){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    content.innerHTML = `
+      <div class="promo-title">军 事 教 育</div>
+      <div class="promo-sub">${school.name} · ${school.abbr}</div>
+      <div class="deploy-narr">
+        人事部门发来通知：${school.name}（${school.abbr}）开始招生。<br><br>
+        招生对象：${school.forTrack === 'E' ? '士官' : '军官'} · 军衔 ${school.forTrack}-${school.forGrade} · 服役 ≥ ${school.minYos} 年<br>
+        课程时长：${school.duration} 个月<br>
+        就读地点：${school.location}<br><br>
+        ${school.desc}
+      </div>
+      <div class="promo-section">课程内容</div>
+      <div style="color:#94a878;font-size:12px;line-height:1.8;padding:0 0 12px">
+        ${school.content.map(c=>`· ${c}`).join('<br>')}
+      </div>
+      <div class="promo-section">你是否申请？</div>
+      <button class="phase-choice" data-school-idx="apply">
+        申请入学
+        <span class="hint">就读 ${school.duration} 个月 · 完成后晋升考核 +${school.graduateBonus}</span>
+      </button>
+      <button class="phase-choice" data-school-idx="defer">
+        暂不申请——现在任务太多
+        <span class="hint">2 年内不再询问 · 晋升时需更高绩效分</span>
+      </button>
+    `;
+
+    document.querySelectorAll('[data-school-idx]').forEach(btn=>{
+      btn.onclick = ()=>{
+        overlay.classList.remove('show');
+        const choice = btn.dataset.schoolIdx;
+        if(choice === 'apply'){
+          startSchoolAttendance(school);
+        } else {
+          state.militaryEducation[`${school.id}_declined`] = state.yos;
+          addLog(`你决定暂不申请 ${school.abbr}。`, 'fx');
+        }
+        resolve();
+      };
+    });
+  });
+}
+
+function startSchoolAttendance(school){
+  if(!state.militaryEducation) state.militaryEducation = {};
+  if(!state.militaryEducationAttendance){
+    state.militaryEducationAttendance = {};
+  }
+  state.militaryEducationAttendance = {
+    schoolId: school.id,
+    school: school,
+    startMonth: state.yos * 12 + state.month,
+    monthsAttended: 0,
+    score: 30,       // 起始分
+    completed: false,
+    results: []
+  };
+  addLog(`📚 你被 ${school.name}（${school.abbr}）录取。${school.duration} 个月后毕业。`, 'good');
+  addCareer('milestone', `进入 ${school.name}`, school.location);
+  // 立即搬到学校所在地
+  const newLoc = ['benning','bliss','riley','stewart','mead','lewis'].find(k=>LOCATIONS[k].name.includes(school.location.replace('堡','')));
+  if(newLoc){
+    const loc = LOCATIONS[newLoc];
+    state.location = Object.assign({}, loc);
+    state.location._key = newLoc;
+  }
+}
+
+async function runSchoolMonthlyEvent(){
+  const att = state.militaryEducationAttendance;
+  if(!att) return false;
+  if(att.completed) return false;
+
+  att.monthsAttended += 1;
+
+  const school = att.school;
+  const overlay = document.getElementById('promo-overlay');
+  const content = document.getElementById('promo-content');
+  overlay.classList.add('show');
+  overlay.scrollTop = 0;
+
+  // 根据月份推进，生成不同的阶段内容
+  const stage = att.monthsAttended;
+  let stageTitle = '';
+  let stageDesc = '';
+  let choices = [];
+
+  if(stage === 1){
+    stageTitle = '入学';
+    stageDesc = `你到达 ${school.location}。宿舍不大，但窗外能看到操场。同期学员来自各个部队，有的人穿着勋章，有的人和你一样，胸前干干净净。`;
+    choices = [
+      { label:'主动和同期打招呼', key:'social', hint:'人脉 +3 · 毕业分 +2' },
+      { label:'先安顿好，观察一下', key:'observe', hint:'专业 +2 · 毕业分 +1' },
+      { label:'埋头准备第一堂课', key:'study', hint:'智力类 +2 · 毕业分 +3' }
+    ];
+  } else if(stage <= Math.floor(school.duration / 2)){
+    stageTitle = '课堂与野外';
+    stageDesc = `课程进行到一半。教官是一位 ${school.forTrack === 'E' ? '资深军士长' : '上校'}，说话很慢，但每一句都是重点。今天的野外作业是 ${school.content[Math.floor(Math.random()*school.content.length)]}。`;
+    choices = [
+      { label:'按标准流程完成任务', key:'standard', hint:'稳 · 毕业分 +3' },
+      { label:'尝试一个非常规方案', key:'innovative', hint:'可能高收益或失败' },
+      { label:'找同期学员合作', key:'team', hint:'人脉 +2 · 毕业分 +2' }
+    ];
+  } else if(stage === school.duration){
+    stageTitle = '毕业项目';
+    stageDesc = `毕业考核。你被要求独立完成一个综合项目，并面对考官团的提问。台下坐着三位校官。`;
+    choices = [
+      { label:'稳妥展示你的学习成果', key:'safe', hint:'毕业分 +5' },
+      { label:'展示你真正的想法', key:'bold', hint:'可能高评价或被批评' },
+      { label:'强调团队贡献', key:'teamwork', hint:'毕业分 +3 · 领导 +2' }
+    ];
+  } else {
+    stageTitle = '课程进行中';
+    stageDesc = `第 ${stage} 个月。日程表上排满了课程、体能和作业。你开始适应这种节奏。`;
+    choices = [
+      { label:'专注学业', key:'focus', hint:'毕业分 +3' },
+      { label:'兼顾同期交流', key:'balance', hint:'毕业分 +1 · 人脉 +2' },
+      { label:'抽时间给家里打电话', key:'family', hint:'士气 +3' }
+    ];
+  }
+
+  let html = `
+    <div class="promo-title">${school.abbr} · 第 ${stage} / ${school.duration} 个月</div>
+    <div class="promo-sub">${stageTitle}</div>
+    <div class="deploy-narr">${stageDesc}</div>
+    <div class="promo-section">你的选择</div>
+  `;
+  choices.forEach((c, i)=>{
+    html += `<button class="phase-choice" data-school-ev="${i}">${c.label}<span class="hint">${c.hint}</span></button>`;
+  });
+  content.innerHTML = html;
+
+  document.querySelectorAll('[data-school-ev]').forEach(btn=>{
+    btn.onclick = ()=>{
+      overlay.classList.remove('show');
+      const choice = choices[parseInt(btn.dataset.schoolEv)];
+      applySchoolChoice(choice, att);
+      refreshHud();
+      refreshStats();
+    };
+  });
+  return true;
+}
+
+function applySchoolChoice(choice, att){
+  const key = choice.key;
+  att.results.push({ stage: att.monthsAttended, key, label: choice.label });
+
+  if(key === 'social' || key === 'team'){
+    state.net = clamp(state.net + 3, 0, 100);
+    att.score += 2;
+  } else if(key === 'observe' || key === 'standard'){
+    state.mos = clamp(state.mos + 2, 0, 100);
+    att.score += 2;
+  } else if(key === 'study' || key === 'focus'){
+    state.mos = clamp(state.mos + 2, 0, 100);
+    state.pol = clamp(state.pol + 1, 0, 100);
+    att.score += 3;
+  } else if(key === 'innovative' || key === 'bold'){
+    if(Math.random() < 0.55){
+      att.score += 8;
+      state.lead = clamp(state.lead + 3, 0, 100);
+    } else {
+      att.score -= 3;
+      state.morale = clamp(state.morale - 2, 0, 100);
+    }
+  } else if(key === 'balance'){
+    att.score += 1;
+    state.net = clamp(state.net + 2, 0, 100);
+  } else if(key === 'family'){
+    state.morale = clamp(state.morale + 3, 0, 100);
+  } else if(key === 'teamwork'){
+    state.lead = clamp(state.lead + 2, 0, 100);
+    state.net = clamp(state.net + 2, 0, 100);
+    att.score += 3;
+  } else if(key === 'safe'){
+    att.score += 5;
+  }
+
+  // 检查是否毕业
+  if(att.monthsAttended >= att.school.duration){
+    finishSchool(att);
+  }
+}
+
+function finishSchool(att){
+  const school = att.school;
+  const finalScore = att.score + randomInt(-5, 5);
+
+  let grade, gradeLabel, bonus;
+  if(finalScore >= 55){ grade = 'excellent'; gradeLabel = '优秀'; bonus = school.graduateBonus + 2; }
+  else if(finalScore >= 40){ grade = 'good'; gradeLabel = '良好'; bonus = school.graduateBonus; }
+  else if(finalScore >= 25){ grade = 'pass'; gradeLabel = '合格'; bonus = Math.max(1, school.graduateBonus - 2); }
+  else { grade = 'fail'; gradeLabel = '不合格'; bonus = -2; }
+
+  state.militaryEducation[school.id] = {
+    year: state.yos,
+    month: state.month,
+    grade,
+    gradeLabel,
+    score: finalScore,
+    bonus
+  };
+  state.militaryEducationAttendance.completed = true;
+
+  addLog(`🎓 ${school.name}（${school.abbr}）毕业。评价：${gradeLabel}（${finalScore} 分）`, grade === 'fail' ? 'warn' : 'good');
+  addCareer('milestone', `毕业于 ${school.name}`, `${gradeLabel} · ${finalScore} 分`);
+
+  // 属性奖励
+  if(grade === 'excellent'){
+    state.lead = clamp(state.lead + 3, 0, 100);
+    state.mos = clamp(state.mos + 3, 0, 100);
+    state.pol = clamp(state.pol + 2, 0, 100);
+  } else if(grade === 'good'){
+    state.lead = clamp(state.lead + 2, 0, 100);
+    state.mos = clamp(state.mos + 2, 0, 100);
+  } else if(grade === 'pass'){
+    state.lead = clamp(state.lead + 1, 0, 100);
+  }
+
+  // 清空就读状态
+  state.militaryEducationAttendance = null;
+}
+
+function getSchoolBonusForPromotion(){
+  if(!state.militaryEducation) return 0;
+  const school = getSchoolForCurrentRank();
+  if(!school) return 0;
+  const result = state.militaryEducation[school.id];
+  if(!result) return 0;
+  return result.bonus || 0;
+}
+
+function hasRequiredSchool(){
+  const school = getSchoolForCurrentRank();
+  if(!school) return true; // 不需要
+  return !!(state.militaryEducation && state.militaryEducation[school.id]);
+}
+
+/* =========================================================
+   历史战役模式
+   ========================================================= */
+const CAMPAIGNS = {
+  peace: {
+    id:'peace', name:'和平时期', icon:'◌',
+    year: 2020,
+    desc:'国际局势相对平静。军队处于例行训练和轮换部署状态。',
+    tags:['标准', '平衡'],
+    worldBias: null,
+    deployMult: 1.0,
+    sfMult: 1.0,
+    soflineBonus: 0
+  },
+  gwot: {
+    id:'gwot', name:'反恐战争', icon:'⚔',
+    year: 2005,
+    desc:'2001~2011。美军深陷中东，大规模部署，SOF 任务频繁，伤亡率高。',
+    tags:['部署翻倍', 'SOF 频繁', '伤亡率高'],
+    tagTypes:['warn','warn','warn'],
+    worldBias: 'wartime',
+    deployMult: 1.8,
+    sfMult: 1.5,
+    soflineBonus: -5
+  },
+  greatpower: {
+    id:'greatpower', name:'大国竞争', icon:'◆',
+    year: 2024,
+    desc:'2020s。多国联合演习，高技术武器部署，SOF 与情报任务增多。',
+    tags:['联合演习', '技术类事件+', 'SOF 增多'],
+    tagTypes:['good','good','good'],
+    worldBias: 'reform',
+    deployMult: 0.8,
+    sfMult: 1.3,
+    soflineBonus: 0
+  },
+  drawdown: {
+    id:'drawdown', name:'撤军时期', icon:'☮',
+    year: 2014,
+    desc:'撤军与裁军时期。晋升名额紧缩，转业机会多，全军士气低落。',
+    tags:['晋升困难', '部署减少', '裁军潮'],
+    tagTypes:['warn','warn','warn'],
+    worldBias: 'peace',
+    deployMult: 0.5,
+    sfMult: 0.7,
+    soflineBonus: 5
+  }
+};
+
+function getCampaign(){
+  if(!state.campaign) return CAMPAIGNS.peace;
+  return CAMPAIGNS[state.campaign] || CAMPAIGNS.peace;
+}
+
+// 战役对世界状态的偏向
+function applyCampaignWorldBias(){
+  const camp = getCampaign();
+  if(!camp.worldBias) return;
+  // 每年 12 月检查：如果世界状态和战役偏向不一致，30% 概率强制切换
+  const ws = state.worldState;
+  if(!ws) return;
+  if(ws.current === camp.worldBias) return;
+  if(Math.random() < 0.30){
+    const oldState = ws.current;
+    ws.current = camp.worldBias;
+    ws.yearsIn = 0;
+    ws.history.push({ year: state.yos, from: oldState, to: camp.worldBias });
+    const newState = WORLD_STATES[camp.worldBias];
+    if(newState && camp.worldBias !== 'normal'){
+      addLog(`🌍 世界状态：${newState.icon} ${newState.name}（战役背景）`, 'good');
+      addLog(newState.desc, 'fx');
+    }
+  }
+}
+
+// 战役对部署概率的影响
+function applyCampaignDeployMult(baseChance){
+  const camp = getCampaign();
+  return baseChance * (camp.deployMult || 1.0);
+}
+
+// 战役对 SOF 选拔的影响
+function applyCampaignSOFThreshold(baseTarget){
+  const camp = getCampaign();
+  return baseTarget + (camp.soflineBonus || 0);
+}
+
+/* =========================================================
+   敌对指挥官系统
+   ========================================================= */
+const ENEMY_CODE_NAMES = [
+  { code:'狼',     meaning:'行动前会在同一地点观察三天' },
+  { code:'影子',   meaning:'没人见过他的真面目' },
+  { code:'医生',   meaning:'他曾经是一名外科医生' },
+  { code:'会计师', meaning:'他精通资金流和后勤' },
+  { code:'老师',   meaning:'他曾是大学教授' },
+  { code:'旅人',   meaning:'不停换地方，从不住同一处' },
+  { code:'园丁',   meaning:'喜欢在占领区种花，这是他的记号' },
+  { code:'钟表匠', meaning:'做事精准，从不迟到' }
+];
+
+const ENEMY_REAL_DESCS = [
+  '一个 40 岁左右的男人',
+  '一个前军官，曾在正规军服过役',
+  '一个曾在欧洲留过学的工程师',
+  '一个有三个孩子的父亲',
+  '一个在战争中失去全家的幸存者',
+  '一个看起来像普通商人的中年人'
+];
+
+const ENEMY_STYLES = [
+  { id:'trap',    name:'陷阱流',    desc:'他喜欢在撤退路线上做文章。' },
+  { id:'ambush',  name:'伏击流',    desc:'他从不正面开战，只打你最松懈的时候。' },
+  { id:'network', name:'情报流',    desc:'他总能提前知道你的行动路线。' },
+  { id:'attrition',name:'消耗流',   desc:'他不在意一次交手的胜负，只想慢慢磨死你。' }
+];
+
+const ENEMY_INTEL_BY_LEVEL = {
+  0: '他存在，但没人知道细节。',
+  1: null,   // 动态生成：代号
+  2: '他最近在同一区域活动。',
+  3: null,   // 动态生成：真实身份
+  4: null,   // 动态生成：战术风格
+  5: '他的下一个目标，可能是你的单位。'
+};
+
+function activateEnemyCommander(){
+  if(state.enemyCommander && state.enemyCommander.active) return false;
+  const code = randomPick(ENEMY_CODE_NAMES);
+  const style = randomPick(ENEMY_STYLES);
+  state.enemyCommander = {
+    active: true,
+    stage: 1,
+    codeName: code.code,
+    codeMeaning: code.meaning,
+    realDesc: null,
+    style: style.id,
+    styleName: style.name,
+    styleDesc: style.desc,
+    intelLevel: 1,
+    encounters: 0,
+    status: 'active',
+    history: [],
+    activatedYear: state.yos,
+    finalAttemptYear: 0,
+    finalAttemptFailed: false
+  };
+  addLog(`📡 情报简报：某地区出现一名活跃指挥官，代号「${code.code}」。${code.meaning}。`, 'warn');
+  addCareer('milestone', `敌情浮现：代号「${code.code}」`, '');
+  return true;
+}
+
+function checkEnemyActivation(){
+  if(state.enemyCommander && state.enemyCommander.active) return false;
+  if(state.yos < 3) return false;
+  if(!state.flags.deployed) return false;
+  const ws = getCurrentWorldState();
+  if(!ws || ws.id !== 'wartime') return false;
+  // 5% 概率每年 12 月触发
+  if(state.month !== 12) return false;
+  if(Math.random() > 0.05) return false;
+  return true;
+}
+
+function checkEnemyEncounter(){
+  if(!state.enemyCommander || !state.enemyCommander.active) return false;
+  if(state.enemyCommander.status !== 'active') return false;
+  if(state.enemyCommander.intelLevel >= 5) return false;
+  const ws = getCurrentWorldState();
+  if(!ws || ws.id !== 'wartime') return false;
+  // 只在战斗类部署后触发
+  return true;
+}
+
+function updateEnemyIntel(amount){
+  if(!state.enemyCommander) return;
+  const ec = state.enemyCommander;
+  ec.intelLevel = clamp(ec.intelLevel + amount, 0, 5);
+  // 情报等级 3 时揭示真实身份
+  if(ec.intelLevel >= 3 && !ec.realDesc){
+    ec.realDesc = randomPick(ENEMY_REAL_DESCS);
+    addLog(`📡 情报更新：代号「${ec.codeName}」的指挥官，${ec.realDesc}。`, 'warn');
+    addCareer('milestone', `敌情更新：身份揭示`, ec.realDesc);
+  }
+  // 情报等级 4 时揭示战术风格
+  if(ec.intelLevel >= 4 && !ec.styleRevealed){
+    ec.styleRevealed = true;
+    addLog(`📡 情报更新：${ec.styleDesc}`, 'warn');
+    addCareer('milestone', `敌情更新：战术风格`, ec.styleName);
+  }
+  // 情报等级 5 时警告
+  if(ec.intelLevel >= 5 && !ec.finalWarned){
+    ec.finalWarned = true;
+    addLog(`📡 情报更新：代号「${ec.codeName}」的下一个目标，可能是你的单位。`, 'bad');
+    addCareer('milestone', `敌情更新：目标锁定`, '');
+  }
+}
+
+async function runEnemyEncounter(){
+  return new Promise(resolve=>{
+    const ec = state.enemyCommander;
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    // 根据战术风格生成不同的遭遇文本
+    let encounterText = '';
+    if(ec.style === 'trap'){
+      encounterText = '任务完成后，工兵在撤退路线上发现了一个未引爆的装置。从手法看——这是他的布置。他本来想让你们死在这里。';
+    } else if(ec.style === 'ambush'){
+      encounterText = '车队返回途中，你注意到路边的一个村庄安静得不对劲。你下令加速通过。十分钟后，情报部门证实那里确实有埋伏。';
+    } else if(ec.style === 'network'){
+      encounterText = '任务前，一名士兵发现自己的通讯设备被人动过。信号里混进了一段不明来源的干扰。这是他的手法——他总能提前知道你要来。';
+    } else {
+      encounterText = '任务完成，但你们失去了两名弟兄——不是战斗中，是撤退时的疲劳和一次小事故。这是他的战术：不打你，磨你。';
+    }
+
+    const nickDisplay = ec.realDesc ? `（${ec.realDesc}）` : '';
+
+    content.innerHTML = `
+      <div class="promo-title">战 后 记 录</div>
+      <div class="promo-sub">代号「${ec.codeName}」${nickDisplay}</div>
+      <div class="deploy-narr">${encounterText}</div>
+      <div class="promo-section">你如何处置这份记录？</div>
+      <button class="phase-choice" data-enc-idx="0">
+        向上级详细汇报
+        <span class="hint">政治 +2 · 情报 +1</span>
+      </button>
+      <button class="phase-choice" data-enc-idx="1">
+        自己分析，记录在案
+        <span class="hint">专业 +2 · 情报 +1</span>
+      </button>
+      <button class="phase-choice" data-enc-idx="2">
+        不理会——太多琐事
+        <span class="hint">士气 -2 · 情报不变</span>
+      </button>
+    `;
+
+    document.querySelectorAll('[data-enc-idx]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const choice = parseInt(btn.dataset.encIdx);
+        overlay.classList.remove('show');
+        ec.encounters += 1;
+        ec.history.push({
+          year: state.yos,
+          month: state.month,
+          text: encounterText.slice(0, 30) + '…'
+        });
+
+        if(choice === 0){
+          state.pol = clamp(state.pol + 2, 0, 100);
+          updateEnemyIntel(1);
+          addLog(`你把这次遭遇详细汇报了上级。政治 +2，情报等级 +1`, 'fx');
+        } else if(choice === 1){
+          state.mos = clamp(state.mos + 2, 0, 100);
+          updateEnemyIntel(1);
+          addLog(`你把这次遭遇记在笔记本上。专业 +2，情报等级 +1`, 'fx');
+        } else {
+          state.morale = clamp(state.morale - 2, 0, 100);
+          addLog(`你没有理会这次遭遇。士气 -2`, 'warn');
+        }
+        refreshHud();
+        refreshStats();
+        resolve();
+      };
+    });
+  });
+}
+
+async function runEnemyFinalConfrontation(){
+  return new Promise(async (resolve)=>{
+    const ec = state.enemyCommander;
+    ec.stage = 4;
+    ec.finalAttemptYear = state.yos;
+
+    // 第一步：情报分析
+    const phase1 = await runFinalPhase1(ec);
+    // 第二步：突袭行动
+    const phase2 = await runFinalPhase2(ec, phase1);
+    // 第三步：最终抉择
+    const phase3 = await runFinalPhase3(ec, phase1, phase2);
+    
+    resolve();
+  });
+}
+
+function runFinalPhase1(ec){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    const intelBonus = ec.intelLevel >= 5 ? 8 : ec.intelLevel >= 4 ? 5 : 2;
+
+    content.innerHTML = `
+      <div class="promo-title">最 终 对 决</div>
+      <div class="promo-sub">阶段 1 / 3 · 情报分析</div>
+      <div class="deploy-narr">
+        上级下达了专门任务——清剿代号「${ec.codeName}」的指挥官。<br><br>
+        你手里的情报等级：${ec.intelLevel} / 5。${ec.realDesc ? '你已经知道他是谁。' : '他的身份仍然是谜。'}${ec.styleDesc ? '你了解他的战术风格。' : ''}
+      </div>
+      <div class="promo-section">你的作战方案</div>
+      <button class="phase-choice" data-f1="0">
+        根据已知情报，制定精确打击方案
+        <span class="hint">${intelBonus >= 5 ? '情报充足，方案可行性高' : '情报有限，存在风险'}</span>
+      </button>
+      <button class="phase-choice" data-f1="1">
+        请求增援，稳妥推进
+        <span class="hint">政治 -3 · 但降低风险</span>
+      </button>
+      <button class="phase-choice" data-f1="2">
+        赌一把——不依赖情报，直接突击
+        <span class="hint">高风险 · 高回报</span>
+      </button>
+    `;
+
+    document.querySelectorAll('[data-f1]').forEach(btn=>{
+      btn.onclick = ()=>{
+        overlay.classList.remove('show');
+        const choice = parseInt(btn.dataset.f1);
+        let phaseScore = 0;
+        if(choice === 0){
+          phaseScore = intelBonus;
+          addLog('你根据情报制定了精确方案。', 'fx');
+        } else if(choice === 1){
+          state.pol = clamp(state.pol - 3, 0, 100);
+          phaseScore = 5;
+          addLog('你请求了增援。政治 -3，但方案更稳。', 'fx');
+        } else {
+          phaseScore = Math.random() < 0.5 ? 10 : -5;
+          addLog(phaseScore > 0 ? '你的直觉是对的。' : '你的直觉错了。', phaseScore > 0 ? 'good' : 'warn');
+        }
+        resolve({ choice, phaseScore });
+      };
+    });
+  });
+}
+
+function runFinalPhase2(ec, phase1Result){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    // 玩家属性 + 单位状态影响判定
+    const playerSkill = state.lead * 0.3 + state.mos * 0.3 + state.pt * 0.2 + state.pol * 0.2;
+    const unitQuality = state.command ? (state.command.morale + state.command.training + state.command.equipment) / 3 : 60;
+    const combined = (playerSkill + unitQuality) / 2;
+
+    content.innerHTML = `
+      <div class="promo-title">最 终 对 决</div>
+      <div class="promo-sub">阶段 2 / 3 · 突袭行动</div>
+      <div class="deploy-narr">
+        你带着部队进入了目标区域。情报显示他藏在一处废弃工业区内。<br><br>
+        夜色很黑。无线电里只有电流声。<br><br>
+        突入的那一刻，你听见了枪声。
+      </div>
+      <div class="promo-section">关键决策</div>
+      <button class="phase-choice" data-f2="0">
+        带队正面突破
+        <span class="hint">体能 + 领导判定</span>
+      </button>
+      <button class="phase-choice" data-f2="1">
+        分散包围，等他自己出来
+        <span class="hint">专业 + 政治判定</span>
+      </button>
+      <button class="phase-choice" data-f2="2">
+        呼叫空中打击，把建筑夷平
+        <span class="hint">高效 · 但无法生俘</span>
+      </button>
+    `;
+
+    document.querySelectorAll('[data-f2]').forEach(btn=>{
+      btn.onclick = ()=>{
+        overlay.classList.remove('show');
+        const choice = parseInt(btn.dataset.f2);
+        let phaseScore = 0;
+        let noCapture = false;
+
+        if(choice === 0){
+          phaseScore = (state.pt + state.lead) / 2 - 30 + phase1Result.phaseScore * 0.5;
+        } else if(choice === 1){
+          phaseScore = (state.mos + state.pol) / 2 - 30 + phase1Result.phaseScore * 0.5;
+        } else {
+          phaseScore = 20;
+          noCapture = true;
+        }
+        // 加入随机波动
+        phaseScore += (Math.random() - 0.5) * 15;
+
+        resolve({ choice, phaseScore, noCapture, combined });
+      };
+    });
+  });
+}
+
+function runFinalPhase3(ec, phase1Result, phase2Result){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    const totalScore = phase1Result.phaseScore + phase2Result.phaseScore;
+
+    // 判定结果
+    let outcome = 'escaped';
+    if(totalScore >= 25) outcome = 'decisive';
+    else if(totalScore >= 10) outcome = 'partial';
+    else outcome = 'failed';
+
+    let narrative = '';
+    if(outcome === 'decisive'){
+      if(phase2Result.noCapture){
+        narrative = '空袭结束后，工兵进入废墟。三具尸体，其中一具身上有他的记号。DNA 比对需要两周，但所有人都知道——是他。';
+      } else {
+        narrative = '你带着小队进入了最后那间屋子。他坐在那里，手放在膝盖上，没有拿枪。他看着你说："你终于来了。"';
+      }
+    } else if(outcome === 'partial'){
+      narrative = '突袭成功了，但你冲进屋子的时候——屋子里只有一张桌子，桌上放着一杯还温着的茶。他提前十五分钟离开了。';
+    } else {
+      narrative = '突袭失败了。他留下了两个陷阱，你的小队损失了两名弟兄。他在撤退路线上留了一张纸条，上面用英文写着："下次。"';
+    }
+
+    let html = `
+      <div class="promo-title">最 终 对 决</div>
+      <div class="promo-sub">阶段 3 / 3 · 结果</div>
+      <div class="deploy-narr">${narrative}</div>
+    `;
+
+    // 只在 decisive + 活捉分支给出选择
+    if(outcome === 'decisive' && !phase2Result.noCapture){
+      html += `
+        <div class="promo-section">你怎么处置他？</div>
+        <button class="phase-choice" data-f3="kill">
+          击毙
+          <span class="hint">铁血派 +5 · 理想派 -3</span>
+        </button>
+        <button class="phase-choice" data-f3="capture">
+          活捉——他掌握情报
+          <span class="hint">政治 +5 · 理想派 +3</span>
+        </button>
+        <button class="phase-choice" data-f3="release">
+          放他走——战争快结束了
+          <span class="hint">高风险 · 可能再遇</span>
+        </button>
+      `;
+    } else {
+      html += `<button class="promo-btn" id="final-ok">确 定</button>`;
+    }
+
+    content.innerHTML = html;
+
+    const finish = (choice)=>{
+      overlay.classList.remove('show');
+      const result = finalizeEnemyOutcome(ec, outcome, choice, phase2Result.noCapture);
+      addLog(result.log, result.type);
+      addCareer('milestone', result.careerTitle, result.careerDetail);
+      refreshHud();
+      refreshStats();
+      resolve();
+    };
+
+    if(outcome === 'decisive' && !phase2Result.noCapture){
+      document.querySelectorAll('[data-f3]').forEach(btn=>{
+        btn.onclick = ()=> finish(btn.dataset.f3);
+      });
+    } else {
+      document.getElementById('final-ok').onclick = ()=> finish(null);
+    }
+  });
+}
+
+function finalizeEnemyOutcome(ec, outcome, choice, noCapture){
+  if(outcome === 'decisive'){
+    if(noCapture){
+      ec.status = 'killed';
+      addFaction('warrior', 8);
+      addFaction('idealist', 3);
+      state.pol = clamp(state.pol + 4, 0, 100);
+      state.morale = clamp(state.morale + 6, 0, 100);
+      return {
+        log: `📡 代号「${ec.codeName}」被确认击毙。任务完成。政治 +4，士气 +6`,
+        type: 'rank',
+        careerTitle: `击毙代号「${ec.codeName}」`,
+        careerDetail: '空袭摧毁目标'
+      };
+    }
+    if(choice === 'kill'){
+      ec.status = 'killed';
+      addFaction('warrior', 8);
+      addFaction('idealist', -3);
+      state.morale = clamp(state.morale + 5, 0, 100);
+      state.lead = clamp(state.lead + 3, 0, 100);
+      return {
+        log: `📡 你击毙了代号「${ec.codeName}」。铁血派 +8，理想派 -3`,
+        type: 'rank',
+        careerTitle: `击毙代号「${ec.codeName}」`,
+        careerDetail: '面对面击毙'
+      };
+    }
+    if(choice === 'capture'){
+      ec.status = 'captured';
+      addFaction('idealist', 5);
+      addFaction('pragmatist', 5);
+      state.pol = clamp(state.pol + 6, 0, 100);
+      state.net = clamp(state.net + 4, 0, 100);
+      return {
+        log: `📡 你活捉了代号「${ec.codeName}」。政治 +6，人脉 +4`,
+        type: 'rank',
+        careerTitle: `活捉代号「${ec.codeName}」`,
+        careerDetail: '俘虏并移交情报部门'
+      };
+    }
+    // release
+    ec.status = 'released';
+    ec.intelLevel = 0;
+    state.morale = clamp(state.morale - 5, 0, 100);
+    state.lead = clamp(state.lead + 5, 0, 100);
+    addFaction('idealist', 8);
+    addFaction('warrior', -8);
+    return {
+      log: `📡 你放走了代号「${ec.codeName}」。理想派 +8，铁血派 -8`,
+      type: 'warn',
+      careerTitle: `放走代号「${ec.codeName}」`,
+      careerDetail: '出于个人理由放行'
+    };
+  }
+
+  if(outcome === 'partial'){
+    ec.status = 'wounded';
+    ec.intelLevel = Math.max(0, ec.intelLevel - 1);
+    ec.finalAttemptFailed = true;
+    state.morale = clamp(state.morale - 3, 0, 100);
+    return {
+      log: `📡 代号「${ec.codeName}」受伤逃脱。任务部分完成。`,
+      type: 'warn',
+      careerTitle: `「${ec.codeName}」逃脱`,
+      careerDetail: '受伤后逃走'
+    };
+  }
+
+  // failed
+  ec.status = 'escaped';
+  ec.finalAttemptFailed = true;
+  state.morale = clamp(state.morale - 8, 0, 100);
+  state.pt = clamp(state.pt - 5, 0, 100);
+  return {
+    log: `📡 任务失败。代号「${ec.codeName}」逃脱，你的小队损失两人。`,
+    type: 'bad',
+    careerTitle: `「${ec.codeName}」逃脱`,
+    careerDetail: '任务失败，损失两人'
+  };
+}
+
+/* =========================================================
+   战场日记系统
+   ========================================================= */
+const DIARY_TEMPLATES = {
+  deploy: {
+    title: '关于那次任务',
+    build: (s) => {
+      const loc = s.deployedLocation ? s.deployedLocation.name : '那个地方';
+      return `今天又梦到了${loc}。\n\n梦里全是尘土、声音、还有枪声停止后的那种安静。醒来的时候，天还没亮。\n\n我们完成了任务。但有些东西留在了那里，带不回来。`;
+    },
+    fx: { lead: 2, morale: -2 }
+  },
+  fallen: {
+    title: '写给那个人',
+    build: (s) => {
+      const m = s.squad && s.squad.memorial ? s.squad.memorial.find(x=>x.reason && x.reason.includes('阵亡')) : null;
+      if(!m) return null;
+      const years = s.yos - m.year;
+      return `${m.name}已经走了 ${years} 年了。\n\n今天我翻到一张旧照片。照片上他还很年轻，在笑。我盯着看了很久。\n\n有些名字，一辈子忘不掉。`;
+    },
+    fx: { morale: -2, lead: 2 }
+  },
+  brothers: {
+    title: '弟兄们',
+    build: (s) => {
+      if(!s.squad || !s.squad.core.length) return null;
+      const m = s.squad.core[Math.floor(Math.random()*s.squad.core.length)];
+      const phrase = m.catchphrase || '长官，我没什么事';
+      return `今天${m.name}来找我聊了一会儿。\n\n他说"${phrase}"。我笑了笑。\n\n这些年，一起走过来的弟兄越来越少了。剩下的这几个，是我能信的人。`;
+    },
+    fx: { morale: 3, lead: 1 }
+  },
+  family: {
+    title: '家人',
+    build: (s) => {
+      const sp = s.spouse;
+      if(!sp || sp.status === 'single' || sp.status === 'divorced') return null;
+      return `今晚给${sp.name}打了个电话。\n\n电话里说了些家常——她工作的事，邻居的事，天气。挂电话之前她说"你早点休息"。\n\n其实没什么好写的。但我想记下来。有一天，我会需要这些。`;
+    },
+    fx: { morale: 3, love: 3 }
+  },
+  children: {
+    title: '孩子',
+    build: (s) => {
+      if(!s.spouse || !s.spouse.children || !s.spouse.children.length) return null;
+      const c = s.spouse.children[0];
+      return `${c.name}今年 ${c.age} 岁了。\n\n我上次回家的时候，他抱了我一下——以前他不这样。\n\n有时候我不知道自己算不算一个好父亲。但我希望他记得，他爸爸曾经是个军人。`;
+    },
+    fx: { morale: 4 }
+  },
+  reflect: {
+    title: '关于我自己',
+    build: (s) => {
+      return `今天有人问我"你为什么还在部队"。\n\n我想了很久，没想出一个能说出口的答案。\n\n也许是因为——我除了这个，不会干别的。也许是因为——我还没准备好离开。\n\n也许只是因为——我还没找到离开的理由。`;
+    },
+    fx: { morale: 3, pol: 1 }
+  },
+  daily: {
+    title: '平常的一天',
+    build: (s) => {
+      return `今天没什么特别的。\n\n训练、吃饭、开会、写报告。晚上看了会儿书，然后熄灯。\n\n但我想把这种日子记下来——因为也许，多年以后，我会怀念的正是这种平常。`;
+    },
+    fx: { morale: 2 }
+  }
+};
+
+function generateDiaryThemes(){
+  const pool = [];
+
+  // 部署相关
+  if(state.flags.deployed || state.deployedLocation){
+    pool.push('deploy');
+  }
+  // 战友阵亡
+  if(state.squad && state.squad.memorial && state.squad.memorial.some(m=>m.reason && m.reason.includes('阵亡'))){
+    pool.push('fallen');
+  }
+  // 有核心战友
+  if(state.squad && state.squad.core && state.squad.core.length){
+    pool.push('brothers');
+  }
+  // 家庭
+  if(state.spouse && state.spouse.status !== 'single' && state.spouse.status !== 'divorced'){
+    pool.push('family');
+  }
+  // 孩子
+  if(state.spouse && state.spouse.children && state.spouse.children.length){
+    pool.push('children');
+  }
+  // 反思（服役 5 年以上）
+  if(state.yos >= 5){
+    pool.push('reflect');
+  }
+  // 日常永远可选
+  pool.push('daily');
+
+  // 去重后打乱，取 3 个
+  const unique = [...new Set(pool)];
+  const shuffled = unique.sort(()=>Math.random()-0.5);
+  return shuffled.slice(0, 3);
+}
+
+function checkDiaryTrigger(){
+  if(!state.diaryFlags) return false;
+  if(state.diaryFlags.wroteThisYear >= state.yos) return false;
+  if(state.yos < 2) return false;
+  if(!state.diary) state.diary = [];
+  if(state.diary.length >= 20) return false;
+
+  // 有值得记录的事件 → 高概率触发
+  const hasEvent = state.flags.deployed_recent || state.flags.sof_recent ||
+                   (state.squad && state.squad.memorial && state.squad.memorial.some(m=>m.year === state.yos)) ||
+                   (state.career && state.career.some(c=>c.year === state.yos && (c.type === 'promotion' || c.type === 'medal')));
+  if(hasEvent) return Math.random() < 0.75;
+
+  // 平常年 25% 概率
+  return Math.random() < 0.25;
+}
+
+async function runDiaryEvent(){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    const themes = generateDiaryThemes();
+
+    let html = `
+      <div class="promo-title">写 日 记</div>
+      <div class="promo-sub">第 ${state.yos} 年 · 夜</div>
+      <div class="deploy-narr">
+        熄灯了。宿舍里只剩下上铺的呼噜声。<br>
+        你从枕头下面摸出那本旧笔记本。笔在手里转了两圈。<br><br>
+        今晚你想写点什么？
+      </div>
+      <div class="promo-section">选择主题</div>
+    `;
+    themes.forEach((themeId, i)=>{
+      const tpl = DIARY_TEMPLATES[themeId];
+      html += `<button class="phase-choice" data-diary-idx="${i}">${tpl.title}</button>`;
+    });
+    html += `<button class="phase-choice" data-diary-idx="skip" style="border-color:#3a4a26;color:#68774f">不写——今天太累了</button>`;
+
+    content.innerHTML = html;
+
+    document.querySelectorAll('[data-diary-idx]').forEach(btn=>{
+      btn.onclick = ()=>{
+        overlay.classList.remove('show');
+        const val = btn.dataset.diaryIdx;
+        if(val === 'skip'){
+          state.diaryFlags.wroteThisYear = state.yos;
+          addLog('你合上笔记本。今晚不写了。', 'fx');
+          resolve();
+          return;
+        }
+        const themeId = themes[parseInt(val)];
+        writeDiary(themeId);
+        resolve();
+      };
+    });
+  });
+}
+
+function writeDiary(themeId){
+  const tpl = DIARY_TEMPLATES[themeId];
+  if(!tpl) return;
+  const text = tpl.build(state);
+  if(!text) return;
+
+  const entry = {
+    year: state.yos,
+    month: state.month,
+    title: tpl.title,
+    text: text,
+    theme: themeId
+  };
+  state.diary.push(entry);
+  state.diaryFlags.wroteThisYear = state.yos;
+
+  addLog(`✒ 你写下了一篇日记：《${tpl.title}》`, 'fx');
+
+  // 应用效果
+  if(tpl.fx){
+    const parts = [];
+    for(const [k,v] of Object.entries(tpl.fx)){
+      if(k === 'love' && state.spouse){
+        state.spouse.love = clamp(state.spouse.love + v, 0, 100);
+        parts.push(`爱意${v>0?'+':''}${v}`);
+      } else if(STATS.includes(k)){
+        state[k] = clamp(state[k] + v, 0, 100);
+        parts.push(`${STAT_CN[k]}${v>0?'+':''}${v}`);
+      }
+    }
+    if(parts.length) addLog(parts.join('　'), 'fx');
+  }
+
+  addCareer('milestone', `日记：《${tpl.title}》`, '');
+}
+
+function openDiaryEntry(idx){
+  const entry = state.diary[idx];
+  if(!entry) return;
+  const overlay = document.getElementById('promo-overlay');
+  const content = document.getElementById('promo-content');
+  overlay.classList.add('show');
+  overlay.scrollTop = 0;
+
+  content.innerHTML = `
+    <div class="diary-full">
+      <div class="diary-full-title">${entry.title}</div>
+      ${entry.text}
+      <div class="diary-full-date">第 ${entry.year} 年 ${entry.month} 月</div>
+    </div>
+    <button class="promo-btn" id="diary-close-btn">关 闭</button>
+  `;
+
+  document.getElementById('diary-close-btn').onclick = ()=>{
+    overlay.classList.remove('show');
+  };
+}
+
+/* =========================================================
+   伤亡通知系统
+   ========================================================= */
+function checkCasualtyNotificationTrigger(){
+  if(!state.casualtyFlags) return null;
+  if(state.casualtyFlags.notified) return null;
+  // 需要玩家有战友阵亡
+  if(!state.squad || !state.squad.memorial || !state.squad.memorial.length) return null;
+  const killed = state.squad.memorial.find(m=>m.reason && m.reason.includes('阵亡'));
+  if(!killed) return null;
+  // 玩家需要 E-6+ 或 O-1+（有资格作为通知官）
+  const rank = state.track === 'E' ? state.grade : state.track === 'O' ? 10 + state.grade : 0;
+  if(state.track === 'E' && state.grade < 6) return null;
+  if(state.track === 'O' && state.grade < 1) return null;
+  return killed;
+}
+
+async function runCasualtyNotification(killed){
+  return new Promise(resolve=>{
+    state.casualtyFlags.notified = true;
+    state.casualtyFlags.notifiedBuddy = killed.name;
+    state.casualtyFlags.ceremonyYear = state.yos;
+
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    // 第一步：敲门
+    content.innerHTML = `
+      <div class="promo-title">通 知</div>
+      <div class="promo-sub">伤亡通知官 · 任务</div>
+      <div class="deploy-narr">
+        上级把你叫到办公室。桌上摆着一份档案——${killed.name}，在第 ${killed.year} 年的行动中阵亡。他还没有家属收到正式通知。<br><br>
+        你是他的直接上级。按照惯例，你会穿着礼服，去敲他家的门。<br><br>
+        你站在他家门口。手抬起来，又放下去。你敲了第三下——门开了。
+      </div>
+      <div class="promo-section">你怎么开口？</div>
+      <button class="phase-choice" data-cas-idx="0">
+        按标准程序："战争部遗憾地通知您……"
+        <span class="hint">正式 · 谨慎</span>
+      </button>
+      <button class="phase-choice" data-cas-idx="1">
+        用你自己的话："我很难过，我必须告诉您一个消息……"
+        <span class="hint">私人 · 真诚</span>
+      </button>
+      <button class="phase-choice" data-cas-idx="2">
+        什么都不说，先握住对方的手
+        <span class="hint">沉默 · 陪伴</span>
+      </button>
+    `;
+
+    document.querySelectorAll('[data-cas-idx]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const choice = parseInt(btn.dataset.casId);
+        runCasualtyStep2(killed, choice).then(resolve);
+      };
+    });
+  });
+}
+
+async function runCasualtyStep2(killed, openingChoice){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.scrollTop = 0;
+
+    let reaction = '';
+    if(openingChoice === 0){
+      reaction = '她的脸一下子白了，手扶住门框。她没有哭，只是问了一句："他……痛吗？"';
+    } else if(openingChoice === 1){
+      reaction = '她先是没听懂，然后眼睛慢慢睁大。她开始发抖，然后蹲了下来。你蹲在她旁边。';
+    } else {
+      reaction = '她看着你的眼睛，什么都明白了。她没哭，只是握住你的手，握得很紧。';
+    }
+
+    content.innerHTML = `
+      <div class="promo-title">通 知</div>
+      <div class="promo-sub">${killed.name} 的家属</div>
+      <div class="deploy-narr">
+        你站在客厅里。${reaction}<br><br>
+        她的丈夫/母亲/家人从里屋走出来。接下来的两个小时里，你回答了所有问题——什么任务、什么时间、有没有痛苦、遗体什么时候回来、葬礼怎么安排。有些问题你能回答，有些你不能。
+      </div>
+      <div class="promo-section">你打算怎么离开？</div>
+      <button class="phase-choice" data-cas-idx="0">
+        完成程序后离开——这是规定
+        <span class="hint">专业 · 克制</span>
+      </button>
+      <button class="phase-choice" data-cas-idx="1">
+        留下来陪他们吃一顿饭
+        <span class="hint">私人 · 陪伴</span>
+      </button>
+      <button class="phase-choice" data-cas-idx="2">
+        留下联系方式，告诉他们"随时可以打给我"
+        <span class="hint">长期 · 承诺</span>
+      </button>
+    `;
+
+    document.querySelectorAll('[data-cas-idx]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const choice = parseInt(btn.dataset.casId);
+        runCasualtyStep3(killed, choice).then(resolve);
+      };
+    });
+  });
+}
+
+async function runCasualtyStep3(killed, leaveChoice){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.scrollTop = 0;
+
+    let after = '';
+    let effects = {};
+
+    if(leaveChoice === 0){
+      after = '你按程序完成了所有文件，敬礼，然后离开。你的手在方向盘上抖了 20 分钟。';
+      effects = { morale: -8, pol: +3, lead: +2 };
+      state.casualtyFlags.funeralAttended = 'no';
+    } else if(leaveChoice === 1){
+      after = '你留了下来，和他们一起吃了一顿饭。餐桌上没有人说话。你离开时已经深夜。';
+      effects = { morale: -5, lead: +4, net: +3 };
+      state.casualtyFlags.funeralAttended = 'yes';
+    } else {
+      after = '你把自己的手机号写在一张纸上，压在了茶杯下面。"任何时候，打给我。" 她点了点头。';
+      effects = { morale: -6, lead: +3, net: +5 };
+      state.casualtyFlags.funeralAttended = 'committed';
+    }
+
+    for(const [k,v] of Object.entries(effects)){
+      state[k] = clamp(state[k]+v, 0, 100);
+    }
+    addFaction('idealist', 5);
+    addFaction('warrior', 3);
+
+    content.innerHTML = `
+      <div class="promo-title">通 知</div>
+      <div class="promo-sub">结束</div>
+      <div class="deploy-narr">${after}</div>
+      <div style="color:#94a878;font-size:12px;padding:10px 0;line-height:1.8">
+        士气 ${effects.morale}　领导 +${effects.lead}　政治 +${effects.pol||0}　人脉 +${effects.net||0}
+      </div>
+      <button class="promo-btn" id="cas-close-btn">确 定</button>
+    `;
+
+    addLog(`你作为伤亡通知官，通知了 ${killed.name} 的家属。`, 'warn');
+    addCareer('milestone', `伤亡通知：${killed.name}`, after.slice(0, 40));
+
+    document.getElementById('cas-close-btn').onclick = ()=>{
+      overlay.classList.remove('show');
+      refreshHud();
+      refreshStats();
+      resolve();
+    };
+  });
+}
+
+/* =========================================================
+   家属来信（通知后 2~3 年触发一次）
+   ========================================================= */
+function checkCasualtyLetter(){
+  const cf = state.casualtyFlags;
+  if(!cf || !cf.notified) return false;
+  if(cf.letterYear) return false;
+  if(state.yos - cf.ceremonyYear < 2) return false;
+  if(state.yos - cf.ceremonyYear > 5) return false;
+  if(Math.random() > 0.25) return false;
+  cf.letterYear = state.yos;
+  return true;
+}
+
+function runCasualtyLetter(){
+  const cf = state.casualtyFlags;
+  const name = cf.notifiedBuddy || '那位战友';
+
+  let letterText = '';
+  if(cf.funeralAttended === 'committed'){
+    letterText = `${name} 的母亲给你写了一封信。"两年了。我一直没敢给你打电话，怕打扰你。今天我想告诉你——我现在好多了。他的房间我保持原样。他小时候喜欢画画，我一直留着他的画。谢谢你那天没有立刻离开。"`;
+  } else if(cf.funeralAttended === 'yes'){
+    letterText = `${name} 的妻子给你写了一封信。"两年前的那顿晚饭，我一直记得。你坐在那里听我们说话，什么也没吃。后来我才知道，你那天是从另一个基地赶来的，连制服都没换。谢谢你。我和孩子都还好。"`;
+  } else {
+    letterText = `${name} 的父亲给你写了一封信。"两年前你来通知我们的时候，我恨过你——不是恨你，是恨你带来的那个消息。今天我想跟你说：我不恨了。你做了你该做的。"`;
+  }
+
+  state.morale = clamp(state.morale + 5, 0, 100);
+  state.pol = clamp(state.pol + 3, 0, 100);
+
+  addLog(`〔家属来信〕${letterText}`, 'good');
+  addCareer('milestone', `${name} 家属来信`, '');
+}
+
+/* =========================================================
+   家庭写信系统
+   ========================================================= */
+function checkLetterTrigger(){
+  if(!state.flags || !state.flags.deployed && !state.deployedLocation) return false;
+  if(!state.flags.in_deploy && !state.deployedLocation) return false;
+  const lf = state.letterFlags;
+  if(!lf) return false;
+  // 每 3 个月触发一次
+  const monthsSince = (state.yos * 12 + state.month) - (lf.lastLetterMonth || 0);
+  if(monthsSince < 3) return false;
+  return true;
+}
+
+async function runLetterEvent(){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    const sp = state.spouse;
+    const hasSpouse = sp && sp.status !== 'single' && sp.status !== 'divorced';
+    const children = sp && sp.children ? sp.children.filter(c=>c.age >= 3) : [];
+    const hasChildren = children.length > 0;
+
+    let html = `
+      <div class="promo-title">写 信</div>
+      <div class="promo-sub">部署期间</div>
+      <div class="deploy-narr">营区里的通信站每周三开放。你坐下来，拿起笔，面前是一张空白的信纸。你想写给谁？</div>
+      <div class="promo-section">你的选择</div>
+    `;
+
+    if(hasSpouse){
+      html += `<button class="phase-choice" data-letter="spouse">给 ${sp.name} 写</button>`;
+    }
+    if(hasChildren){
+      html += `<button class="phase-choice" data-letter="child">给孩子写（${children.map(c=>c.name).join('、')}）</button>`;
+    }
+    html += `<button class="phase-choice" data-letter="parents">给父母写</button>`;
+    html += `<button class="phase-choice" data-letter="skip" style="border-color:#5a2020;color:#d98a4a">不写——今天太累了</button>`;
+
+    content.innerHTML = html;
+
+    document.querySelectorAll('[data-letter]').forEach(btn=>{
+      btn.onclick = ()=>{
+        overlay.classList.remove('show');
+        const choice = btn.dataset.letter;
+        executeLetterChoice(choice, { hasSpouse, hasChildren, children });
+        refreshHud();
+        refreshStats();
+        resolve();
+      };
+    });
+  });
+}
+
+function executeLetterChoice(choice, ctx){
+  const lf = state.letterFlags;
+  const sp = state.spouse;
+  lf.lastLetterMonth = state.yos * 12 + state.month;
+
+  if(choice === 'spouse'){
+    sp.love = clamp(sp.love + 3, 0, 100);
+    sp.pressure = clamp(sp.pressure - 5, 0, 100);
+    state.morale = clamp(state.morale + 3, 0, 100);
+    lf.consecutiveSkip = 0;
+    // 排队一个回信
+    lf.pendingReply = 'spouse';
+    lf.pendingReplyMonth = state.yos * 12 + state.month + 2;
+    addLog(`你给 ${sp.name} 写了一封长信。爱意 +3，她的压力 -5，你的士气 +3`, 'fx');
+    addCareer('milestone', `给 ${sp.name} 写信`, '');
+  } else if(choice === 'child'){
+    ctx.children.forEach(c=>{
+      c.relation = clamp(c.relation + 5, 0, 100);
+    });
+    sp.love = clamp(sp.love + 1, 0, 100);
+    state.morale = clamp(state.morale + 4, 0, 100);
+    lf.consecutiveSkip = 0;
+    lf.pendingReply = 'child';
+    lf.pendingReplyMonth = state.yos * 12 + state.month + 2;
+    addLog('你给孩子写了一封信。孩子的亲密度 +5，你的士气 +4', 'fx');
+    addCareer('milestone', '给孩子写信', '');
+  } else if(choice === 'parents'){
+    state.morale = clamp(state.morale + 3, 0, 100);
+    state.pol = clamp(state.pol + 1, 0, 100);
+    lf.consecutiveSkip = 0;
+    lf.pendingReply = 'parents';
+    lf.pendingReplyMonth = state.yos * 12 + state.month + 2;
+    addLog('你给父母写了一封信。士气 +3，政治 +1', 'fx');
+    addCareer('milestone', '给父母写信', '');
+  } else {
+    // 不写
+    lf.consecutiveSkip = (lf.consecutiveSkip || 0) + 1;
+    state.morale = clamp(state.morale - 2, 0, 100);
+    addLog('你没有写信。心里有点空。士气 -2', 'warn');
+    if(lf.consecutiveSkip >= 3 && sp && sp.status === 'married'){
+      sp.pressure = clamp(sp.pressure + 10, 0, 100);
+      sp.love = clamp(sp.love - 3, 0, 100);
+      if(sp.children){
+        sp.children.forEach(c=>{ if(c.age >= 3) c.relation = clamp(c.relation - 5, 0, 100); });
+      }
+      addLog(`你连续 ${lf.consecutiveSkip} 次没有写信。${sp.name} 的压力 +10，爱意 -3`, 'bad');
+      lf.consecutiveSkip = 0;
+    }
+  }
+}
+
+function checkLetterReply(){
+  const lf = state.letterFlags;
+  if(!lf || !lf.pendingReply) return;
+  const nowMonth = state.yos * 12 + state.month;
+  if(nowMonth < lf.pendingReplyMonth) return;
+
+  const sp = state.spouse;
+  const type = lf.pendingReply;
+  lf.pendingReply = null;
+
+  let replyText = '';
+  if(type === 'spouse'){
+    if(sp.pressure >= 60){
+      replyText = `${sp.name} 的回信很短。"收到你的信了。最近家里一切都好。你要照顾好自己。" 字迹很工整，但你感觉她写得很克制。`;
+      state.morale = clamp(state.morale - 1, 0, 100);
+    } else if(sp.love >= 70){
+      replyText = `${sp.name} 的回信有三页。她讲了家里的事、邻居的事、她最近看的一本书。信的末尾写了一句："我等你回来。"`;
+      state.morale = clamp(state.morale + 4, 0, 100);
+      sp.pressure = clamp(sp.pressure - 3, 0, 100);
+    } else {
+      replyText = `${sp.name} 的回信。"收到你的信了，我很好。你那边冷不冷？"`;
+      state.morale = clamp(state.morale + 2, 0, 100);
+    }
+  } else if(type === 'child'){
+    replyText = '孩子的回信歪歪扭扭，只有几句话："爸爸，我想你。妈妈说你在很远的地方。我画了一幅画给你。" 信里夹着一张蜡笔画——画上是三个人，中间那个画得特别高。';
+    state.morale = clamp(state.morale + 5, 0, 100);
+    if(sp.children){
+      sp.children.forEach(c=>{ if(c.age >= 3 && c.age <= 12) c.relation = clamp(c.relation + 3, 0, 100); });
+    }
+  } else {
+    replyText = '父母的回信。"家里都好，不用担心。你妈让我跟你说，天冷了多穿点。你爸说他年轻时也去过那个地方。"';
+    state.morale = clamp(state.morale + 3, 0, 100);
+  }
+
+  addLog(`〔回信〕${replyText}`, 'good');
+  addCareer('milestone', '收到回信', '');
+}
+
+/* =========================================================
+   动态事件（状态阈值触发，一生一次）
+   ========================================================= */
+const DYN_EVENTS = [
+  /* ---------- 负面状态 ---------- */
+  { id:'dyn_low_morale', flag:'dynLowMorale',
+    cond:s=>s.morale<=30,
+    text:'你走进办公室，发现桌上放着一封没有署名的信。信上只有一句话："长官，我们都快撑不住了。"',
+    fx:{morale:-3,lead:+2} },
+  { id:'dyn_low_pt', flag:'dynLowPt',
+    cond:s=>s.pt<=15,
+    text:'你爬楼梯时停下来喘气。一个下士走过，回头看了你一眼，没说话。',
+    fx:{pt:-2,morale:-2} },
+  { id:'dyn_low_lead', flag:'dynLowLead',
+    cond:s=>s.lead<=15 && s.grade>=4,
+    text:'一次班务会上，一个士兵当面质疑你的决定。其他人都低着头，没人替你说话。',
+    fx:{lead:-3,morale:-3} },
+  { id:'dyn_low_pol', flag:'dynLowPol',
+    cond:s=>s.pol<=15 && s.yos>=5,
+    text:'你听说晋升名单里没有你的名字。你去人事处问，对方说"你不了解流程"。',
+    fx:{pol:-3,morale:-4} },
+  { id:'dyn_low_mos', flag:'dynLowMos',
+    cond:s=>s.mos<=15 && s.yos>=5,
+    text:'一次演习中你发现自己看不懂新的装备手册。一个比你小十岁的技术员把要点讲给你听。',
+    fx:{mos:-3,morale:-3} },
+  { id:'dyn_debt_warning', flag:'dynDebtWarning',
+    cond:s=>s.finance && s.finance.balance < -5000,
+    text:'营区值班室接到一个电话，是银行打来的。值班员转告你："他们说……尽快。"',
+    fx:{morale:-5} },
+  { id:'dyn_marriage_strain', flag:'dynMarriageStrain',
+    cond:s=>s.spouse && s.spouse.status==='married' && s.spouse.pressure>=60,
+    text:'配偶在电话里说："我需要你回来一趟。" 语气很平静，但你听出了那种"最后通牒"的感觉。',
+    fx:{morale:-4} },
+  { id:'dyn_unit_low', flag:'dynUnitLow',
+    cond:s=>s.command && s.command.active && ((s.command.morale + s.command.training + s.command.equipment) / 3 < 40),
+    text:'上级突击检查。检查官在你的连队里发现了三处不合规。他当着全连的面说："这个单位需要整顿。"',
+    fx:{pol:-4,morale:-5} },
+  { id:'dyn_child_distant', flag:'dynChildDistant',
+    cond:s=>s.spouse && s.spouse.children && s.spouse.children.some(c=>c.age>=6 && c.age<=15 && c.relation<=30),
+    text:'配偶在电话里说，孩子最近在学校不说话，老师建议家长聊聊。你想了一下——你已经多久没好好跟他说过话了。',
+    fx:{morale:-4} },
+  { id:'dyn_no_deploy', flag:'dynNoDeploy',
+    cond:s=>s.yos>=8 && !s.flags.deployed_recent && state.yos - (state.flags.lastDeployYear||0) >= 3,
+    text:'你翻开近年来的档案，发现自己已经很久没上过前线了。你开始怀疑自己还算不算一个真正的军人。',
+    fx:{morale:-3,lead:+2} },
+
+  /* ---------- 正面状态 ---------- */
+  { id:'dyn_high_lead', flag:'dynHighLead',
+    cond:s=>s.lead>=85,
+    text:'一个新兵找到你，说："长官，我想成为您这样的人。" 你看着他年轻的脸，忽然想起当年的自己。',
+    fx:{morale:+5,lead:+2} },
+  { id:'dyn_high_pol', flag:'dynHighPol',
+    cond:s=>s.pol>=85,
+    text:'总部有人给你打电话："下一批人事调整，我们想到了你。"',
+    fx:{pol:+3,net:+2} },
+  { id:'dyn_high_morale', flag:'dynHighMorale',
+    cond:s=>s.morale>=90 && s.yos>=5,
+    text:'今天早上你走出营房，发现天特别蓝。你忽然觉得——这就是你想要的生活。',
+    fx:{morale:+3} },
+  { id:'dyn_unit_high', flag:'dynUnitHigh',
+    cond:s=>s.command && s.command.active && ((s.command.morale + s.command.training + s.command.equipment) / 3 >= 85),
+    text:'上级通报表彰你的单位。一位将军在表彰会上说："这是我的部队里最好的一个连。"',
+    fx:{pol:+4,morale:+5,lead:+2} },
+  { id:'dyn_finance_rich', flag:'dynFinanceRich',
+    cond:s=>s.finance && s.finance.balance >= 100000,
+    text:'银行理财顾问给你打电话，问你有没有兴趣做点投资。你想起当年入伍时账户里只有三位数。',
+    fx:{morale:+3} },
+
+  /* ---------- 特殊状态 ---------- */
+  { id:'dyn_so_alone', flag:'dynSoAlone',
+    cond:s=>s.flags.sof && s.yos>=10,
+    text:'一次老兵聚会上，你发现当年一起通过选拔的人，只剩下三个还在部队。你们互相看了一眼，什么都没说。',
+    fx:{morale:-3,lead:+2} },
+  { id:'dyn_lost_medal', flag:'dynLostMedal',
+    cond:s=>s.medals.length >= 5 && s.yos >= 15,
+    text:'你整理旧物，翻出一枚勋章。你盯着它看了很久，想起的不是荣誉，而是那个没能回来的战友。',
+    fx:{morale:-2,pol:+2} },
+  { id:'dyn_old_letter', flag:'dynOldLetter',
+    cond:s=>s.yos>=20,
+    text:'你在旧箱子里找到一封二十年前的信。写信的人已经在几年前去世了。你读完，把它放回原处。',
+    fx:{morale:+2,pol:+1} },
+  { id:'dyn_world_war', flag:'dynWorldWar',
+    cond:s=>getCurrentWorldState().id==='wartime' && s.yos>=3,
+    text:'新闻里说局势正在恶化。你知道这意味着什么——下一批部署名单，快了。',
+    fx:{morale:-2,pt:+1} },
+  { id:'dyn_legacy_reflect', flag:'dynLegacyReflect',
+    cond:s=>s.yos>=25,
+    text:'你独自坐在营房外面，看着新兵跑步。你忽然意识到，你已经比你的第一任军士长当年还老了。',
+    fx:{morale:+3,pol:+2,lead:+2} }
+];
+
+/* =========================================================
+   NPC 主动事件（A+B 触发：从未互动 / 关系骤变）
+   ========================================================= */
+const NPC_PROACTIVE = {
+  superior: {
+    never: {
+      text:'哈里森在走廊里拦住你："你来这儿多久了？我怎么没见过你来汇报过。"',
+      choices:[
+        { label:'道歉，并承诺定期汇报', apply:s=>{ s.npcs.superior.value=clamp(s.npcs.superior.value+8,0,100); s.lead=clamp(s.lead+2,0,100); return '他点了点头，说："我不是要你拍马屁。我只是想知道你在干什么。"'; } },
+        { label:'解释自己"一直在忙"', apply:s=>{ s.npcs.superior.value=clamp(s.npcs.superior.value-5,0,100); return '他看了你一眼，说："忙什么？忙到连上级都不认识你？"'; } }
+      ]
+    },
+    tension: {
+      text:'哈里森把你叫进办公室，关上门。"最近我听到一些关于你的传闻，"他说，"我想听你自己说。"',
+      choices:[
+        { label:'如实说明最近的状态', apply:s=>{ s.npcs.superior.value=clamp(s.npcs.superior.value+12,0,100); s.morale=clamp(s.morale+3,0,100); return '他听完之后说："你说出来就好。我年轻的时候也有过这种时候。"'; } },
+        { label:'说"没什么事"', apply:s=>{ s.npcs.superior.value=clamp(s.npcs.superior.value-8,0,100); return '他没再问，但你能感觉到，你们之间的距离又远了一点。'; } }
+      ]
+    },
+    warm: {
+      text:'哈里森私下找你："最近你干得不错。有个机会，我想到你。"',
+      choices:[
+        { label:'认真听取机会的详情', apply:s=>{ s.npcs.superior.value=clamp(s.npcs.superior.value+5,0,100); s.pol=clamp(s.pol+3,0,100); s.yearPromoBonus=(s.yearPromoBonus||0)+0.05; return '他透露了一个即将空出的岗位。你记住了这个机会。'; } },
+        { label:'谦虚地说"我还不够格"', apply:s=>{ s.npcs.superior.value=clamp(s.npcs.superior.value+8,0,100); return '他笑了："谦虚是好事，但别过了头。"'; } }
+      ]
+    }
+  },
+  peer: {
+    never: {
+      text:'里维拉在食堂坐到你的对面："我们共事这么久了，却好像没好好聊过。"',
+      choices:[
+        { label:'接受，聊聊', apply:s=>{ s.npcs.peer.value=clamp(s.npcs.peer.value+8,0,100); s.pol=clamp(s.pol+2,0,100); return '你们聊了两个小时。你发现他其实不像表面那么圆滑。'; } },
+        { label:'客气地回应，很快离开', apply:s=>{ s.npcs.peer.value=clamp(s.npcs.peer.value-3,0,100); return '他笑了笑，什么都没说。但你知道，他记住了这个态度。'; } }
+      ]
+    },
+    tension: {
+      text:'里维拉在走廊里低声对你说："我们之间好像有点问题。晚上喝一杯？"',
+      choices:[
+        { label:'赴约，面对面谈', apply:s=>{ s.npcs.peer.value=clamp(s.npcs.peer.value+12,0,100); s.pol=clamp(s.pol+3,0,100); return '几杯酒下肚，话说开了。有些事，不摊开反而更糟。'; } },
+        { label:'婉拒，说自己忙', apply:s=>{ s.npcs.peer.value=clamp(s.npcs.peer.value-8,0,100); return '他点了点头，说"下次吧"。但你知道——不会有下次。'; } }
+      ]
+    },
+    warm: {
+      text:'里维拉私下找到你："我手上有个信息，也许对你有用。"',
+      choices:[
+        { label:'接受他的情报', apply:s=>{ s.npcs.peer.value=clamp(s.npcs.peer.value+5,0,100); s.pol=clamp(s.pol+4,0,100); s.net=clamp(s.net+2,0,100); return '他告诉了你一个关于人事变动的内部消息。你记下了。'; } },
+        { label:'礼貌拒绝，不想欠人情', apply:s=>{ s.npcs.peer.value=clamp(s.npcs.peer.value-3,0,100); return '他笑了："你这种人，真难搞。" 但你能感觉到，他其实更尊重你了。'; } }
+      ]
+    }
+  },
+  subordinate: {
+    never: {
+      text:'科尔在你办公室门口站了很久，最后敲了敲门："长官，我能跟您聊两句吗？"',
+      choices:[
+        { label:'放下手中的事，认真听', apply:s=>{ s.npcs.subordinate.value=clamp(s.npcs.subordinate.value+10,0,100); s.lead=clamp(s.lead+2,0,100); return '他讲了整整一个小时——关于士兵们的真实想法，关于他自己。你第一次意识到，你对这支队伍的了解更多来自报告，而不是人。'; } },
+        { label:'说"现在有点忙，改天"', apply:s=>{ s.npcs.subordinate.value=clamp(s.npcs.subordinate.value-6,0,100); return '他点了点头，走了。你继续工作，但心里有点不舒服。'; } }
+      ]
+    },
+    tension: {
+      text:'科尔在操场边找到你，脸色很难看："长官，有件事我必须说。这几个月您变了。"',
+      choices:[
+        { label:'让他把话说完', apply:s=>{ s.npcs.subordinate.value=clamp(s.npcs.subordinate.value+15,0,100); s.lead=clamp(s.lead+3,0,100); s.morale=clamp(s.morale+3,0,100); return '他讲了 20 分钟。你听着，没有打断。他说完之后，你说："谢谢你。" 他愣住了。'; } },
+        { label:'打断他，说"这是命令"', apply:s=>{ s.npcs.subordinate.value=clamp(s.npcs.subordinate.value-12,0,100); s.morale=clamp(s.morale-3,0,100); return '他闭上嘴，敬礼，走了。你看着他离开的背影，忽然想起当年也有一个人对你说过同样的话。'; } }
+      ]
+    },
+    warm: {
+      text:'科尔带着几个兵来找你："长官，我们商量了一下，想请您周末跟我们一起吃顿饭。"',
+      choices:[
+        { label:'接受', apply:s=>{ s.npcs.subordinate.value=clamp(s.npcs.subordinate.value+6,0,100); s.morale=clamp(s.morale+5,0,100); return '那顿饭吃得很开心。你听到了很多平时听不到的话。'; } },
+        { label:'说有安排，改天', apply:s=>{ s.npcs.subordinate.value=clamp(s.npcs.subordinate.value-4,0,100); return '他们有点失望，但没说什么。你知道，有些机会失去一次，可能就没有第二次了。'; } }
+      ]
+    }
+  },
+  technician: {
+    never: {
+      text:'陈纳德在你路过时叫住你："你从来不来技术间。为什么？"',
+      choices:[
+        { label:'坦白说"我对技术不太懂"', apply:s=>{ s.npcs.technician.value=clamp(s.npcs.technician.value+8,0,100); s.mos=clamp(s.mos+3,0,100); return '他说："不懂才要来。懂了就不用来。" 从那以后，你每周去一次。'; } },
+        { label:'说"那不是我的工作"', apply:s=>{ s.npcs.technician.value=clamp(s.npcs.technician.value-5,0,100); return '他没再说话，转身回了技术间。你听到门关上的声音。'; } }
+      ]
+    },
+    tension: {
+      text:'陈纳德找到你："我听说你上次在会上的发言，把技术方案否了。我不高兴。"',
+      choices:[
+        { label:'解释你的考量', apply:s=>{ s.npcs.technician.value=clamp(s.npcs.technician.value+10,0,100); s.pol=clamp(s.pol+2,0,100); return '他听完之后说："你早说清楚不就好了。" 他是个直人，你也一样。'; } },
+        { label:'说"我不需要向你解释"', apply:s=>{ s.npcs.technician.value=clamp(s.npcs.technician.value-10,0,100); return '他看了你三秒，转身走了。从此以后，你再也约不到他的时间。'; } }
+      ]
+    },
+    warm: {
+      text:'陈纳德把一个旧零件放在你桌上："从一台退役的电台拆的。给你留个纪念。"',
+      choices:[
+        { label:'郑重收下', apply:s=>{ s.npcs.technician.value=clamp(s.npcs.technician.value+5,0,100); s.morale=clamp(s.morale+4,0,100); return '你把零件放进上衣口袋。那是父亲那台电台的型号。'; } },
+        { label:'问"这有什么特别吗"', apply:s=>{ s.npcs.technician.value=clamp(s.npcs.technician.value+3,0,100); s.mos=clamp(s.mos+2,0,100); return '他给你讲了半个小时——关于那台电台、他的父亲、和他的三十年。'; } }
+      ]
+    }
+  }
+};
+
+function checkDynamicEvents(){
+  if(!state.flags) state.flags = {};
+  for(const ev of DYN_EVENTS){
+    if(state.flags[ev.flag]) continue;
+    try {
+      if(ev.cond(state)){
+        state.flags[ev.flag] = true;
+        return ev;
+      }
+    } catch(err){}
+  }
+  return null;
+}
+
+function checkNPCProactive(){
+  if(!state.npcs) return null;
+  const keys = ['superior','peer','subordinate','technician'];
+  for(const key of keys){
+    const npc = state.npcs[key];
+    const prof = NPC_PROACTIVE[key];
+    if(!npc || !prof) continue;
+    if(!npc.proactiveFlags) npc.proactiveFlags = {};
+
+    // A. 从未互动
+    if(!npc.proactiveFlags.never && state.yos >= 3 && (npc.lastInteractionYear || 0) === 0){
+      npc.proactiveFlags.never = true;
+      return { key, type:'never', data:prof.never };
+    }
+
+    // B. 关系骤变
+    const h = npc.relationHistory || [];
+    if(h.length >= 2){
+      const delta = h[h.length-1] - h[h.length-2];
+      if(!npc.proactiveFlags.tension && delta <= -20){
+        npc.proactiveFlags.tension = true;
+        return { key, type:'tension', data:prof.tension };
+      }
+      if(!npc.proactiveFlags.warm && delta >= 15){
+        npc.proactiveFlags.warm = true;
+        return { key, type:'warm', data:prof.warm };
+      }
+    }
+  }
+  return null;
+}
+
+async function runNPCProactive(evt){
+  return new Promise(resolve=>{
+    const npc = state.npcs[evt.key];
+    const overlay = document.getElementById('promo-overlay');
+    const content = document.getElementById('promo-content');
+    overlay.classList.add('show');
+    overlay.scrollTop = 0;
+
+    let html = `
+      <div class="promo-title">主动交谈</div>
+      <div class="promo-sub">${npc.name}</div>
+      <div class="deploy-narr">${evt.data.text}</div>
+      <div class="promo-section">你的回应</div>
+    `;
+    evt.data.choices.forEach((c, i)=>{
+      html += `<button class="phase-choice" data-npc-idx="${i}">${c.label}</button>`;
+    });
+    content.innerHTML = html;
+
+    document.querySelectorAll('[data-npc-idx]').forEach(btn=>{
+      btn.onclick = ()=>{
+        overlay.classList.remove('show');
+        const c = evt.data.choices[parseInt(btn.dataset.npcIdx)];
+        const result = c.apply(state);
+        if(result) addLog(result, 'good');
+        // 更新互动时间
+        npc.lastInteractionYear = state.yos;
+        addCareer('milestone', `${npc.name} 主动找你`, evt.type === 'never' ? '从未互动' : evt.type === 'tension' ? '关系骤降' : '关系骤升');
+        refreshHud();
+        refreshStats();
+        resolve();
+      };
+    });
+  });
+}
+
+/* =========================================================
+   氛围事件（不占 15% 窗口，独立 40% 触发）
+   ========================================================= */
+const AMBIENCE_EVENTS = [
+  /* ---------- 驻地日常（15） ---------- */
+  { id:'amb_1',  text:'食堂里，一个新兵把汤洒在了军士长的裤子上。全食堂鸦雀无声。军士长低头看了一眼，说"下次注意"，然后走了。新兵愣在原地。', fx:{morale:+1} },
+  { id:'amb_2',  text:'今天下雨。你站在营房门口看了一会儿，想起小时候父亲带你去钓鱼的那个下午。', fx:{morale:+1} },
+  { id:'amb_3',  text:'一个战友跟你分享了他女朋友的照片。他说"等退役就结婚"。', fx:{morale:+1} },
+  { id:'amb_4',  text:'训练场上有人在放歌。你没听过，但记住了旋律。晚上躺在床上时，它还在你脑子里转。', fx:{morale:+1} },
+  { id:'amb_5',  text:'你在营区小卖部买了一罐可乐。收银的老太太说"你上次也是买这个"。', fx:{morale:+1} },
+  { id:'amb_6',  text:'一个下士在擦枪时唱起了歌。很难听，但没人制止他。', fx:{morale:+1} },
+  { id:'amb_7',  text:'你在操场上看到一个士兵对着沙袋打了半个小时。没人去打扰他。', fx:{pt:+1} },
+  { id:'amb_8',  text:'半夜值班。你站在岗楼上看星星，忽然想起自己已经很久没这样看过天了。', fx:{morale:+1} },
+  { id:'amb_9',  text:'一个新兵问你"长官，你打过仗吗？" 你想了想，说"打过"。他没再问。', fx:{lead:+1} },
+  { id:'amb_10', text:'你在洗衣房发现自己的袜子和一个士兵的混在了一起。你们对视了一眼，都笑了。', fx:{morale:+1} },
+  { id:'amb_11', text:'今天发工资。你看到一个新兵拿着工资单在算"能不能给家里寄一半"。', fx:{morale:-1,pol:+1} },
+  { id:'amb_12', text:'你把床铺整理了三遍。每次都不太满意。', fx:{pt:+1} },
+  { id:'amb_13', text:'一个老兵在食堂说了一个老掉牙的军营笑话。所有人都笑了，包括听过五遍的你。', fx:{morale:+1} },
+  { id:'amb_14', text:'你在营区门口看到一个母亲来探亲。她儿子跑过来抱住她。你转身走开了。', fx:{morale:-1} },
+  { id:'amb_15', text:'你在军装口袋里发现了一张去年的电影票。你想不起来是哪一场了。', fx:{morale:+1} },
+
+  /* ---------- 训练 / 工作（15） ---------- */
+  { id:'amb_16', text:'射击训练。你今天打了 38 环。教官说"不错"。你已经很久没听他夸过人了。', fx:{mos:+1} },
+  { id:'amb_17', text:'你今天修好了一台别人修了三天都没修好的设备。技术员看你的眼神变了。', fx:{mos:+1} },
+  { id:'amb_18', text:'战术课。教官问"如果你是指挥官，你会怎么做？" 你举手回答，答得比想象中好。', fx:{lead:+1} },
+  { id:'amb_19', text:'你整理了一份报告，写得很认真。交上去之后，上级一个字也没改。', fx:{pol:+1} },
+  { id:'amb_20', text:'你今天带一个新兵完成了他第一次五公里越野。到终点时他喘着气说"长官，谢谢"。', fx:{lead:+1,morale:+1} },
+  { id:'amb_21', text:'夜训。你在黑暗中认错了路，走了二十分钟才发现。没人笑话你。', fx:{mos:+1} },
+  { id:'amb_22', text:'你在训练场上摔了一跤。膝盖破了皮。军医说"小事"，但你走路开始有点别扭。', fx:{pt:-1} },
+  { id:'amb_23', text:'你第一次完整讲解了一堂装备课。台下有人记笔记。', fx:{mos:+1,lead:+1} },
+  { id:'amb_24', text:'一个新兵在障碍训练中卡住了。你爬上去，把他拉了下来。', fx:{lead:+1} },
+  { id:'amb_25', text:'你今天在地图上找到一个别人都没发现的战术要点。教官看了三分钟，说"这个可以"。', fx:{mos:+1} },
+  { id:'amb_26', text:'整理仓库。你在一堆旧文件里发现了一张 2003 年的训练表。那个连队现在还在。', fx:{pol:+1} },
+  { id:'amb_27', text:'一次越野中你的鞋带松了。你蹲下来系鞋带，抬头发现所有人都停下来等你。', fx:{lead:+1} },
+  { id:'amb_28', text:'一个老士官跟你说了一句"你比我刚来的时候强多了"。他没再多说。', fx:{morale:+1} },
+  { id:'amb_29', text:'你负责的装备在一次突击检查中拿了满分。检查官问你"是谁负责的"，上级指了指你。', fx:{pol:+1,mos:+1} },
+  { id:'amb_30', text:'你今天教一个左撇子怎么用右手射击。他花了两个小时才打中靶心。', fx:{lead:+1} },
+
+  /* ---------- 家庭 / 私人（15） ---------- */
+  { id:'amb_31', text:'你收到母亲寄来的一盒饼干。她不识字，是托邻居写的地址。', fx:{morale:+2} },
+  { id:'amb_32', text:'你给家里打电话。没人接。你听了一会儿忙音，然后挂了。', fx:{morale:-1} },
+  { id:'amb_33', text:'你的旧手表坏了。是父亲留给你那块。你花了一个下午修好了它。', fx:{morale:+1} },
+  { id:'amb_34', text:'你在休息日看了一部老电影。是关于战争的。看完之后你没说话。', fx:{morale:-1,pol:+1} },
+  { id:'amb_35', text:'一个战友问你"你想过退役之后干什么吗？" 你说"还没想好"。他说"我也是"。', fx:{pol:+1} },
+  { id:'amb_36', text:'你今天梦到了小时候的家。醒来时宿舍里一片漆黑，只有上铺的呼噜声。', fx:{morale:+1} },
+  { id:'amb_37', text:'你给自己买了一双新靴子。旧的没扔，收进了柜子最底层。', fx:{pt:+1} },
+  { id:'amb_38', text:'你收到了一封战友的信。他退役后去了别的州。信里只写了几句。', fx:{morale:+1} },
+  { id:'amb_39', text:'今天生日。没有人记得，除了一个不认识的新兵在食堂跟你说"生日快乐，长官"。', fx:{morale:+2} },
+  { id:'amb_40', text:'你在军人服务社买了一本旧书。晚上读了半本。', fx:{pol:+1} },
+  { id:'amb_41', text:'你在换季整理衣服时发现了一张照片。是入伍第一天拍的。照片上的你看起来非常年轻。', fx:{morale:+1} },
+  { id:'amb_42', text:'你听着收音机里的球赛。你支持的队输了。', fx:{morale:-1} },
+  { id:'amb_43', text:'一个退役的老兵回到基地，看了看营房。他说"这里一点没变"。', fx:{pol:+1} },
+  { id:'amb_44', text:'你在休息日睡了 14 个小时。醒来之后觉得更累了。', fx:{morale:+1,pt:-1} },
+  { id:'amb_45', text:'你今天刮胡子刮破了下巴。一个士兵说"长官，您看起来更凶了"。', fx:{morale:+1} },
+
+  /* ---------- 部署 / 战场（15） ---------- */
+  { id:'amb_46', text:'夜里巡逻。你路过一个村子，看到一个孩子趴在窗户上看你。你冲他点了点头。他也点了点头。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_47', text:'你在部署地收到了一封家书。信在路上走了三个星期。', fx:{morale:+2}, cond:s=>s.flags.deployed },
+  { id:'amb_48', text:'一个当地小孩向你跑来，递给你一个水果。他的母亲在远处看着。你没接。', fx:{morale:-1,pol:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_49', text:'沙尘暴。所有人躲在帐篷里，听风声。有人开始讲他家里的故事。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_50', text:'你在一处废墟里发现了一本烧了一半的书。你把它收好，带回了基地。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_51', text:'一个战友的手机里存着他女儿的视频。他给你看，眼睛里全是光。', fx:{morale:+2}, cond:s=>s.flags.deployed },
+  { id:'amb_52', text:'你在头盔里发现了一张战友塞进来的纸条。上面写着"小心点"。', fx:{morale:+2}, cond:s=>s.flags.deployed },
+  { id:'amb_53', text:'一次夜袭结束后，你坐在装甲车边。有人递给你一瓶水。你喝了半瓶，发现自己手在抖。', fx:{morale:-1,pt:-1}, cond:s=>s.flags.deployed },
+  { id:'amb_54', text:'当地的一名老人跟你说了几句话。翻译说"他说的是 愿平安与你同在"。', fx:{morale:+1,pol:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_55', text:'你在一处哨塔上看日出。沙子被风吹起来，天空变成了橙色。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_56', text:'一个战友的靴子磨破了。你把自己备用的给了他。他说"回去还你"。', fx:{lead:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_57', text:'轮换倒计时。你在墙上刻了一道，发现上面已经有 130 道。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_58', text:'一次巡逻中你走错了路。整个小队多花了两个小时。没人抱怨。', fx:{mos:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_59', text:'你在驻地的一角种了一棵小植物。三个月后它死了。但你还是又种了一棵。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_60', text:'出发前，你把遗书重新写了一遍。写得比上次长。', fx:{morale:-2,pol:+1}, cond:s=>s.flags.deployed && s.spouse && s.spouse.status==='married' },
+
+  /* ---------- 军官专属（10） ---------- */
+  { id:'amb_o_1', text:'第一次以连长身份主持全连点名。你站在队列前面，看着 120 双眼睛。', fx:{lead:+1}, cond:s=>s.track==='O' && s.grade>=3 },
+  { id:'amb_o_2', text:'你收到一份士兵的投诉信。信里说"我们不理解连长的决定"。', fx:{pol:+1}, cond:s=>s.track==='O' && s.grade>=3 },
+  { id:'amb_o_3', text:'你参加了一次营级作战会议。会上你发言了三分钟，没人打断你。', fx:{pol:+1}, cond:s=>s.track==='O' && s.grade>=3 },
+  { id:'amb_o_4', text:'你第一次签署士兵的休假申请。那是个 19 岁的孩子，想去见女朋友。', fx:{lead:+1}, cond:s=>s.track==='O' && s.grade>=2 },
+  { id:'amb_o_5', text:'一个士官在走廊里叫住你："长官，我有个问题。" 你停下脚步。', fx:{lead:+1}, cond:s=>s.track==='O' },
+  { id:'amb_o_6', text:'你第一次看到自己的名字出现在旅部文件上。字很小，但你盯着看了很久。', fx:{pol:+1}, cond:s=>s.track==='O' && s.grade>=3 },
+  { id:'amb_o_7', text:'你深夜加班写年度训练计划。窗外只有哨兵在走。', fx:{mos:+1}, cond:s=>s.track==='O' && s.grade>=3 },
+  { id:'amb_o_8', text:'一个士兵在你面前哭了。你没有递纸巾，只是听他说完。', fx:{lead:+1,morale:+1}, cond:s=>s.track==='O' },
+  { id:'amb_o_9', text:'你签发了一份处分通知。签完字之后，你在椅子上坐了一会儿。', fx:{pol:+1,morale:-1}, cond:s=>s.track==='O' && s.grade>=3 },
+  { id:'amb_o_10', text:'一位老军士长对你说："你比你想象的更适合当军官。"', fx:{morale:+2}, cond:s=>s.track==='O' && s.yos>=5 },
+
+  /* ---------- 准尉专属（5） ---------- */
+  { id:'amb_w_1', text:'你独立完成了一项关键技术评估。陈纳德只在末尾改了一个字。', fx:{mos:+1}, cond:s=>s.track==='W' },
+  { id:'amb_w_2', text:'一位年轻的军官来找你请教技术问题。你讲了半小时，他记了一整页笔记。', fx:{lead:+1}, cond:s=>s.track==='W' },
+  { id:'amb_w_3', text:'你在技术间干到凌晨三点。最后一次测试通过时，你笑了。', fx:{mos:+1,morale:+1}, cond:s=>s.track==='W' },
+  { id:'amb_w_4', text:'一位士兵送了你一杯咖啡。他说"长官，这是我自己冲的"。', fx:{morale:+2}, cond:s=>s.track==='W' },
+  { id:'amb_w_5', text:'你在一份技术文档上签下自己的名字。那一刻，你想起当年那个通信兵。', fx:{mos:+1,morale:+1}, cond:s=>s.track==='W' && s.yos>=8 },
+
+  /* ---------- SOF 专属（5） ---------- */
+  { id:'amb_s_1', text:'一次极限训练后，你躺在泥地里。天空是灰色的。你什么都没想。', fx:{pt:+1,morale:+1}, cond:s=>s.flags.sof },
+  { id:'amb_s_2', text:'一个新队员第一次实弹射击紧张得手抖。你把自己的手套递给了他。', fx:{lead:+1}, cond:s=>s.flags.sof },
+  { id:'amb_s_3', text:'你在一处训练场看到一面旧墙，上面刻着历届队员的名字。你找了一会儿，没找到自己的。', fx:{morale:+1}, cond:s=>s.flags.sof },
+  { id:'amb_s_4', text:'一次夜间伞降。着地后你抬头看天，发现星星亮得不像话。', fx:{morale:+2}, cond:s=>s.flags.sof },
+  { id:'amb_s_5', text:'一个老队员退役前把一件旧装备留给了你。他说"用得上"。', fx:{morale:+2}, cond:s=>s.flags.sof && s.yos>=8 },
+
+  /* ---------- 部署专属（10） ---------- */
+  { id:'amb_d_1', text:'你在营地墙上看到前一批部队留下的涂鸦。有人在下面写了"我们回家"。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_2', text:'一名当地孩子在营地外看你。你挥手，他跑了。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_3', text:'你收到了一包国内寄来的口香糖。寄件人是个你不认识的小学生。', fx:{morale:+2}, cond:s=>s.flags.deployed },
+  { id:'amb_d_4', text:'你在沙地上画战术图。风把图吹掉了一半。', fx:{mos:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_5', text:'一名战友的手机在爆炸声中掉在了地上。他捡起来，屏幕碎了，但照片还在。', fx:{morale:-1,lead:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_6', text:'你和几名战友在营火边聊天。聊到家里的时候，所有人都沉默了。', fx:{morale:-1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_7', text:'你在值守时听到远处的祈祷声。你不知道那是哪个宗教。', fx:{pol:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_8', text:'你在一处废弃建筑里发现了一本当地孩子的课本。你把它收好，带回了基地。', fx:{morale:+1}, cond:s=>s.flags.deployed },
+  { id:'amb_d_9', text:'一次巡逻中你路过一片麦田。风吹过的时候，你忽然想起小时候。', fx:{morale:+2}, cond:s=>s.flags.deployed },
+  { id:'amb_d_10', text:'你第一次穿上防弹衣出任务。你知道，这可能是最后一次穿它。', fx:{morale:-2,pt:+1}, cond:s=>s.flags.deployed },
+
+  /* ---------- 老兵 / 退役前（10） ---------- */
+  { id:'amb_v_1', text:'你第一次意识到自己已经比新兵大 20 岁。', fx:{morale:+1,pol:+1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_2', text:'你参加的葬礼越来越多。你开始记住墓碑上的名字。', fx:{morale:-2,pol:+1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_3', text:'你在军人服务社遇到一个年轻人。他说"我爷爷也当过兵"。', fx:{morale:+1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_4', text:'你整理旧物时发现入伍第一天拍的证件照。照片上的你笑得非常傻。', fx:{morale:+2}, cond:s=>s.yos>=15 },
+  { id:'amb_v_5', text:'一个退役的老兵回来拜访。他看到你说"你还在啊"。', fx:{morale:+1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_6', text:'你在营区走了一圈。很多地方变了，很多地方没变。', fx:{morale:+1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_7', text:'你的膝盖在雨天开始疼。军医说"这是正常的，你这个年纪"。', fx:{pt:-1,morale:-1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_8', text:'你开始想退役后的生活。脑子里一片空白。', fx:{pol:+1}, cond:s=>s.yos>=18 },
+  { id:'amb_v_9', text:'你带的兵开始带兵了。你看着那一幕，忽然笑了。', fx:{morale:+2,lead:+1}, cond:s=>s.yos>=15 },
+  { id:'amb_v_10', text:'你在会议上被一位年轻上校称呼"老前辈"。你愣了一下。', fx:{morale:+1,pol:+1}, cond:s=>s.yos>=18 }
+];
+
+const AMBIENCE_ECHOES = [
+  /* =====================================================
+     独立回声（20 个）
+     ===================================================== */
+  /* ----- 温暖回声 ----- */
+  { id:'echo_2',  from:'amb_2',  minGap:8, maxGap:20, tag:'warm',
+    text:'多年后你带着自己的孩子去了同一片湖边。你父亲不在了，但那个下午还在。', fx:{morale:+3} },
+  { id:'echo_3',  from:'amb_3',  minGap:2, maxGap:6, tag:'warm',
+    text:'那个跟你分享女友照片的战友后来结婚了。你是伴郎。', fx:{morale:+2,net:+2} },
+  { id:'echo_8',  from:'amb_8',  minGap:5, maxGap:15, tag:'warm',
+    text:'你在基地的同一片天空下看到了流星。你许了一个愿——愿望的内容，你没有告诉任何人。', fx:{morale:+2} },
+  { id:'echo_17', from:'amb_17', minGap:3, maxGap:10, tag:'warm',
+    text:'那台你当年修好的设备至今还在服役。每次你路过，都会拍一下它。', fx:{mos:+1,morale:+1} },
+  { id:'echo_29', from:'amb_29', minGap:3, maxGap:10, tag:'warm',
+    text:'你那次装备检查的记录，成了后来新兵训练的教学案例。', fx:{pol:+2,mos:+1} },
+  { id:'echo_31', from:'amb_31', minGap:5, maxGap:15, tag:'warm',
+    text:'母亲去世前把所有寄给你的信都留在了抽屉里。你后来才看到。', fx:{morale:+2,pol:+1} },
+  { id:'echo_46', from:'amb_46', minGap:8, maxGap:20, tag:'warm',
+    text:'那个村子的小男孩后来成了一名翻译，为联合国工作。', fx:{morale:+3,pol:+1} },
+  { id:'echo_d_2', from:'amb_d_2', minGap:5, maxGap:15, tag:'warm',
+    text:'多年后你收到一封信。是那个孩子写的。他问你"你还记得我吗"。', fx:{morale:+3} },
+  { id:'echo_v_3', from:'amb_v_3', minGap:3, maxGap:12, tag:'warm',
+    text:'那个年轻人后来入伍了。他写信告诉你，他爷爷的部队番号和你一样。', fx:{morale:+2,pol:+1} },
+  { id:'echo_w_4', from:'amb_w_4', minGap:3, maxGap:10, tag:'warm',
+    text:'那个送咖啡的士兵后来成了你的副手。他冲咖啡的手艺一直没变。', fx:{morale:+2,lead:+1} },
+
+  /* ----- 苦涩回声 ----- */
+  { id:'echo_d_5', from:'amb_d_5', minGap:2, maxGap:8, tag:'bitter',
+    text:'那张照片上的人，最终没能回来。他的母亲把那部碎屏手机一直留着。', fx:{morale:-3,lead:+1} },
+  { id:'echo_v_2', from:'amb_v_2', minGap:3, maxGap:10, tag:'bitter',
+    text:'你后来参加了太多葬礼。你开始习惯在西装口袋里放一块黑纱。', fx:{morale:-2,pol:+2} },
+  { id:'echo_53', from:'amb_53', minGap:2, maxGap:10, tag:'bitter',
+    text:'那个递给你水的战友，在一次行动中牺牲了。那半瓶水，你一直记着。', fx:{morale:-3,lead:+2} },
+  { id:'echo_d_6', from:'amb_d_6', minGap:5, maxGap:15, tag:'bitter',
+    text:'当年那几个营火边的战友，如今只剩两个还在部队。', fx:{morale:-2,pol:+1} },
+  { id:'echo_v_7', from:'amb_v_7', minGap:3, maxGap:8, tag:'bitter',
+    text:'几年后你做了膝盖手术。医生说"这是当兵的代价"。', fx:{pt:-2,morale:-1} },
+
+  /* ----- 世界回声 ----- */
+  { id:'echo_11', from:'amb_11', minGap:5, maxGap:12, tag:'world',
+    text:'那个在食堂算工资的新兵后来成了一名财务军官。他说"我记得当年那个数"。', fx:{pol:+2,net:+1} },
+  { id:'echo_24', from:'amb_24', minGap:3, maxGap:10, tag:'world',
+    text:'那个被你从障碍墙上拉下来的新兵，现在是你手下的班长。', fx:{lead:+1,morale:+2} },
+  { id:'echo_50', from:'amb_50', minGap:8, maxGap:20, tag:'world',
+    text:'那本烧了一半的书后来被军校列入必读书目。你没告诉任何人是你发现的。', fx:{pol:+2,morale:+1} },
+  { id:'echo_d_8', from:'amb_d_8', minGap:5, maxGap:15, tag:'world',
+    text:'那本当地孩子的课本后来被送进了当地一所学校。孩子写来了感谢信。', fx:{morale:+2,pol:+2} },
+  { id:'echo_o_8', from:'amb_o_8', minGap:4, maxGap:12, tag:'world',
+    text:'那个在你面前哭的士兵成了你手下最好的班长。他后来也开始带兵了。', fx:{lead:+2,morale:+2} },
+
+  /* =====================================================
+     链式回声 · 第 1 阶段（10 个）
+     ===================================================== */
+  { id:'echo_20_1', from:'amb_20', minGap:4, maxGap:10, tag:'warm', nextId:'echo_20_2',
+    text:'当年那个跑完五公里喘气的新兵，今年在旅里拿了第一。', fx:{morale:+2,lead:+1} },
+  { id:'echo_1_1', from:'amb_1', minGap:3, maxGap:8, tag:'warm', nextId:'echo_1_2',
+    text:'当年把汤洒了军士长裤子的那个新兵，今天晋升了中士。', fx:{morale:+2} },
+  { id:'echo_9_1', from:'amb_9', minGap:3, maxGap:10, tag:'world', nextId:'echo_9_2',
+    text:'那个问你"打过仗吗"的新兵，今天第一次上了战场。', fx:{lead:+1,morale:+1} },
+  { id:'echo_23_1', from:'amb_23', minGap:4, maxGap:12, tag:'world', nextId:'echo_23_2',
+    text:'当年你教的那批兵，如今有三个成了教官。', fx:{lead:+1,morale:+2} },
+  { id:'echo_27_1', from:'amb_27', minGap:5, maxGap:12, tag:'warm', nextId:'echo_27_2',
+    text:'当年等你系鞋带的那些兵里，有一个现在是营长。', fx:{lead:+1,morale:+1} },
+  { id:'echo_49_1', from:'amb_49', minGap:6, maxGap:14, tag:'bitter', nextId:'echo_49_2',
+    text:'当年一起躲在帐篷里听沙尘暴的弟兄，如今只剩五个还在部队。', fx:{morale:-1,pol:+1} },
+  { id:'echo_51_1', from:'amb_51', minGap:3, maxGap:8, tag:'warm', nextId:'echo_51_2',
+    text:'那个给你看女儿视频的战友，他女儿今年上小学了。', fx:{morale:+2} },
+  { id:'echo_58_1', from:'amb_58', minGap:3, maxGap:10, tag:'world', nextId:'echo_58_2',
+    text:'当年那个跟你走错路的小队下士，现在带队从没走错过。', fx:{lead:+1,morale:+1} },
+  { id:'echo_w2_1', from:'amb_w_2', minGap:4, maxGap:10, tag:'world', nextId:'echo_w2_2',
+    text:'那个向你请教的年轻军官后来成了上尉。他还在用你当年的框架。', fx:{mos:+1,lead:+1} },
+  { id:'echo_o8_1', from:'amb_o_8', minGap:5, maxGap:12, tag:'world', nextId:'echo_o8_2',
+    text:'那个曾在你面前哭的士兵，如今已经能独当一面。', fx:{lead:+1,morale:+2} },
+
+  /* =====================================================
+     链式回声 · 第 2 阶段（10 个）
+     ===================================================== */
+  { id:'echo_20_2', from:'amb_20', minGap:12, maxGap:22, tag:'warm', requires:'echo_20_1',
+    text:'那个新兵，现在是你手下的军士长。他的五公里成绩，比当年快了整整三分钟。', fx:{lead:+2,morale:+3} },
+  { id:'echo_1_2', from:'amb_1', minGap:12, maxGap:20, tag:'warm', requires:'echo_1_1',
+    text:'那个当年把汤洒了的新兵后来成了教官。他的第一堂课上，就讲了这个故事。', fx:{morale:+3,lead:+1} },
+  { id:'echo_9_2', from:'amb_9', minGap:12, maxGap:22, tag:'world', requires:'echo_9_1',
+    text:'那个新兵复员后成了中学历史老师。他说他教的是"真实的历史"。', fx:{pol:+2,morale:+2} },
+  { id:'echo_23_2', from:'amb_23', minGap:12, maxGap:20, tag:'world', requires:'echo_23_1',
+    text:'军校教材里有一段话，标注的出处是你的名字。你后来才看到。', fx:{pol:+3,morale:+2} },
+  { id:'echo_27_2', from:'amb_27', minGap:12, maxGap:22, tag:'warm', requires:'echo_27_1',
+    text:'那个营长在一次演习中下令"等所有人都到齐"。他知道为什么。', fx:{lead:+2,morale:+2} },
+  { id:'echo_49_2', from:'amb_49', minGap:14, maxGap:24, tag:'bitter', requires:'echo_49_1',
+    text:'每年沙尘暴季节，你们几个会互相发一条消息。只说"还记得吗"。', fx:{morale:+2,net:+2} },
+  { id:'echo_51_2', from:'amb_51', minGap:12, maxGap:22, tag:'warm', requires:'echo_51_1',
+    text:'她长大后给你写了一封信："叔叔，我爸爸经常提起你。"', fx:{morale:+3} },
+  { id:'echo_58_2', from:'amb_58', minGap:12, maxGap:20, tag:'world', requires:'echo_58_1',
+    text:'那个下士后来对别人说"因为第一次走错的时候，长官没骂我"。', fx:{lead:+2,morale:+1} },
+  { id:'echo_w2_2', from:'amb_w_2', minGap:14, maxGap:24, tag:'world', requires:'echo_w2_1',
+    text:'那位军官后来成了准将。他在一次演讲中提到"有一位准尉教会我最重要的东西"。', fx:{mos:+2,pol:+2,morale:+2} },
+  { id:'echo_o8_2', from:'amb_o_8', minGap:14, maxGap:24, tag:'warm', requires:'echo_o8_1',
+    text:'他退役那天对你说："您当年没递纸巾，我一直记得。"', fx:{morale:+3,lead:+1} }
 ];
 
 /* =========================================================
@@ -6879,6 +9458,25 @@ function newState(bg, talent, mos){
       log: []
     },
     financeFlags: {},
+    letterFlags: {
+      lastLetterMonth: 0,
+      consecutiveSkip: 0,
+      pendingReply: null,
+      pendingReplyMonth: 0
+    },
+    casualtyFlags: {
+      notified: false,
+      notifiedBuddy: null,
+      funeralAttended: null,
+      ceremonyYear: 0,
+      letterYear: 0
+    },
+    diary: [],
+    diaryFlags: { wroteThisYear: 0 },
+    enemyCommander: null,
+    campaign: 'peace',
+    militaryEducation: {},
+    militaryEducationAttendance: null,
     unit: null,
     location: null,
     deployedLocation: null,
@@ -6915,10 +9513,10 @@ function newState(bg, talent, mos){
     worldState: { current:'normal', yearsIn:0, history:[] },
     career: [],
     npcs:{
-      superior:    { name:'哈里森', role:'上级主官',   value:40 },
-      peer:        { name:'里维拉', role:'同级竞争者', value:40 },
-      subordinate: { name:'科尔',   role:'手下骨干',   value:40 },
-      technician:  { name:'陈纳德', role:'技术顾问',   value:40 }
+      superior:    { name:'哈里森', role:'上级主官',   value:40, lastInteractionYear:0, relationHistory:[], proactiveFlags:{} },
+      peer:        { name:'里维拉', role:'同级竞争者', value:40, lastInteractionYear:0, relationHistory:[], proactiveFlags:{} },
+      subordinate: { name:'科尔',   role:'手下骨干',   value:40, lastInteractionYear:0, relationHistory:[], proactiveFlags:{} },
+      technician:  { name:'陈纳德', role:'技术顾问',   value:40, lastInteractionYear:0, relationHistory:[], proactiveFlags:{} }
     },
     factions:{
       warrior:    0,
@@ -7045,6 +9643,7 @@ function perfScore(){
 
 
 function doPromote(key){
+  playSound('promote');
   const [t,g] = key.split('-');
   state.track = t;
   state.grade = parseInt(g);
@@ -7106,10 +9705,67 @@ function pickEvent(){
 }
 
 /* =========================================================
+   氛围事件触发
+   ========================================================= */
+function pickAmbienceEvent(){
+  // 独立 40% 概率
+  if(Math.random() > 0.40) return null;
+  // 筛选条件满足的
+  const pool = AMBIENCE_EVENTS.filter(e=>{
+    if(!e.cond) return true;
+    try{ return e.cond(state); }catch(err){ return false; }
+  });
+  if(!pool.length) return null;
+  const ev = pool[Math.floor(Math.random()*pool.length)];
+  // 记录触发过的，供回声使用
+  if(!state.flags.triggeredAmbience) state.flags.triggeredAmbience = {};
+  state.flags.triggeredAmbience[ev.id] = state.yos;
+  return ev;
+}
+
+function checkAmbienceEchoes(){
+  if(!state.flags.triggeredAmbience) return;
+  if(!state.flags.echoShown) state.flags.echoShown = {};
+  if(!state.flags.echoCount) state.flags.echoCount = 0;
+  if(state.flags.echoCount >= 8) return;
+
+  for(const echo of AMBIENCE_ECHOES){
+    if(state.flags.echoShown[echo.id]) continue;
+    // 链式第 2 阶段：需要前置
+    if(echo.requires && !state.flags.echoShown[echo.requires]) continue;
+
+    const triggerYear = state.flags.triggeredAmbience[echo.from];
+    if(!triggerYear) continue;
+    const gap = state.yos - triggerYear;
+    if(gap < echo.minGap || gap > echo.maxGap) continue;
+
+    if(Math.random() > 0.30) continue;
+
+    // 触发
+    state.flags.echoShown[echo.id] = true;
+    state.flags.echoCount += 1;
+    addLog(`〔回声〕${echo.text}`, 'fx');
+    if(echo.fx){
+      const parts = [];
+      for(const [k,v] of Object.entries(echo.fx)){
+        if(STATS.includes(k)){
+          state[k] = clamp(state[k]+v, 0, 100);
+          parts.push(`${STAT_CN[k]}${v>0?'+':''}${v}`);
+        }
+      }
+      if(parts.length) addLog(parts.join('　'), 'fx');
+    }
+    addCareer('milestone', `回声：${echo.text.slice(0, 20)}…`, echo.tag === 'bitter' ? '苦涩' : echo.tag === 'warm' ? '温暖' : '世界');
+    return;
+  }
+}
+
+/* =========================================================
    每年推进
    ========================================================= */
 async function endMonth(){
   if(busy || state.over) return;
+  if(state.ended) return;
   busy = true;
   document.getElementById('btn-next').disabled = true;
 
@@ -7137,6 +9793,110 @@ async function endMonth(){
   monthlyCommandUpdate();
   // 检查是否应该组建小队
   ensureSquadExists();
+
+  // 氛围事件（不占 15% 窗口）
+  const ambEv = pickAmbienceEvent();
+  if(ambEv){
+    addLog(ambEv.text, 'ev');
+    if(ambEv.fx){
+      const fxParts = [];
+      for(const [k,v] of Object.entries(ambEv.fx)){
+        if(STATS.includes(k)){
+          state[k] = clamp(state[k]+v, 0, 100);
+          fxParts.push(`${STAT_CN[k]}${v>0?'+':''}${v}`);
+        }
+      }
+      if(fxParts.length) addLog(fxParts.join('　'), 'fx');
+    }
+  }
+
+  // 氛围事件回声
+  checkAmbienceEchoes();
+  // 家庭写信（部署期间每 3 个月触发一次）
+  if((state.flags.in_deploy || state.deployedLocation) && checkLetterTrigger()){
+    await runLetterEvent();
+    await sleep(220);
+  }
+
+  // 检查待收到的回信
+  checkLetterReply();
+
+  // 伤亡通知（第一次战友阵亡后触发一次）
+  const casTrigger = checkCasualtyNotificationTrigger();
+  if(casTrigger){
+    await runCasualtyNotification(casTrigger);
+    await sleep(280);
+  }
+
+  // 家属来信（通知后 2~5 年触发一次）
+  if(checkCasualtyLetter()){
+    runCasualtyLetter();
+  }
+
+  // 战场日记（每年年底触发）
+  if(isYearEnd && checkDiaryTrigger()){
+    await runDiaryEvent();
+    await sleep(220);
+  }
+
+
+  // 敌对指挥官 · 交手事件
+  if(state.flags.enemyEncounterPending){
+    state.flags.enemyEncounterPending = false;
+    await runEnemyEncounter();
+    await sleep(220);
+  }
+
+  // 军事教育 · 就读期间每月事件
+  if(state.militaryEducationAttendance && !state.militaryEducationAttendance.completed){
+    await runSchoolMonthlyEvent();
+    await sleep(220);
+  } else {
+    // 军事教育 · 招生通知
+    const school = checkMilitarySchoolTrigger();
+    if(school){
+      await runSchoolApplication(school);
+      await sleep(220);
+    }
+  }
+
+    // 敌对指挥官 · 激活检查
+  if(isYearEnd && checkEnemyActivation()){
+    activateEnemyCommander();
+    await sleep(200);
+  }
+
+  // 敌对指挥官 · 最终对决
+  if(state.enemyCommander && state.enemyCommander.active && 
+     state.enemyCommander.intelLevel >= 5 && 
+     state.enemyCommander.status === 'active' &&
+     state.month === 1 && state.yos > state.enemyCommander.finalAttemptYear){
+    await runEnemyFinalConfrontation();
+    await sleep(280);
+  }
+
+  // 动态事件（每月最多一个）
+  const dynEv = checkDynamicEvents();
+  if(dynEv){
+    addLog(dynEv.text, 'ev');
+    if(dynEv.fx){
+      const parts = [];
+      for(const [k,v] of Object.entries(dynEv.fx)){
+        if(STATS.includes(k)){
+          state[k] = clamp(state[k]+v, 0, 100);
+          parts.push(`${STAT_CN[k]}${v>0?'+':''}${v}`);
+        }
+      }
+      if(parts.length) addLog(parts.join('　'), 'fx');
+    }
+  }
+
+  // NPC 主动事件（每月最多一个）
+  const npcEvt = checkNPCProactive();
+  if(npcEvt){
+    await runNPCProactive(npcEvt);
+    await sleep(220);
+  }
 
   // 事件触发优先级：force > 破格 > SOF > 专长 > 15% 池
   let eventFired = false;
@@ -7248,6 +10008,7 @@ async function endMonth(){
 
   // 12 月：年度结算
   if(isYearEnd){
+    playSound('yearEnd');
     // 1. 世界状态切换
     tickWorldState();
 
@@ -7319,6 +10080,18 @@ async function endMonth(){
       addLog(`距离 ${RANK_NAMES[check.next]} 还差：${check.missing.join('、')}`, 'warn');
     }
 
+    // 记录 NPC 关系历史
+    if(state.npcs){
+      ['superior','peer','subordinate','technician'].forEach(k=>{
+        if(!state.npcs[k]) return;
+        if(!state.npcs[k].relationHistory) state.npcs[k].relationHistory = [];
+        state.npcs[k].relationHistory.push(state.npcs[k].value);
+        if(state.npcs[k].relationHistory.length > 5){
+          state.npcs[k].relationHistory = state.npcs[k].relationHistory.slice(-5);
+        }
+      });
+    }
+
     // 6. 重置年度标记
     state.yearHadEvent = false;
     state.breakthroughAttemptedThisYear = false;
@@ -7383,7 +10156,52 @@ async function endMonth(){
           m.pt = clamp(m.pt + 1, 0, 100);
           m.mos = clamp(m.mos + 1, 0, 100);
         }
+
+        // 自动晋升判定
+        const yearsIn = state.yos - m.joinYear;
+        if(m.isCore && m.rank < 7){
+          let chance = 0.20;
+          if(m.loyalty >= 70 && yearsIn >= 5) chance = 0.40;
+          if(m.loyalty >= 85 && yearsIn >= 8) chance = 0.55;
+          if(Math.random() < chance){
+            m.rank += 1;
+            m.events.push(`第 ${state.yos} 年 · 晋升 ${getSquadRankName(m.rank)}`);
+            addLog(`⭐ ${m.name} 晋升 ${getSquadRankName(m.rank)}`, 'good');
+          }
+        } else if(!m.isCore && m.rank < 6){
+          let chance = 0.15;
+          if(m.loyalty >= 70 && yearsIn >= 4) chance = 0.30;
+          if(Math.random() < chance){
+            m.rank += 1;
+            m.events.push(`第 ${state.yos} 年 · 晋升 ${getSquadRankName(m.rank)}`);
+          }
+        }
       });
+
+      // 流动战友转正检查
+      if(state.squad && state.squad.flow.length){
+        for(let i = state.squad.flow.length - 1; i >= 0; i--){
+          const m = state.squad.flow[i];
+          const yearsIn = state.yos - m.joinYear;
+          if(m.loyalty >= 75 && yearsIn >= 5){
+            // 转正
+            state.squad.flow.splice(i, 1);
+            m.isCore = true;
+            if(!m.story){
+              const bios = SQUAD_BIO_POOL[m.role] || SQUAD_BIO_POOL['步枪手'];
+              m.story = randomPick(bios);
+            }
+            if(!m.catchphrase) m.catchphrase = randomPick(SQUAD_CATCHPHRASES);
+            if(!m.dream) m.dream = randomPick(SQUAD_DREAMS);
+            if(!m.keepsake) m.keepsake = randomPick(SQUAD_KEEPSAKES);
+            m.impression = '';
+            m.id = 'core_' + m.id + '_' + Date.now();
+            state.squad.core.push(m);
+            addLog(`⭐ ${m.name}（${m.nickname || ''}）从流动战友晋升为核心战友。`, 'good');
+            addCareer('milestone', `${m.name} 晋升为核心战友`, '');
+          }
+        }
+      }
 
       // 流动战友自然轮换
       const toRemove = [];
@@ -7528,18 +10346,54 @@ const ACTIONS = [
   { id:'lead', name:'领导实践', cost:1,
     run:s=>{ s.lead=clamp(s.lead+1,0,100); s.mos=clamp(s.mos+1,0,100);
              return '你主动申请带队训练，在实践中磨练指挥能力。领导 +1，专业 +1'; } },
-  { id:'pol',  name:'政治学习', cost:1,
-    run:s=>{ s.pol=clamp(s.pol+1,0,100); s.net=clamp(s.net+1,0,100);
-             return '你研究军队晋升规则和人事动态，学会了"读懂空气"。政治 +1，人脉 +1'; } },
-  { id:'net',  name:'社交活动', cost:1,
-    run:s=>{ s.net=clamp(s.net+1,0,100); s.morale=clamp(s.morale+2,0,100);
-             return '你在军士长酒馆和军官俱乐部里认识了几个有用的人。人脉 +1，士气 +2'; } },
-  { id:'rest', name:'休整调养', cost:1,
+    { id:'pol',  name:'政治学习', cost:1,
+    run:s=>{ s.pol=clamp(s.pol+2,0,100); s.net=clamp(s.net+1,0,100);
+             return '你研究军队晋升规则和人事动态，学会了"读懂空气"。政治 +2，人脉 +1'; } },
+    { id:'net',  name:'社交活动', cost:1,
+    run:s=>{ s.net=clamp(s.net+3,0,100); s.morale=clamp(s.morale+2,0,100);
+             return '你在军士长酒馆和军官俱乐部里认识了几个有用的人。人脉 +3，士气 +2'; } },
+    { id:'rest', name:'休整调养', cost:1,
     run:s=>{ s.morale=clamp(s.morale+3,0,100);
              return '你休了几天假，重新找回一些平衡。士气 +3'; } },
-  { id:'push', name:'争取晋升', cost:2,
-    run:s=>{ s.yearPromoBonus += 0.15; s.morale=clamp(s.morale-2,0,100);
-             return '你主动找主官汇报思想、争取推荐。晋升几率 +15%，士气 -2'; } },
+    { id:'push', name:'破格晋升', cost:2,
+    run:s=>{
+      // 检查是否本年度已用过
+      if(s._brevetUsedYear === s.yos){
+        return '你今年已经使用过破格晋升机会。';
+      }
+      // 检查下一级
+      const next = nextRankKey();
+      if(!next) return '你已达到最高军衔。';
+      // 检查 MOS 上限
+      if(s.track === 'E' && s.mosCode){
+        const cap = getMOSEffectiveCap();
+        const nextGrade = parseInt(next.split('-')[1]);
+        if(nextGrade > cap) return '已达 MOS 上限，无法破格晋升。';
+      }
+      // 检查是否有可用勋章
+      const rm = s.rankMedals || {first:0,second:0,third:0};
+      let used = null;
+      if(rm.first >= 1){ rm.first -= 1; used = '一等功 ×1'; }
+      else if(rm.second >= 2){ rm.second -= 2; used = '二等功 ×2'; }
+      else if(rm.third >= 3){ rm.third -= 3; used = '三等功 ×3'; }
+      else return '勋章不足。破格晋升需要：一等功×1 / 二等功×2 / 三等功×3。';
+
+      s._brevetUsedYear = s.yos;
+      s.morale = clamp(s.morale-2,0,100);
+
+      // 应用晋升
+      const [t,g] = next.split('-');
+      s.track = t;
+      s.grade = parseInt(g);
+      s.tig = 0;
+      s.failStreak = 0;
+      s.morale = clamp(s.morale+6, 0, 100);
+
+      addLog(`▲ 破格晋升 ——— ${RANK_NAMES[next]}（${RANK_ABBR[next]}）`, 'rank');
+      addLog(`消耗勋章：${used}`, 'fx');
+      addCareer('promotion', '破格晋升', `消耗 ${used}`);
+      return '';
+    } },
   { id:'report_up', name:'汇报工作', cost:1,
     run:s=>{
       const a = getActionNPCMod('report_up','superior');
@@ -7562,7 +10416,7 @@ const ACTIONS = [
       s.morale = clamp(s.morale+2,0,100);
       return `你和同僚喝了杯咖啡。哈里森 ${a>=0?'+':''}${a}　里维拉 ${b>=0?'+':''}${b}　科尔 ${c>=0?'+':''}${c}　士气 +2`;
     } },
-  { id:'train_sub', name:'指导部下', cost:1,
+    { id:'train_sub', name:'指导部下', cost:1,
     run:s=>{
       const a = getActionNPCMod('train_sub','superior');
       const b = getActionNPCMod('train_sub','peer');
@@ -7570,8 +10424,20 @@ const ACTIONS = [
       s.npcs.superior.value = clamp(s.npcs.superior.value + a, 0, 100);
       s.npcs.peer.value = clamp(s.npcs.peer.value + b, 0, 100);
       s.npcs.subordinate.value = clamp(s.npcs.subordinate.value + c, 0, 100);
-      s.lead = clamp(s.lead+1,0,100);
-      return `你花时间指导部下。哈里森 ${a>=0?'+':''}${a}　里维拉 ${b>=0?'+':''}${b}　科尔 ${c>=0?'+':''}${c}　领导 +1`;
+      s.lead = clamp(s.lead+2,0,100);
+
+      // 全体小队战友忠诚/士气 +2
+      let squadMsg = '';
+      if(s.squad){
+        const all = [...s.squad.core, ...s.squad.flow];
+        all.forEach(m=>{
+          m.loyalty = clamp(m.loyalty + 2, 0, 100);
+          m.morale = clamp(m.morale + 2, 0, 100);
+        });
+        if(all.length) squadMsg = `　全体战友忠诚 +2、士气 +2（${all.length} 人）`;
+      }
+
+      return `你花时间指导部下。领导 +2${squadMsg}`;
     } },
   { id:'gather', name:'组织聚餐', cost:2,
     run:s=>{
@@ -7591,10 +10457,11 @@ const ACTIONS = [
         return '你现在没有需要维护的婚姻关系。';
       }
       sp.love = clamp(sp.love + 3, 0, 100);
-      sp.pressure = clamp(sp.pressure - 10, 0, 100);
+      sp.pressure = clamp(sp.pressure - 12, 0, 100);
       sp.understanding = clamp(sp.understanding + 1, 0, 100);
+      sp.patience = clamp(sp.patience + 2, 0, 100);
       s.morale = clamp(s.morale + 3, 0, 100);
-      return `你花了几天时间陪 ${sp.name}。爱意 +3，压力 -10，士气 +3`;
+      return `你花了几天时间陪 ${sp.name}。爱意 +3，压力 -12，理解 +1，耐心 +2，士气 +3`;
     } }
 ];
 
@@ -7633,8 +10500,8 @@ function renderActionOverlay(){
   content.innerHTML = html;
 
   const grid = document.getElementById('action-grid-overlay');
-  ACTIONS.forEach(a=>{
-    // 婚姻维护行动：只有恋爱/订婚/已婚时显示
+    ACTIONS.forEach(a=>{
+    // 婚姻维护行动过滤
     if(a.id === 'marriage_care'){
       const sp = state.spouse;
       if(!sp || (sp.status !== 'dating' && sp.status !== 'engaged' && sp.status !== 'married')) return;
@@ -7643,14 +10510,38 @@ function renderActionOverlay(){
     const isRest = a.id === 'rest';
     const b = document.createElement('button');
     b.className = 'act-btn';
-    b.style.minHeight = '56px';
+
+    // 破格晋升的特殊状态提示
+    if(a.id === 'push'){
+      if(state._brevetUsedYear === state.yos){
+        b.innerHTML = `${a.name}<span class="cost">本年已使用</span>`;
+        b.disabled = true;
+        grid.appendChild(b);
+        return;
+      }
+      const rm = state.rankMedals || {first:0,second:0,third:0};
+      const hasMedal = rm.first >= 1 || rm.second >= 2 || rm.third >= 3;
+      if(!hasMedal){
+        b.innerHTML = `${a.name}<span class="cost">需要 1/2/3 枚一/二/三等功</span>`;
+        b.disabled = true;
+        grid.appendChild(b);
+        return;
+      }
+      const next = nextRankKey();
+      let hint = '勋章破格晋升一级';
+      if(rm.first >= 1) hint = '消耗 一等功 ×1';
+      else if(rm.second >= 2) hint = '消耗 二等功 ×2';
+      else if(rm.third >= 3) hint = '消耗 三等功 ×3';
+      b.innerHTML = `${a.name}<span class="cost">消耗 <b>${a.cost}</b> AP · ${hint}</span>`;
+      b.disabled = state.ap < a.cost || state.over;
+      b.onclick = ()=>doAction(a);
+      grid.appendChild(b);
+      return;
+    }
+
     b.innerHTML = `${a.name}<span class="cost">消耗 <b>${a.cost}</b> AP${(used && !isRest) ?' · 本月已用':''}</span>`;
     b.disabled = state.ap < a.cost || state.over || (used && !isRest);
-    b.onclick = ()=>{
-      doAction(a);
-      // 行动后刷新覆盖层
-      renderActionOverlay();
-    };
+    b.onclick = ()=>doAction(a);
     grid.appendChild(b);
   });
 
@@ -7686,12 +10577,32 @@ function renderActionOverlay(){
 
 function doAction(a){
   if(state.ap < a.cost || state.over) return;
-  if(a.id !== 'rest' && state.usedActionsThisMonth.includes(a.id)) return;
+  if(a.id !== 'rest' && a.id !== 'push' && state.usedActionsThisMonth.includes(a.id)) return;
   state.ap -= a.cost;
-  if(a.id !== 'rest') state.usedActionsThisMonth.push(a.id);
+  if(a.id !== 'rest' && a.id !== 'push') state.usedActionsThisMonth.push(a.id);
   const txt = a.run(state);
-  addLog(txt, 'fx');
+  if(txt) addLog(txt, 'fx');
+
+  // 更新 NPC 互动时间
+  if(state.npcs){
+    if(a.id === 'report_up'){
+      state.npcs.superior.lastInteractionYear = state.yos;
+    }
+    if(a.id === 'bond_peer'){
+      state.npcs.peer.lastInteractionYear = state.yos;
+    }
+    if(a.id === 'train_sub'){
+      state.npcs.subordinate.lastInteractionYear = state.yos;
+    }
+    if(a.id === 'gather'){
+      ['superior','peer','subordinate','technician'].forEach(k=>{
+        if(state.npcs[k]) state.npcs[k].lastInteractionYear = state.yos;
+      });
+    }
+  }
+
   refreshStats();
+  refreshHud();
   renderActions();
 }
 
@@ -7937,14 +10848,24 @@ function checkPromoQualification(){
   for(const [k,v] of Object.entries(req.min||{})){
     if(state[k] < v) missing.push(`${STAT_CN[k]} ${Math.round(state[k])}/${v}`);
   }
+  // 未完成对应军校
+  const requiredSchool = getSchoolForCurrentRank();
+  if(requiredSchool && !hasRequiredSchool()){
+    missing.push(`未完成 ${requiredSchool.abbr}（${requiredSchool.name}）`);
+  }
 
   if(next==='E-2' && missing.length===0){
     return {eligible:true,auto:true,next,req};
   }
+  // 学校缺失是软门槛：不影响 eligible，但会在晋升判定里扣分
+  const schoolMissing = requiredSchool && !hasRequiredSchool();
+  const hardMissing = missing.filter(m=>!m.includes('未完成'));
+  
   return {
-    eligible: missing.length===0,
-    close: missing.length>0 && missing.length<=2,
-    missing, next, req
+    eligible: hardMissing.length===0,
+    close: hardMissing.length>0 && hardMissing.length<=2,
+    missing, next, req,
+    schoolMissing
   };
 }
 
@@ -7958,7 +10879,7 @@ async function runPromotionFlow(check){
       phases:null,
       currentPhase:0,
       results:[],
-      hiddenMod: ((state._promoBonus||0)+(state.yearPromoBonus||0))*15 + npcMods().superior + ((getCurrentWorldState().promoBonus||0) * 20) + (getCareerPathEffects().promoMult - 1) * 20,
+      hiddenMod: ((state._promoBonus||0)+(state.yearPromoBonus||0))*15 + npcMods().superior + ((getCurrentWorldState().promoBonus||0) * 20) + (getCareerPathEffects().promoMult - 1) * 20 + getSchoolBonusForPromotion() + (check.schoolMissing ? -8 : 0),
       resolve
     };
     state.examTarget = EXAM_TARGETS[check.next] || 60;
@@ -8147,6 +11068,10 @@ function executeExamChoice(choiceIdx){
       interviewPenalty += getFactionMedalBonus('pragmatist');
       interviewPenalty += getFactionMedalBonus('idealist');
     }
+    // 军校深造加成
+    if(state.flags.politicsSchool){
+      interviewPenalty += 2;
+    }
     // 单位评分加成
     if(state.command && state.command.active){
       const c = state.command;
@@ -8279,6 +11204,14 @@ function bindResultEvents(){
     state.examPrep = {};
     refreshHud();
     refreshStats();
+
+    // 敌对指挥官 · 交战检查
+    if(checkEnemyEncounter() && ['patrol','mos_11b_assault','sof_recon'].includes(m.id)){
+      if(Math.random() < 0.30){
+        // 推迟到下一次 endMonth 触发，避免和部署结算冲突
+        state.flags.enemyEncounterPending = true;
+      }
+    }
     resolve();
   };
 }
@@ -8371,7 +11304,7 @@ async function runSOFSelection(windowType){
       currentPhase:0,
       results:[],
       failCount:0,
-      target: windowType==='first' ? 70 : 76,
+      target: applyCampaignSOFThreshold(windowType==='first' ? 70 : 76),
       hiddenMod: npcMods().superior * NPC_PROFILES.superior.contextMult.sof
               + npcMods().peer * NPC_PROFILES.peer.contextMult.sof
               + npcMods().subordinate * NPC_PROFILES.subordinate.contextMult.sof,
@@ -8902,6 +11835,7 @@ function checkDeployTrigger(){
   // 至少 25% 概率触发；军龄越长越容易
   let chance = 0.22 + Math.min(state.yos * 0.01, 0.15);
   chance *= getCareerPathEffects().deployMult;
+  chance = applyCampaignDeployMult(chance);
   const w = getCurrentWorldState();
   if(w.deployMult) chance *= w.deployMult;
   if(w.id === 'peace') chance *= 0.5;
@@ -8918,12 +11852,21 @@ function checkDeployTriggerForce(){
   if(state.track!=='E' && state.track!=='W' && state.track!=='O') return null;
   if(state.yos < 2) return null;
   if(state.flags.in_deploy) return null;
-  if(Math.random() > getCareerPathEffects().deployMult / 1.2) return null;
-  const eligible = DEPLOY_MISSIONS.filter(m=>{
+  let eligible = DEPLOY_MISSIONS.filter(m=>{
     try{ return m.eligible(state); }catch(e){ return false; }
   });
   if(!eligible.length) return null;
-  return eligible[Math.floor(Math.random()*eligible.length)];
+  // 应用战役过滤
+  eligible = applyCampaignMissionFilter(eligible);
+  // 按战役加成加权随机
+  let total = 0;
+  eligible.forEach(m=>{ total += (m._campaignBoost || 1.0); });
+  let roll = Math.random() * total;
+  for(const m of eligible){
+    roll -= (m._campaignBoost || 1.0);
+    if(roll <= 0) return m;
+  }
+  return eligible[eligible.length - 1];
 }
 
 function getDeployTypeMult(missionId){
@@ -8940,6 +11883,41 @@ function pickSquadForDeployment(){
   return shuffled.slice(0, Math.min(2, shuffled.length));
 }
 
+function applyCampaignMissionFilter(missions){
+  const camp = getCampaign();
+  // 反恐战争：战斗类任务权重翻倍
+  if(camp.id === 'gwot'){
+    return missions.map(m=>{
+      if(['patrol','mos_11b_assault','sof_recon'].includes(m.id)){
+        return Object.assign({}, m, { _campaignBoost: 2.0 });
+      }
+      return m;
+    });
+  }
+  // 大国竞争：联合演习、情报类任务权重提升
+  if(camp.id === 'greatpower'){
+    return missions.map(m=>{
+      if(['mos_25b_joint','train_local'].includes(m.id)){
+        return Object.assign({}, m, { _campaignBoost: 1.8 });
+      }
+      return m;
+    });
+  }
+  // 撤军时期：人道主义、训练友军权重提升
+  if(camp.id === 'drawdown'){
+    return missions.map(m=>{
+      if(['humanitarian','train_local'].includes(m.id)){
+        return Object.assign({}, m, { _campaignBoost: 2.0 });
+      }
+      if(['patrol','mos_11b_assault'].includes(m.id)){
+        return Object.assign({}, m, { _campaignBoost: 0.3 });
+      }
+      return m;
+    });
+  }
+  return missions;
+}
+
 function pickDeployLocation(mission){
   const deployLocs = ['arifjan','iraq','syria','eastafrica'];
   if(mission.id === 'humanitarian') return LOCATIONS['eastafrica'];
@@ -8950,7 +11928,12 @@ function pickDeployLocation(mission){
 }
 
 async function runDeployment(mission){
+  playSound('deploy');
   return new Promise(resolve=>{
+    // 战斗任务播放枪声
+    if(['patrol','mos_11b_assault','sof_recon'].includes(mission.id)){
+      playSound('gunfire');
+    }
     deployFlow = {
       step:'brief',
       mission,
@@ -9196,6 +12179,7 @@ function bindDeployResultEvents(){
     const resolve = deployFlow.resolve;
     const squadMembers = deployFlow.squadMembers || [];
     deployFlow = null;
+    playSound('deployEnd');
     state.flags.in_deploy = false;
     state.deployedLocation = null;
 
@@ -9952,8 +12936,9 @@ function renderSquadTab(){
     state.squad.memorial.forEach(m=>{
       html += `
         <div class="memorial-item">
-          <div class="memorial-name">· ${m.name} · ${getSquadRankName(m.rank)}</div>
-          <div class="memorial-meta">${m.reason} · 第 ${m.year} 年</div>
+          <div class="memorial-name">· ${m.name} ${m.nickname ? '「'+m.nickname+'」' : ''} · ${getSquadRankName(m.rank)}</div>
+          <div class="memorial-meta">${m.reason} · 第 ${m.year} 年${m.hometown ? ' · ' + m.hometown : ''}</div>
+          ${m.impression ? `<div class="memorial-meta" style="font-style:italic;color:#7d8f5e">"${m.impression.slice(0,40)}${m.impression.length>40?'…':''}"</div>` : ''}
         </div>
       `;
     });
@@ -9969,10 +12954,14 @@ function renderSquadCard(m, type){
   const loyCls = m.loyalty>=70?'high':m.loyalty>=40?'mid':'low';
   const morCls = m.morale>=70?'high':m.morale>=40?'mid':'low';
 
+  const nickDisplay = m.nickname ? `「${m.nickname}」` : '';
+  const homeDisplay = m.hometown ? ` · ${m.hometown}` : '';
+
   return `
     <div class="squad-card ${type}" data-squad-id="${m.id}">
-      <div class="squad-name">${m.name} · ${getSquadRankName(m.rank)} · ${m.role}</div>
-      <div class="squad-meta">${m.age} 岁 · ${m.personalityName} · 第 ${m.joinYear} 年入伍</div>
+      <div class="squad-name">${m.name} ${nickDisplay} · ${getSquadRankName(m.rank)} · ${m.role}</div>
+      <div class="squad-meta">${m.age} 岁 · ${m.personalityName}${homeDisplay}</div>
+      ${!m.isCore && m.impression ? `<div class="squad-meta" style="color:#7d8f5e;font-style:italic">"${m.impression}"</div>` : ''}
       <div class="squad-bars">
         <div class="squad-bar-row"><span class="squad-bar-label">体能</span><div class="squad-bar"><div class="squad-bar-fill ${ptCls}" style="width:${m.pt}%"></div></div><span class="squad-bar-val">${m.pt}</span></div>
         <div class="squad-bar-row"><span class="squad-bar-label">专业</span><div class="squad-bar"><div class="squad-bar-fill ${mosCls}" style="width:${m.mos}%"></div></div><span class="squad-bar-val">${m.mos}</span></div>
@@ -10008,28 +12997,71 @@ function removeSquadMember(member, reason){
   }
   if(idx < 0) return;
 
+  // 阵亡/离开时展示档案
+  if(reason.includes('阵亡') && member.isCore){
+    const nick = member.nickname ? `「${member.nickname}」` : '';
+    addLog(`💀 ${member.name} ${nick} 在任务中阵亡。`, 'bad');
+    addLog(`来自 ${member.hometown || '未知'}。${member.story || ''}`, 'warn');
+    if(member.dream){
+      addLog(`他的梦想是：${member.dream}`, 'warn');
+    }
+    if(member.keepsake){
+      addLog(`他随身带着 ${member.keepsake}。这件东西会被送回家。`, 'warn');
+    }
+    state.morale = clamp(state.morale - 15, 0, 100);
+    addLog('士气 -15', 'warn');
+    addCareer('milestone', `${member.name} 阵亡`, reason);
+  } else if(reason.includes('阵亡')){
+    addLog(`💀 ${member.name} 在任务中阵亡。`, 'bad');
+    state.morale = clamp(state.morale - 8, 0, 100);
+    addLog('士气 -8', 'warn');
+    addCareer('milestone', `${member.name} 阵亡`, reason);
+  } else {
+    addLog(`${member.name} 离开了你的小队（${reason}）。`, 'warn');
+    addCareer('milestone', `${member.name} 离开`, reason);
+  }
+
   if(isCore){
     state.squad.core.splice(idx, 1);
+    // 核心阵亡/离开 → 从流动战友里选忠诚最高的补位
+    promoteFromFlowToCore(reason);
   } else {
     state.squad.flow.splice(idx, 1);
   }
 
   state.squad.memorial.push({
     name: member.name,
+    nickname: member.nickname,
     rank: member.isOfficer ? member.officerRank : member.rank,
     reason: reason,
-    year: state.yos
+    year: state.yos,
+    hometown: member.hometown,
+    impression: member.impression || member.story || ''
   });
+}
 
-  if(reason.includes('阵亡')){
-    state.morale = clamp(state.morale - 10, 0, 100);
-    addLog(`💀 ${member.name} 在任务中阵亡。`, 'bad');
-    addLog('士气 -10', 'warn');
-    addCareer('milestone', `${member.name} 阵亡`, reason);
-  } else {
-    addLog(`${member.name} 离开了你的小队（${reason}）。`, 'warn');
-    addCareer('milestone', `${member.name} 离开`, reason);
+function promoteFromFlowToCore(reason){
+  if(!state.squad || !state.squad.flow.length) return;
+  // 从流动战友里选忠诚最高的
+  const sorted = [...state.squad.flow].sort((a,b)=>b.loyalty - a.loyalty);
+  const promoted = sorted[0];
+  const idx = state.squad.flow.findIndex(m=>m.id===promoted.id);
+  if(idx < 0) return;
+  state.squad.flow.splice(idx, 1);
+  // 转换为核心战友：补齐完整档案
+  promoted.isCore = true;
+  if(!promoted.story){
+    const bios = SQUAD_BIO_POOL[promoted.role] || SQUAD_BIO_POOL['步枪手'];
+    promoted.story = randomPick(bios);
   }
+  if(!promoted.catchphrase) promoted.catchphrase = randomPick(SQUAD_CATCHPHRASES);
+  if(!promoted.dream) promoted.dream = randomPick(SQUAD_DREAMS);
+  if(!promoted.keepsake) promoted.keepsake = randomPick(SQUAD_KEEPSAKES);
+  promoted.impression = '';
+  promoted.id = 'core_' + promoted.id + '_' + Date.now();
+  state.squad.core.push(promoted);
+  addLog(`⭐ ${promoted.name} 从流动战友晋升为核心战友。${reason.includes('阵亡') ? '他填补了阵亡战友的空缺。' : ''}`, 'good');
+  addCareer('milestone', `${promoted.name} 晋升为核心战友`, '');
 }
 
 let squadDetailId = null;
@@ -10043,7 +13075,6 @@ function renderSquadDetail(){
   overlay.classList.add('show');
   overlay.scrollTop = 0;
 
-  // 背景故事解锁条件：忠诚≥60 且 服役≥5年（这里用年龄-入伍年龄表示服役年限）
   const yearsServed = state.yos - m.joinYear;
   const bioUnlockable = m.loyalty >= 60 && yearsServed >= 5;
   if(bioUnlockable && !m.bioUnlocked){
@@ -10055,11 +13086,13 @@ function renderSquadDetail(){
   const loyCls = m.loyalty>=70?'high':m.loyalty>=40?'mid':'low';
   const morCls = m.morale>=70?'high':m.morale>=40?'mid':'low';
 
+  const nickDisplay = m.nickname ? `「${m.nickname}」` : '';
+
   let html = `
     <div class="squad-detail-header">
-      <div class="squad-detail-name">${m.name}</div>
+      <div class="squad-detail-name">${m.name} ${nickDisplay}</div>
       <div class="squad-detail-meta">${getSquadRankName(m.rank)} · ${m.role} · ${m.age} 岁 · ${m.personalityName}</div>
-      <div class="squad-detail-meta">第 ${m.joinYear} 年入伍 · 已服役 ${yearsServed} 年</div>
+      <div class="squad-detail-meta">${m.hometown || '家乡未知'} · 第 ${m.joinYear} 年入伍 · 已服役 ${yearsServed} 年</div>
     </div>
 
     <div class="squad-detail-section">属性</div>
@@ -10085,25 +13118,59 @@ function renderSquadDetail(){
         <div class="squad-stat-bar"><div class="fill ${morCls}" style="width:${m.morale}%;background:${morCls==='high'?'#8fbf55':morCls==='mid'?'#c9a227':'#c94a2a'}"></div></div>
       </div>
     </div>
+  `;
 
-    <div class="squad-detail-section">背景故事</div>
-    ${m.bioUnlocked
-      ? `<div class="squad-bio">${m.bio}</div>`
-      : `<div class="squad-bio locked">尚未了解他的过去。需要忠诚 ≥ 60 且服役 ≥ 5 年。</div>`
-    }
+  // 核心战友：完整档案
+  if(m.isCore){
+    html += `
+      <div class="squad-detail-section">个人档案</div>
+      <div class="squad-bio">
+        ${m.bioUnlocked
+          ? `<div style="color:#c8d0b8;line-height:1.9">${m.story || ''}</div>
+             ${m.catchphrase ? `<div style="color:#a89050;font-style:italic;margin-top:8px;border-top:1px dashed #3a4a26;padding-top:8px">"${m.catchphrase}"</div>` : ''}
+             <div style="margin-top:10px;line-height:1.9">
+               <span style="color:#68774f">梦想：</span>${m.dream || '未提及'}<br>
+               <span style="color:#68774f">随身物品：</span>${m.keepsake || '未提及'}
+             </div>`
+          : `<div class="squad-bio locked">尚未了解他的过去。需要忠诚 ≥ 60 且服役 ≥ 5 年。</div>`
+        }
+      </div>
+    `;
+  } else {
+    // 流动战友：简化档案
+    html += `
+      <div class="squad-detail-section">印象</div>
+      <div class="squad-bio">
+        ${m.impression ? `<span style="font-style:italic">"${m.impression}"</span>` : ''}
+        <div style="margin-top:8px;color:#94a878;font-size:11.5px">
+          来自 ${m.hometown || '未知'} · 绰号「${m.nickname || '无'}」
+        </div>
+        <div style="color:#68774f;font-size:11px;margin-top:6px;font-style:italic">
+          流动战友 · 若忠诚 ≥ 75 且服役 ≥ 5 年，可晋升为核心战友
+        </div>
+      </div>
+    `;
+  }
 
+  // 经历
+  html += `
     <div class="squad-detail-section">经历</div>
     <div class="squad-event-list">
       ${m.events && m.events.length
         ? m.events.map(e=>`<div class="squad-event-item">${e}</div>`).join('')
         : '<div class="squad-event-item" style="color:#68774f;font-style:italic">暂无记录</div>'}
     </div>
+  `;
 
-    ${m.medals && m.medals.length ? `
+  if(m.medals && m.medals.length){
+    html += `
       <div class="squad-detail-section">勋章</div>
       <div style="padding:6px 0">${m.medals.map(x=>`<span class="medal">${x}</span>`).join('')}</div>
-    ` : ''}
+    `;
+  }
 
+  // 行动
+  html += `
     <div class="squad-detail-section">可用行动（消耗主 AP）</div>
     <div class="squad-action-grid">
       <button class="squad-action-btn" data-squad-action="train" ${state.ap<1?'disabled':''}>
@@ -10147,13 +13214,14 @@ async function executeSquadAction(action){
     m.mos = clamp(m.mos + 2, 0, 100);
     m.loyalty = clamp(m.loyalty + 1, 0, 100);
     addLog(`你带训了 ${m.name}。体能 +2，专业 +2，忠诚 +1`, 'fx');
-  } else if(action === 'talk'){
+    } else if(action === 'talk'){
     if(state.ap < 1){ addLog('AP 不足。', 'warn'); return; }
     state.ap -= 1;
     m.loyalty = clamp(m.loyalty + 3, 0, 100);
     m.morale = clamp(m.morale + 3, 0, 100);
-    addLog(`你和 ${m.name} 谈了一次心。忠诚 +3，士气 +3`, 'fx');
-  } else if(action === 'promote'){
+    state.lead = clamp(state.lead + 1, 0, 100);
+    addLog(`你和 ${m.name} 谈了一次心。忠诚 +3，士气 +3，你的领导 +1`, 'fx');
+  }else if(action === 'promote'){
     if(state.ap < 2){ addLog('AP 不足。', 'warn'); return; }
     if(m.loyalty < 70){ addLog(`${m.name} 的忠诚不足 70，他还需要更多信任。`, 'warn'); return; }
     if(m.isOfficer){ addLog(`${m.name} 已经是军官，无法通过士官序列晋升。`, 'warn'); return; }
@@ -10826,6 +13894,7 @@ function renderCareerOverlay(){
     <div class="promo-item"><span>服役年限</span><span>${state.yos} 年 ${state.month} 月</span></div>
     <div class="promo-item"><span>当前年龄</span><span>${state.age} 岁</span></div>
     <div class="promo-item"><span>服役路线</span><span>${state.track==='E'?'士兵':state.track==='W'?'准尉':'军官'}</span></div>
+    ${state.campaign && state.campaign !== 'peace' ? `<div class="promo-item"><span>战役背景</span><span>${getCampaign().icon} ${getCampaign().name}</span></div>` : ''}
     ${state.unit ? `<div class="promo-item"><span>所属部队</span><span>${state.unit.name}</span></div>` : ''}
     ${state.careerPath ? `<div class="promo-item"><span>职业路线</span><span>${getCareerPath().icon} ${getCareerPath().name}</span></div>` : ''}
     ${state.location ? `<div class="promo-item"><span>当前驻地</span><span>${getLocationLabel()}</span></div>` : ''}
@@ -10847,6 +13916,35 @@ function renderCareerOverlay(){
     });
     html += `</div>`;
   }
+
+    // 军事教育
+  if(state.militaryEducation && Object.keys(state.militaryEducation).length){
+    html += `<div class="promo-section">军事教育</div>`;
+    Object.entries(state.militaryEducation).forEach(([key, result])=>{
+      if(key.includes('declined')) return;
+      const school = MILITARY_SCHOOLS[key];
+      if(!school) return;
+      const gradeColor = result.grade === 'excellent' ? '#e8d98a' :
+                         result.grade === 'good' ? '#9dd96a' :
+                         result.grade === 'pass' ? '#c9a227' : '#d98a4a';
+      html += `
+        <div class="promo-item" style="flex-direction:column;align-items:flex-start;gap:4px">
+          <div style="color:#b6cc8a;font-size:12.5px">${school.abbr} · ${school.name}</div>
+          <div style="color:${gradeColor};font-size:11.5px">${result.gradeLabel}（${result.score} 分）· 晋升加成 +${result.bonus}</div>
+        </div>
+      `;
+    });
+    const nextSchool = getSchoolForCurrentRank();
+    if(nextSchool){
+      const completed = state.militaryEducation[nextSchool.id];
+      if(!completed){
+        html += `<div style="color:#68774f;font-size:11px;padding:6px 0 0;font-style:italic">
+          下一所：${nextSchool.abbr}（${nextSchool.name}）· 完成后晋升考核 +${nextSchool.graduateBonus}
+        </div>`;
+      }
+    }
+  }
+
 
   // 专长
   if(state.specialties && state.specialties.length){
@@ -10918,6 +14016,54 @@ function renderCareerOverlay(){
     });
     html += `</div>`;
   }
+
+    // 日记本
+  if(state.diary && state.diary.length){
+    html += `<div class="promo-section">日记本（${state.diary.length} 篇）</div>`;
+    html += `<div class="diary-list">`;
+    [...state.diary].reverse().forEach((entry, i)=>{
+      const realIdx = state.diary.length - 1 - i;
+      html += `
+        <div class="diary-row" data-diary-open="${realIdx}">
+          <div class="diary-date">第 ${entry.year} 年 ${entry.month} 月</div>
+          <div class="diary-title">《${entry.title}》</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+    // 敌对指挥官
+  if(state.enemyCommander && state.enemyCommander.active){
+    const ec = state.enemyCommander;
+    const statusMap = {
+      active:'活动中', wounded:'受伤逃脱', captured:'已被俘',
+      killed:'已击毙', escaped:'逃逸', released:'被放走', vanished:'失踪'
+    };
+    html += `<div class="promo-section">敌对指挥官</div>`;
+    html += `<div class="enemy-card">
+      <div class="enemy-header">
+        <div class="enemy-icon">✕</div>
+        <div style="flex:1">
+          <div class="enemy-name">代号「${ec.codeName}」</div>
+          <div class="enemy-sub">${ec.codeMeaning} · ${statusMap[ec.status] || '未知'}</div>
+        </div>
+      </div>
+      <div style="color:#68774f;font-size:10.5px;letter-spacing:2px;margin-bottom:4px">情 报 等 级 ${ec.intelLevel} / 5</div>
+      <div class="enemy-intel">
+        ${[1,2,3,4,5].map(i=>`<div class="enemy-intel-cell ${i<=ec.intelLevel?'filled':''}"></div>`).join('')}
+      </div>
+      ${ec.realDesc ? `<div style="color:#a05858;font-size:11.5px;margin-top:8px">${ec.realDesc}</div>` : ''}
+      ${ec.styleDesc ? `<div style="color:#a05858;font-size:11.5px;margin-top:2px">${ec.styleDesc}</div>` : ''}
+      ${ec.history && ec.history.length ? `
+        <div style="margin-top:10px;padding-top:8px;border-top:1px dashed #3a1a1a">
+          ${ec.history.slice(-3).map(h=>`<div class="enemy-history-row">第 ${h.year} 年 ${h.month} 月 · ${h.text}</div>`).join('')}
+        </div>
+      ` : ''}
+    </div>`;
+  }
+
+
 
   // 世界状态历史
   if(state.worldState && state.worldState.history && state.worldState.history.length){
@@ -10993,6 +14139,13 @@ function renderCareerOverlay(){
     html += `<div class="promo-item"><span>独立性</span><span>${Math.round(sp.independence)} / 100</span></div>`;
     html += `<div class="promo-item"><span>耐心</span><span>${Math.round(sp.patience)} / 100</span></div>`;
     html += `<div class="promo-item"><span>爱意</span><span>${Math.round(sp.love)} / 100</span></div>`;
+
+    html += `<div style="color:#68774f;font-size:10.5px;line-height:1.7;padding:6px 0 0;border-top:1px dashed #2a3520;margin-top:8px">
+      理解度：理解军人生活的程度 · 维护婚姻 +1/次<br>
+      独立性：因长期分离而被动提升 · 部署期间 +1/月<br>
+      耐心：承受分离的韧性 · 维护婚姻 +2/次，部署期间 -1/月<br>
+      爱意：感情深度 · 维护婚姻 +3/次，自然衰减 -1/月
+    </div>`;
     if(sp.status === 'married'){
       html += `<div class="promo-item"><span>婚姻压力</span><span style="color:${sp.pressure>=70?'#d95a4a':sp.pressure>=40?'#d98a4a':'#94a878'}">${Math.round(sp.pressure)} / 100</span></div>`;
     }
@@ -11061,6 +14214,11 @@ function renderCareerOverlay(){
   document.getElementById('career-close-btn').onclick = ()=>{
     overlay.classList.remove('show');
   };
+
+  // 绑定日记点击
+  document.querySelectorAll('[data-diary-open]').forEach(row=>{
+    row.onclick = ()=> openDiaryEntry(parseInt(row.dataset.diaryOpen));
+  });
 }
 
 /* =========================================================
@@ -11334,6 +14492,7 @@ function addMerit(n){
 }
 
 function addRankMedal(level){
+  playSound('medal');
   if(!state.pendingRankMedals) state.pendingRankMedals = { first:0, second:0, third:0 };
   state.pendingRankMedals[level] = (state.pendingRankMedals[level] || 0) + 1;
 }
@@ -11373,6 +14532,7 @@ function settleMonthlyRewards(){
 }
 
 function addMedal(m){
+  playSound('medal');
   if(!state.medals.includes(m)){
     state.medals.push(m);
     addCareer('medal', `获得勋章：${m}`);
@@ -11583,17 +14743,72 @@ function continueFromSlot(slot){
 
 function startNewInSlot(slot){
   activeSaveSlot = slot;
-  // 如果该槽位有存档，先清空
   deleteSave(slot);
-  // 进入出身选择
-  renderStartFlow();
+  // 先进入战役选择
+  renderCampaignSelect();
+}
+
+let selectedCampaign = null;
+
+function renderCampaignSelect(){
+  const body = document.getElementById('start-body');
+  selectedCampaign = null;
+
+  let html = `
+    <div class="section-label">选择战役背景</div>
+    <div class="campaign-options" id="campaign-opts">
+  `;
+  Object.values(CAMPAIGNS).forEach(camp=>{
+    const tagsHtml = camp.tags.map((t,i)=>{
+      const type = camp.tagTypes ? camp.tagTypes[i] : '';
+      return `<span class="campaign-tag ${type}">${t}</span>`;
+    }).join('');
+    html += `
+      <div class="campaign-card" data-campaign="${camp.id}">
+        <div>
+          <span class="campaign-icon">${camp.icon}</span>
+          <span class="campaign-name">${camp.name}</span>
+          <span class="campaign-year">${camp.year}</span>
+        </div>
+        <div class="campaign-desc">${camp.desc}</div>
+        <div class="campaign-tags">${tagsHtml}</div>
+      </div>
+    `;
+  });
+  html += `</div>`;
+  html += `<button class="btn-primary" id="btn-camp-next" disabled>继 续</button>`;
+  html += `<button class="btn-primary" id="btn-camp-back" style="margin-top:12px;background:#141a0e;border-color:#3a4a26;color:#94a878">返 回 存 档</button>`;
+
+  body.innerHTML = html;
+
+  document.querySelectorAll('[data-campaign]').forEach(card=>{
+    card.onclick = ()=>{
+      document.querySelectorAll('[data-campaign]').forEach(c=>c.classList.remove('sel'));
+      card.classList.add('sel');
+      selectedCampaign = card.dataset.campaign;
+      document.getElementById('btn-camp-next').disabled = false;
+    };
+  });
+
+  document.getElementById('btn-camp-next').onclick = ()=>{
+    if(!selectedCampaign) return;
+    window._pickedCampaign = selectedCampaign;
+    renderStartFlow();
+  };
+  document.getElementById('btn-camp-back').onclick = showSlotSelector;
 }
 
 function renderStartFlow(){
   const body = document.getElementById('start-body');
   const legacies = getUnlockedLegacies();
+  const camp = CAMPAIGNS[window._pickedCampaign] || CAMPAIGNS.peace;
 
-  let html = '';
+  let html = `
+    <div style="text-align:center;margin-bottom:16px;padding:8px;background:#0e140a;border:1px solid #2a3520;border-radius:4px">
+      <div style="color:#e8d98a;font-size:12.5px;letter-spacing:2px">${camp.icon} ${camp.name} · ${camp.year}</div>
+      <div style="color:#68774f;font-size:11px;margin-top:4px">${camp.desc}</div>
+    </div>
+  `;
 
   // 传承开局（只有解锁了才显示）
   if(legacies.length){
@@ -11715,6 +14930,7 @@ function rollTalents(){
 function beginGame(){
   if(!selectedBg || !window._pickedTalent || !window._pickedMOS) return;
   state = newState(selectedBg, window._pickedTalent, window._pickedMOS);
+  state.campaign = window._pickedCampaign || 'peace';
 
   // 应用传承加成
   if(window._pickedLegacy){
@@ -11755,6 +14971,9 @@ function beginGame(){
 
   state.month = 1;
   state._lastPCS = 0;
+  state._brevetUsedYear = -1;
+  state.flags.commandBannedUntil = 0;
+  state._lastBrevetCheck = 0;
   state.deployedLocation = null;
   state.ap = state.apMax;
   state.usedActionsThisMonth = [];
@@ -11767,6 +14986,28 @@ function beginGame(){
     hasHouse: false, hasCar: false, log: []
   };
   state.financeFlags = {};
+
+  state.letterFlags = {
+    lastLetterMonth: 0,
+    consecutiveSkip: 0,
+    pendingReply: null,
+    pendingReplyMonth: 0
+  };
+
+  state.casualtyFlags = {
+    notified: false,
+    notifiedBuddy: null,
+    funeralAttended: null,
+    ceremonyYear: 0,
+    letterYear: 0
+  };
+  state.diary = [];
+  state.diaryFlags = { wroteThisYear: 0 };
+  state.enemyCommander = null;
+  state.militaryEducation = {};
+  state.militaryEducationAttendance = null;
+  // campaign 已在前面设置，无需重置
+
   renderFinanceLine();
 
   state.spouse = {
@@ -11800,8 +15041,15 @@ function beginGame(){
 }
 
 function endGame(reason){
+  state.ended = true;
   state.over = true;
   state.endReason = reason;
+
+  // 立即锁定游戏循环
+  ['btn-next','btn-action-open','btn-career','btn-rel'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(btn) btn.disabled = true;
+  });
 
   // 退役前最后一次结算
   if(state.pendingMerits > 0 || (state.pendingRankMedals && (state.pendingRankMedals.first + state.pendingRankMedals.second + state.pendingRankMedals.third) > 0)){
@@ -11848,6 +15096,11 @@ function endGame(reason){
       <div style="color:${ending.color};font-size:13px;letter-spacing:3px;text-align:center;font-weight:700;margin-bottom:10px">${ending.title}</div>
       <div style="color:#94a878;font-size:12.5px;line-height:1.85">${ending.text}</div>
     </div>
+
+    ${(()=>{
+      const elig = checkArlingtonEligibility(score, ending);
+      return elig.eligible ? renderArlingtonCeremony(elig) : renderOrdinaryRetirement(score);
+    })()}
 
     <div class="end-text" style="color:#68774f;font-size:11.5px;margin-top:14px">${reason}</div>
 
@@ -12076,9 +15329,352 @@ function showScreen(id){
 }
 
 /* =========================================================
+   音效系统 · Web Audio API
+   ========================================================= */
+const SoundSystem = {
+  ctx: null,
+  masterGain: null,
+  volume: 2,   // 0=关, 1=低, 2=中, 3=高
+  initialized: false,
+
+  volumeMap: { 0: 0, 1: 0.15, 2: 0.35, 3: 0.7 },
+
+  init(){
+    if(this.initialized) return;
+    try {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      this.masterGain = this.ctx.createGain();
+      this.masterGain.gain.value = this.volumeMap[this.volume];
+      this.masterGain.connect(this.ctx.destination);
+      this.initialized = true;
+    } catch(e){}
+  },
+
+  play(name){
+    if(!this.initialized) return;
+    if(this.volume === 0) return;
+    const fn = SOUNDS[name];
+    if(!fn) return;
+    try {
+      if(this.ctx.state === 'suspended') this.ctx.resume();
+      fn(this.ctx, this.masterGain);
+    } catch(e){}
+  },
+
+  setVolume(level){
+    this.volume = parseInt(level);
+    if(this.masterGain){
+      this.masterGain.gain.value = this.volumeMap[this.volume];
+    }
+    // 保存
+    try {
+      const meta = readMeta();
+      meta._soundVolume = this.volume;
+      writeMeta(meta);
+    } catch(e){}
+  },
+
+  loadVolume(){
+    try {
+      const meta = readMeta();
+      if(typeof meta._soundVolume === 'number'){
+        this.volume = meta._soundVolume;
+      }
+    } catch(e){}
+  }
+};
+
+/* =========================================================
+   12 种音效 · 合成定义
+   ========================================================= */
+const SOUNDS = {
+  /* 1. 按钮点击 · 短促"咔" */
+  click(ctx, dest){
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(880, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.04);
+    g.gain.setValueAtTime(0.15, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+    o.connect(g); g.connect(dest);
+    o.start(); o.stop(ctx.currentTime + 0.07);
+  },
+
+  /* 2. 晋升 · 上扬两音 */
+  promote(ctx, dest){
+    const now = ctx.currentTime;
+    [660, 990].forEach((f, i)=>{
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = f;
+      const t = now + i * 0.16;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.35, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+      o.connect(g); g.connect(dest);
+      o.start(t); o.stop(t + 0.4);
+    });
+  },
+
+  /* 3. 勋章 · 三音上行 */
+  medal(ctx, dest){
+    const now = ctx.currentTime;
+    [523, 659, 784].forEach((f, i)=>{
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'triangle';
+      o.frequency.value = f;
+      const t = now + i * 0.12;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.28, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
+      o.connect(g); g.connect(dest);
+      o.start(t); o.stop(t + 0.5);
+    });
+  },
+
+  /* 4. 部署开始 · 低沉鼓点 */
+  deploy(ctx, dest){
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(120, now);
+    o.frequency.exponentialRampToValueAtTime(45, now + 0.5);
+    g.gain.setValueAtTime(0.5, now);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+    o.connect(g); g.connect(dest);
+    o.start(now); o.stop(now + 0.65);
+  },
+
+  /* 5. 部署结束 · 中音收尾 */
+  deployEnd(ctx, dest){
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(523, now);
+    o.frequency.exponentialRampToValueAtTime(392, now + 0.3);
+    g.gain.setValueAtTime(0.25, now);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+    o.connect(g); g.connect(dest);
+    o.start(now); o.stop(now + 0.45);
+  },
+
+  /* 6. 覆盖层弹出 · 轻微"噗" */
+  popup(ctx, dest){
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(300, now);
+    o.frequency.exponentialRampToValueAtTime(600, now + 0.08);
+    g.gain.setValueAtTime(0.12, now);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    o.connect(g); g.connect(dest);
+    o.start(now); o.stop(now + 0.12);
+  },
+
+  /* 7. 覆盖层关闭 · 轻微"嘟" */
+  close(ctx, dest){
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(600, now);
+    o.frequency.exponentialRampToValueAtTime(300, now + 0.08);
+    g.gain.setValueAtTime(0.10, now);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    o.connect(g); g.connect(dest);
+    o.start(now); o.stop(now + 0.12);
+  },
+
+  /* 8. 事件触发 · 中性提示音 */
+  event(ctx, dest){
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'triangle';
+    o.frequency.value = 587;
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(0.18, now + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+    o.connect(g); g.connect(dest);
+    o.start(now); o.stop(now + 0.3);
+  },
+
+  /* 9. 战争状态 · 低频轰鸣 */
+  war(ctx, dest){
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(80, now);
+    o.frequency.linearRampToValueAtTime(45, now + 0.9);
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(0.35, now + 0.1);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+    const f = ctx.createBiquadFilter();
+    f.type = 'lowpass';
+    f.frequency.value = 200;
+    o.connect(f); f.connect(g); g.connect(dest);
+    o.start(now); o.stop(now + 1.05);
+  },
+
+  /* 10. 荣誉勋章 · 庄重和弦 */
+  moh(ctx, dest){
+    const now = ctx.currentTime;
+    [392, 523, 659].forEach(f=>{
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(0.22, now + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+      o.connect(g); g.connect(dest);
+      o.start(now); o.stop(now + 1.25);
+    });
+  },
+
+  /* 11. 婚姻/家庭 · 温暖单音 */
+  family(ctx, dest){
+    const now = ctx.currentTime;
+    [440, 554].forEach((f, i)=>{
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = f;
+      const t = now + i * 0.2;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.20, t + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+      o.connect(g); g.connect(dest);
+      o.start(t); o.stop(t + 0.65);
+    });
+  },
+
+  /* 12. 枪声 / 战斗 · 短促噪声脉冲 */
+  gunfire(ctx, dest){
+    const now = ctx.currentTime;
+    const bufferSize = ctx.sampleRate * 0.08;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i = 0; i < bufferSize; i++){
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 4);
+    }
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    const f = ctx.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = 1200;
+    f.Q.value = 2;
+    const g = ctx.createGain();
+    g.gain.value = 0.35;
+    src.connect(f); f.connect(g); g.connect(dest);
+    src.start(now);
+  },
+
+  /* 13. 年度结算 · 钟声 */
+  yearEnd(ctx, dest){
+    const now = ctx.currentTime;
+    [523, 1046].forEach((f, i)=>{
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(i === 0 ? 0.3 : 0.12, now + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+      o.connect(g); g.connect(dest);
+      o.start(now); o.stop(now + 1.6);
+    });
+  }
+};
+
+/* 便捷函数 */
+function playSound(name){
+  SoundSystem.play(name);
+}
+
+/* =========================================================
    启动
    ========================================================= */
 document.getElementById('btn-next').addEventListener('click', endMonth);
+
+// 全局点击音效
+document.addEventListener('click', (e)=>{
+  // 第一次点击时初始化 AudioContext
+  SoundSystem.init();
+  const target = e.target.closest('button, .phase-choice, .act-btn, .squad-card, .opt, .mos-opt, .talent, .legacy-card, .campaign-card, .spec-card, .rel-tab, .gallery-tab, .medal-choice, .squad-action-btn, .command-action-btn, .diary-row, .squad-card, .child-card');
+  if(target && !target.disabled){
+    playSound('click');
+  }
+}, true);
+
+// 加载音量设置
+SoundSystem.loadVolume();
+
+
+// 覆盖层音效（自动监听 .show 类）
+setTimeout(()=>{
+  ['promo-overlay','career-overlay','rel-overlay','gallery-overlay','action-overlay'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    new MutationObserver((mutations)=>{
+      mutations.forEach(m=>{
+        if(m.attributeName === 'class'){
+          const hasShow = el.classList.contains('show');
+          if(hasShow && !el._wasShown){
+            playSound('popup');
+          } else if(!hasShow && el._wasShown){
+            playSound('close');
+          }
+          el._wasShown = hasShow;
+        }
+      });
+    }).observe(el, { attributes: true });
+  });
+}, 100);
+
+// 设置面板
+document.getElementById('settings-btn').onclick = (e)=>{
+  e.stopPropagation();
+  const panel = document.getElementById('settings-panel');
+  panel.classList.toggle('show');
+};
+
+document.addEventListener('click', (e)=>{
+  const panel = document.getElementById('settings-panel');
+  const btn = document.getElementById('settings-btn');
+  if(!panel) return;
+  if(!panel.contains(e.target) && !btn.contains(e.target)){
+    panel.classList.remove('show');
+  }
+});
+
+document.querySelectorAll('[data-sound]').forEach(btn=>{
+  btn.onclick = (e)=>{
+    e.stopPropagation();
+    const level = parseInt(btn.dataset.sound);
+    SoundSystem.setVolume(level);
+    document.querySelectorAll('[data-sound]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    // 试听
+    if(level > 0) playSound('event');
+  };
+});
+
+// 恢复音量按钮状态
+setTimeout(()=>{
+  SoundSystem.loadVolume();
+  document.querySelectorAll('[data-sound]').forEach(b=>{
+    b.classList.toggle('active', parseInt(b.dataset.sound) === SoundSystem.volume);
+  });
+}, 150);
+
 renderStart();  // 现在 renderStart 内部调用 showSlotSelector
 </script>
 </body>
