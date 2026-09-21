@@ -729,11 +729,20 @@ body{
   border-radius:50%;
   color:#94a878;
   font-size:18px;
-  cursor:pointer;
+  cursor:grab;
   display:flex;align-items:center;justify-content:center;
   z-index:50;
-  transition:.15s;
+  transition:border-color .15s, color .15s;
   -webkit-tap-highlight-color:transparent;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+#settings-btn.dragging{
+  cursor:grabbing;
+  transition:none;
+  opacity:.85;
+  box-shadow:0 0 16px rgba(201,162,39,.4);
 }
 #settings-btn:hover{border-color:#6d9440;color:#e8d98a}
 #settings-btn:active{transform:scale(.95)}
@@ -742,6 +751,7 @@ body{
 #settings-panel{
   position:fixed;
   top:60px;right:14px;
+  /* left/top 会被 JS 动态覆盖，这里是初始值 */
   background:#0d1009;
   border:1px solid #2a3520;
   border-radius:6px;
@@ -15639,12 +15649,137 @@ setTimeout(()=>{
   });
 }, 100);
 
-// 设置面板
-document.getElementById('settings-btn').onclick = (e)=>{
-  e.stopPropagation();
+// ===== 设置按钮：可拖动 + 可点击 =====
+(function setupSettingsButton(){
+  const btn = document.getElementById('settings-btn');
   const panel = document.getElementById('settings-panel');
-  panel.classList.toggle('show');
-};
+  if(!btn) return;
+
+  // 恢复保存的位置
+  const saved = localStorage.getItem('military_sim_settings_pos');
+  if(saved){
+    try {
+      const pos = JSON.parse(saved);
+      btn.style.left = pos.left + 'px';
+      btn.style.top = pos.top + 'px';
+      btn.style.right = 'auto';
+    } catch(e){}
+  }
+
+  let isDragging = false;
+  let hasMoved = false;
+  let startX = 0, startY = 0;
+  let btnStartLeft = 0, btnStartTop = 0;
+
+  const DRAG_THRESHOLD = 6; // 位移超过 6px 视为拖动
+
+  function startDrag(e){
+    isDragging = true;
+    hasMoved = false;
+    const touch = e.touches ? e.touches[0] : e;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    const rect = btn.getBoundingClientRect();
+    btnStartLeft = rect.left;
+    btnStartTop = rect.top;
+    btn.classList.add('dragging');
+    e.preventDefault();
+  }
+
+  function moveDrag(e){
+    if(!isDragging) return;
+    const touch = e.touches ? e.touches[0] : e;
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+
+    if(Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD){
+      hasMoved = true;
+    }
+
+    if(hasMoved){
+      let newLeft = btnStartLeft + dx;
+      let newTop = btnStartTop + dy;
+
+      // 限制在屏幕内
+      const maxLeft = window.innerWidth - btn.offsetWidth - 4;
+      const maxTop = window.innerHeight - btn.offsetHeight - 4;
+      newLeft = Math.max(4, Math.min(maxLeft, newLeft));
+      newTop = Math.max(4, Math.min(maxTop, newTop));
+
+      btn.style.left = newLeft + 'px';
+      btn.style.top = newTop + 'px';
+      btn.style.right = 'auto';
+
+      // 设置面板跟随按钮
+      if(panel && panel.classList.contains('show')){
+        const panelTop = newTop + btn.offsetHeight + 6;
+        const panelLeft = newLeft + btn.offsetWidth - panel.offsetWidth;
+        panel.style.left = Math.max(4, panelLeft) + 'px';
+        panel.style.top = panelTop + 'px';
+        panel.style.right = 'auto';
+      }
+    }
+    e.preventDefault();
+  }
+
+  function endDrag(e){
+    if(!isDragging) return;
+    isDragging = false;
+    btn.classList.remove('dragging');
+
+    if(hasMoved){
+      // 保存位置
+      try {
+        const rect = btn.getBoundingClientRect();
+        localStorage.setItem('military_sim_settings_pos', JSON.stringify({
+          left: rect.left,
+          top: rect.top
+        }));
+      } catch(e){}
+
+      // 拖动结束后，如果面板打开，重新定位
+      if(panel && panel.classList.contains('show')){
+        repositionPanel();
+      }
+    } else {
+      // 没移动 → 视为点击，切换面板
+      panel.classList.toggle('show');
+      if(panel.classList.contains('show')){
+        repositionPanel();
+      }
+    }
+  }
+
+  function repositionPanel(){
+    if(!panel) return;
+    const rect = btn.getBoundingClientRect();
+    let panelTop = rect.bottom + 6;
+    let panelLeft = rect.right - panel.offsetWidth;
+
+    // 防止超出屏幕
+    if(panelTop + panel.offsetHeight > window.innerHeight - 8){
+      panelTop = rect.top - panel.offsetHeight - 6;
+    }
+    if(panelLeft < 4) panelLeft = 4;
+    if(panelLeft + panel.offsetWidth > window.innerWidth - 4){
+      panelLeft = window.innerWidth - panel.offsetWidth - 4;
+    }
+
+    panel.style.left = panelLeft + 'px';
+    panel.style.top = panelTop + 'px';
+    panel.style.right = 'auto';
+  }
+
+  // 鼠标事件
+  btn.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', moveDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  // 触摸事件
+  btn.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('touchmove', moveDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+})();
 
 document.addEventListener('click', (e)=>{
   const panel = document.getElementById('settings-panel');
