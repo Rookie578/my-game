@@ -15676,21 +15676,23 @@ setTimeout(()=>{
   function startDrag(e){
     isDragging = true;
     hasMoved = false;
-    const touch = e.touches ? e.touches[0] : e;
-    startX = touch.clientX;
-    startY = touch.clientY;
+    startX = e.clientX;
+    startY = e.clientY;
     const rect = btn.getBoundingClientRect();
     btnStartLeft = rect.left;
     btnStartTop = rect.top;
     btn.classList.add('dragging');
     e.preventDefault();
+    // 捕获指针，确保移出按钮后仍能收到事件
+    try {
+      btn.setPointerCapture(e.pointerId);
+    } catch(err){}
   }
 
   function moveDrag(e){
     if(!isDragging) return;
-    const touch = e.touches ? e.touches[0] : e;
-    const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
 
     if(Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD){
       hasMoved = true;
@@ -15770,15 +15772,11 @@ setTimeout(()=>{
     panel.style.right = 'auto';
   }
 
-  // 鼠标事件
-  btn.addEventListener('mousedown', startDrag);
-  document.addEventListener('mousemove', moveDrag);
-  document.addEventListener('mouseup', endDrag);
-
-  // 触摸事件
-  btn.addEventListener('touchstart', startDrag, { passive: false });
-  document.addEventListener('touchmove', moveDrag, { passive: false });
-  document.addEventListener('touchend', endDrag);
+  // 统一用 Pointer Events（同时处理鼠标和触摸）
+  btn.addEventListener('pointerdown', startDrag);
+  document.addEventListener('pointermove', moveDrag);
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
 })();
 
 document.addEventListener('click', (e)=>{
